@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using Tetris.services;
 
 namespace Tetris
 {
-    class Tetris : Azul.Game
+    class OldGameLoop : Azul.Game
     {
         // Data: --------------------------------------------
 
@@ -201,51 +202,51 @@ namespace Tetris
             // Cycle all the tetris pieces
             if (count < 2 * 10)
             {
-                Shape.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, Shape.Orientation.ORIENT_0);
+                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_0);
 
-                Shape.drawLine(3, 3, Shape.Orientation.ORIENT_0);
-                Shape.drawL1(5, 8, Shape.Orientation.ORIENT_0);
-                Shape.drawL2(5, 14, Shape.Orientation.ORIENT_0);
-                Shape.drawT(5, 19, Shape.Orientation.ORIENT_0);
-                Shape.drawZ1(5, 23, Shape.Orientation.ORIENT_0);
-                Shape.drawZ2(5, 28, Shape.Orientation.ORIENT_0);
-                Shape.drawSquare(8, 4, Shape.Orientation.ORIENT_0);
+                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_0);
+                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_0);
+                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_0);
+                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_0);
+                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_0);
+                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_0);
+                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_0);
             }
             else if (count < 2 * 20)
             {
-                Shape.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, Shape.Orientation.ORIENT_1);
+                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_1);
 
-                Shape.drawLine(3, 3, Shape.Orientation.ORIENT_1);
-                Shape.drawL1(5, 8, Shape.Orientation.ORIENT_1);
-                Shape.drawL2(5, 14, Shape.Orientation.ORIENT_1);
-                Shape.drawT(5, 19, Shape.Orientation.ORIENT_1);
-                Shape.drawZ1(5, 23, Shape.Orientation.ORIENT_1);
-                Shape.drawZ2(5, 28, Shape.Orientation.ORIENT_1);
-                Shape.drawSquare(8, 4, Shape.Orientation.ORIENT_1);
+                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_1);
+                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_1);
+                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_1);
+                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_1);
+                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_1);
+                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_1);
+                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_1);
             }
             else if (count < 2 * 30)
             {
-                Shape.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, Shape.Orientation.ORIENT_2);
+                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_2);
 
-                Shape.drawLine(3, 3, Shape.Orientation.ORIENT_2);
-                Shape.drawL1(5, 8, Shape.Orientation.ORIENT_2);
-                Shape.drawL2(5, 14, Shape.Orientation.ORIENT_2);
-                Shape.drawT(5, 19, Shape.Orientation.ORIENT_2);
-                Shape.drawZ1(5, 23, Shape.Orientation.ORIENT_2);
-                Shape.drawZ2(5, 28, Shape.Orientation.ORIENT_2);
-                Shape.drawSquare(8, 4, Shape.Orientation.ORIENT_2);
+                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_2);
+                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_2);
+                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_2);
+                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_2);
+                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_2);
+                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_2);
+                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_2);
             }
             else
             {
-                Shape.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, Shape.Orientation.ORIENT_3);
+                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_3);
 
-                Shape.drawLine(3, 3, Shape.Orientation.ORIENT_3);
-                Shape.drawL1(5, 8, Shape.Orientation.ORIENT_3);
-                Shape.drawL2(5, 14, Shape.Orientation.ORIENT_3);
-                Shape.drawT(5, 19, Shape.Orientation.ORIENT_3);
-                Shape.drawZ1(5, 23, Shape.Orientation.ORIENT_3);
-                Shape.drawZ2(5, 28, Shape.Orientation.ORIENT_3);
-                Shape.drawSquare(8, 4, Shape.Orientation.ORIENT_3);
+                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_3);
+                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_3);
+                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_3);
+                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_3);
+                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_3);
+                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_3);
+                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_3);
             }
 
             if (count > 2 * 40)

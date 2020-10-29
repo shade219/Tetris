@@ -6,20 +6,27 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain
 {
+    // Authors: Name1, Name2
+    // Description:
     public abstract class GameShape
     {
         Block anchor;
         List<Block> blocks;
-        Shape.Orientation orientation;
+        ShapeRenderer.Orientation orientation;
         DrawColor.Shade color;
         bool isAboutToPlace;
         bool isPlaced;
 
-        public abstract void draw();
+        public GameShape(Block anchor)
+        {
 
-        public abstract void applyAction();
+        }
 
-        public abstract List<Block> calcBlocksPostAction();
+        public abstract void Draw();
+
+        public abstract void ApplyAction(InputAction action);
+
+        public abstract List<Block> CalcBlocksPostAction(InputAction action);
 
 
     }

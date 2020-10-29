@@ -2,7 +2,7 @@
 
 namespace Tetris
 {
-    static class Shape
+    public static class ShapeRenderer
     {
         public enum Orientation
         {
@@ -18,28 +18,28 @@ namespace Tetris
 
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_ORANGE);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x + 2, coor_y, DrawColor.Shade.COLOR_ORANGE);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_ORANGE);
                     SOM.drawBox(coor_x, coor_y - 1, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x, coor_y - 2, DrawColor.Shade.COLOR_ORANGE);
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x - 2, coor_y, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_ORANGE);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_ORANGE);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x, coor_y + 2, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_ORANGE);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_ORANGE);
@@ -55,28 +55,28 @@ namespace Tetris
         {
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_YELLOW);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_YELLOW);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_YELLOW);
                     SOM.drawBox(coor_x, coor_y - 1, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_YELLOW);
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x + 0, coor_y + 1, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_YELLOW);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_YELLOW);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_YELLOW);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_YELLOW);
@@ -92,14 +92,14 @@ namespace Tetris
         {
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_BLUE);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x + 2, coor_y, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_BLUE);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
 
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x + 0, coor_y + 0, DrawColor.Shade.COLOR_DK_BLUE);
@@ -109,14 +109,14 @@ namespace Tetris
 
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x - 2, coor_y, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_BLUE);
                     SOM.drawBox(coor_x + 0, coor_y + 1, DrawColor.Shade.COLOR_BLUE);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x, coor_y + 2, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_BLUE);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_BLUE);
@@ -132,14 +132,14 @@ namespace Tetris
         {
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x - 2, coor_y, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_PURPLE);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_PURPLE);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
 
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_PURPLE);
@@ -147,14 +147,14 @@ namespace Tetris
                     SOM.drawBox(coor_x + 0, coor_y + 2, DrawColor.Shade.COLOR_PURPLE);
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x + 2, coor_y, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_PURPLE);
                     SOM.drawBox(coor_x + 0, coor_y + 1, DrawColor.Shade.COLOR_PURPLE);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x, coor_y - 2, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x, coor_y - 1, DrawColor.Shade.COLOR_PURPLE);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_PURPLE);
@@ -170,28 +170,28 @@ namespace Tetris
         {
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_GREEN);
                     SOM.drawBox(coor_x + 1, coor_y - 1, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_LT_GREEN);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_GREEN);
                     SOM.drawBox(coor_x - 1, coor_y - 1, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_LT_GREEN);
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x + 0, coor_y + 1, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x - 1, coor_y + 1, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_GREEN);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_LT_GREEN);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x + 1, coor_y + 1, DrawColor.Shade.COLOR_LT_GREEN);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_GREEN);
@@ -207,28 +207,28 @@ namespace Tetris
         {
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x - 1, coor_y - 1, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_CYAN);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_CYAN);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
                     SOM.drawBox(coor_x - 1, coor_y + 1, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_CYAN);
                     SOM.drawBox(coor_x, coor_y - 1, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_CYAN);
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x + 0, coor_y + 1, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_CYAN);
                     SOM.drawBox(coor_x + 1, coor_y + 1, DrawColor.Shade.COLOR_CYAN);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x, coor_y + 1, DrawColor.Shade.COLOR_CYAN);
                     SOM.drawBox(coor_x, coor_y + 0, DrawColor.Shade.COLOR_DK_CYAN);
@@ -244,28 +244,28 @@ namespace Tetris
         {
             switch (orient)
             {
-                case Shape.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_RED);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x + 1, coor_y - 1, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_RED);
                     break;
 
-                case Shape.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_RED);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x - 1, coor_y - 1, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x + 0, coor_y - 1, DrawColor.Shade.COLOR_RED);
                     break;
 
-                case Shape.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_RED);
                     SOM.drawBox(coor_x - 1, coor_y, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x - 1, coor_y + 1, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x + 0, coor_y + 1, DrawColor.Shade.COLOR_RED);
                     break;
 
-                case Shape.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:
                     SOM.drawBox(coor_x + 0, coor_y, DrawColor.Shade.COLOR_DK_RED);
                     SOM.drawBox(coor_x + 1, coor_y, DrawColor.Shade.COLOR_RED);
                     SOM.drawBox(coor_x + 1, coor_y + 1, DrawColor.Shade.COLOR_RED);

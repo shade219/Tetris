@@ -9,10 +9,17 @@ namespace Tetris.domain
 {
     public class Block
     {
-        DrawColor.Shade color;
+        Azul.Color color;
         Vector2 coordinates;
 
-        public Block copy()
+        // Author: Your Name Here
+        public Block(Azul.Color color, Vector2 coordinates)
+        {
+
+        }
+
+        // Author: Your Name Here
+        public Block Copy()
         {
             return null;
         }

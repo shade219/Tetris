@@ -8,7 +8,7 @@ namespace Tetris
         static void Main(string[] args)
         {
             // Create the instance
-            Tetris game = new Tetris();
+            OldGameLoop game = new OldGameLoop();
             Debug.Assert(game != null);
 
             // Start the game
