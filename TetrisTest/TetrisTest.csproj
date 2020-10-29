@@ -56,8 +56,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-</ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tetris\Tetris.csproj">
+      <Project>{24756376-ab42-4ada-a243-7928ae596b22}</Project>
+      <Name>Tetris</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
