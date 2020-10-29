@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain.shapes
 {
+    // Authors: Name1, Name2
+    // Description:
     public class LineShape : GameShape
     {
 

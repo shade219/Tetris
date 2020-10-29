@@ -8,6 +8,8 @@ using Tetris.ui;
 
 namespace Tetris.services
 {
+    // Authors: Name1, Name2
+    // Description:
     public class GameManager : Azul.Game
     {
         GameState state;

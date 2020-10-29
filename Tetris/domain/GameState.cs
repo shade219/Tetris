@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain
 {
+    // Authors: Name1, Name2
+    // Description:
     public class GameState
     {
 
@@ -16,6 +18,7 @@ namespace Tetris.domain
         int currentLevel;
         int currentScore;
 
+        // Author: Your Name Here
         public GameState()
         {
 

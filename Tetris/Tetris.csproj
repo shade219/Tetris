@@ -93,20 +93,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="services\GameManager.cs" />
+    <Compile Include="services\GameObject.cs" />
+    <Compile Include="services\InputReader.cs" />
+    <Compile Include="services\LevelManager.cs" />
+    <Compile Include="services\MovementManager.cs" />
+    <Compile Include="services\ScoreManager.cs" />
+    <Compile Include="services\ShapeGenerator.cs" />
+    <Compile Include="services\Timer.cs" />
+    <Compile Include="ui\Constants.cs" />
     <Compile Include="domain\Block.cs" />
+    <Compile Include="domain\BlockGrid.cs" />
+    <Compile Include="domain\GameState.cs" />
+    <Compile Include="domain\InputAction.cs" />
     <Compile Include="domain\shapes\GameShape.cs" />
-    <Compile Include="DrawColor.cs" />
+    <Compile Include="domain\shapes\Z2Shape.cs" />
+    <Compile Include="domain\shapes\Z1Shape.cs" />
+    <Compile Include="domain\shapes\TShape.cs" />
+    <Compile Include="domain\shapes\LineShape.cs" />
+    <Compile Include="domain\shapes\L1Shape.cs" />
+    <Compile Include="domain\shapes\L2Shape.cs" />
+    <Compile Include="domain\shapes\SquareShape.cs" />
+    <Compile Include="ui\DrawColor.cs" />
     <Compile Include="Font\SpriteFont.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameObject.cs" />
+    <Compile Include="services\OldGameLoop.cs" />
     <Compile Include="Font\Glyph.cs" />
     <Compile Include="Font\GlyphMan.cs" />
     <Compile Include="InputTest.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shape.cs" />
-    <Compile Include="SpriteObjectMan.cs" />
+    <Compile Include="ui\ShapeRenderer.cs" />
+    <Compile Include="ui\SpriteObjectMan.cs" />
+    <Compile Include="ui\StateRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

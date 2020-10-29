@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tetris.services
 {
+    // Authors: Name1, Name2
+    // Description:
     public class LevelManager
     {
 
@@ -13,11 +15,13 @@ namespace Tetris.services
         int startLevel;
         int currentLevel;
 
+        // Author: Your Name Here
         public LevelManager(int overrideStartLevel)
         {
 
         }
 
+        // Author: Your Name Here
         public int UpdateLevel(int totalLinesCleared)
         {
             return 0;

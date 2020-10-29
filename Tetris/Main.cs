@@ -2,7 +2,10 @@
 using System.Diagnostics;
 
 namespace Tetris
-{
+{    
+    
+    // Authors: Name1, Name2
+    // Description:
     class Program
     {
         static void Main(string[] args)

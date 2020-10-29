@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain.shapes
 {
+    // Authors: Name1, Name2
+    // Description:
     public class L1Shape : GameShape
     {
         // Author: Your Name Here
@@ -22,7 +24,7 @@ namespace Tetris.domain.shapes
 
         // Author: Your Name Here
         public override List<Block> CalcBlocksPostAction(InputAction action)
-        {InputAction action
+        {
             throw new NotImplementedException();
         }
 

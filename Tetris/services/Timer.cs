@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Tetris.services
 {
+    // Authors: Name1, Name2
+    // Description:
     public class Timer
     {
         long start;
