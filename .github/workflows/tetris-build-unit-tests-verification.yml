@@ -1,4 +1,4 @@
-name: Build and Unit Tests
+name: Build and run Unit Tests
 
 on:
   pull_request:
@@ -10,15 +10,16 @@ jobs:
     runs-on: [windows-latest]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
     
-    - name: ms-build
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
       
-    - name: Get NuGet
+    - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
     
-    - name: Install dependencies
+    - name: Install dependencies with NuGet
       run: nuget restore Tetris.sln
       
     - name: Build
