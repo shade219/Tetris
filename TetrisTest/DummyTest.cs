@@ -9,8 +9,8 @@ namespace TetrisTest
         [TestMethod]
         public void SanityTest()
         {
-            // intentionally failing test
-            Assert.IsTrue(false);
+            // intentionally passing test
+            Assert.IsTrue(true);
         }
     }
 }
