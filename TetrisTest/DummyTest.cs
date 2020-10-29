@@ -10,7 +10,7 @@ namespace TetrisTest
         public void SanityTest()
         {
             // intentionally failing test
-            Assert.IsTrue(false)
+            Assert.IsTrue(false);
         }
     }
 }
