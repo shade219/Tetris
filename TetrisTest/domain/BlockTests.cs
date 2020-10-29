@@ -24,7 +24,7 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void CopyTest()
         {
-
+            Assert.AreEqual(0,1);
         }
     }
 }
