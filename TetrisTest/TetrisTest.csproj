@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
   <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+  <PackageReference Include="Microsoft.VisualStudio.TestPlatform" Version="14.0.0" />
 </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
