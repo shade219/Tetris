@@ -11,7 +11,7 @@ namespace TetrisTest
         public void SanityTest()
         {
             // intentionally passing test as a sanity check
-            Assert.IsTrue(false);
+            Assert.IsTrue(true);
         }
     }
 }
