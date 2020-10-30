@@ -60,10 +60,6 @@ namespace Tetris
             // Play a sound file
             music = AudioEngine.Play2D("theme.wav",true);
             music.Volume = 0.2f;
-            
-            //Team5/deangelo
-            //Description: Test-edit
-            music.Volume = 0f;
 
             // Resident loads
             srcShoot = AudioEngine.AddSoundSourceFromFile("shoot.wav");
@@ -113,7 +109,7 @@ namespace Tetris
         {
             // Snd update - Need to be called once a frame
             AudioEngine.Update();
-
+            
             //-----------------------------------------------------------
             // Input Test
             //-----------------------------------------------------------
