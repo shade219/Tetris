@@ -24,7 +24,7 @@ namespace Tetris.domain
         private List<Block> blocks;
 
         // Author: DeAngelo Wilson
-        public BlockGrid(int maxX, int maxY)//TODO:: FLIP
+        public BlockGrid(int maxX, int maxY)
         {
             row_count = maxY;
             col_count = maxX;
