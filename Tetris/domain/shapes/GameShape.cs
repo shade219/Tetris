@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain
 {
-    // Authors: Name1, Name2
+    // Authors: DeAngelo, Name2
     // Description:
     public abstract class GameShape
     {
