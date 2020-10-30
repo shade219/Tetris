@@ -1,0 +1,13 @@
+issuesOpened: >
+  Thanks for posting this issue! Please be sure do to the following:
+    - Ensure the issue is reproducible
+    - List out the steps to reproduce
+    - Provide clear details on what the issue is
+    - Explain why this is a defect (ex. per API spec this method should return true in X situation but it does not)
+
+pullRequestOpened: >
+  Great job making a Pull Request! Let's make sure yo uhave everything ready before merging:
+    - Make sure tests run locally
+    - Build process passes (build and tests)
+    - Updated comments (ensure you label what classes/methods you worked on)
+    - Add a comment to this PR that details what your code changes aim to do (ex. implement X feature, fix Y bug, etc.)
