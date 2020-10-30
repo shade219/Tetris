@@ -77,7 +77,7 @@ namespace Tetris.domain
             switch (orientation)
             {
                 case ShapeRenderer.Orientation.ORIENT_0:
-                    ori = ShapeRenderer.Orientation.ORIENT_0;
+                    ori = ShapeRenderer.Orientation.ORIENT_1;
                     break;
                 case ShapeRenderer.Orientation.ORIENT_1:
                     ori = ShapeRenderer.Orientation.ORIENT_2;

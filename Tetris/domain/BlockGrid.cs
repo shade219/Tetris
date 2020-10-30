@@ -24,7 +24,7 @@ namespace Tetris.domain
         private List<Block> blocks;
 
         // Author: DeAngelo Wilson
-        public BlockGrid(int maxY, int maxX)
+        public BlockGrid(int maxX, int maxY)//TODO:: FLIP
         {
             row_count = maxY;
             col_count = maxX;
@@ -120,7 +120,7 @@ namespace Tetris.domain
             return completedLineIndex;
         }
 
-        public List<int> GetCompletedLines(List<int> rowIndexes)
+        public List<int> GetCompletedLines(List<int> rowIndexes)//TODO:: CHANGE TO GAMESHAPE
         {
             List<int> completedLineIndex = new List<int>();
 
