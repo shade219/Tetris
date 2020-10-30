@@ -19,7 +19,7 @@ namespace Tetris.domain
 
         public GameShape(Block anchor)
         {
-
+            this.anchor = anchor;
         }
 
         public abstract void Draw();
