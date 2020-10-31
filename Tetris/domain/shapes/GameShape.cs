@@ -12,7 +12,7 @@ namespace Tetris.domain
     public abstract class GameShape
     {
         //used for drawing GameShape
-        Block anchor;
+        protected Block anchor;
 
         //used for placing GameShape onto Game-BlockGrid
         public List<Block> blocks
@@ -20,10 +20,10 @@ namespace Tetris.domain
             get;
         }
 
-        ShapeRenderer.Orientation orientation;
-        DrawColor.Shade color;
-        bool isAboutToPlace;
-        bool isPlaced;
+        protected ShapeRenderer.Orientation orientation;
+        protected DrawColor.Shade color;
+        protected bool isAboutToPlace;
+        protected bool isPlaced;
 
         //MOVED TO Tetris.Constants
         //public Vector2 downOffset;
@@ -32,12 +32,13 @@ namespace Tetris.domain
         //public Vector2 rightOffset;
 
 
-        protected GameShape(Block anchor)
+        protected GameShape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0)
         {
             this.anchor = anchor;
             blocks = new List<Block>();
             isAboutToPlace = false;
             isPlaced = false;
+            this.orientation = orientation;
         }
 
         //Draw GameShape at 'anchor' in 'orientation'
@@ -48,6 +49,17 @@ namespace Tetris.domain
 
         public abstract List<Block> CalcBlocksPostAction(InputAction action);
 
+
+        protected List<Block> CopyBlocks()
+        {
+            List<Block> newBlocks = new List<Block>();
+            foreach (Block b in blocks)
+            {
+                newBlocks.Add(b.Copy());
+            }
+            return newBlocks;
+        }
+
         //DeAngelo Wilson
         private List<Block> CreateCopyOfBlocksArray()
         {
@@ -57,11 +69,9 @@ namespace Tetris.domain
             return new List<Block>(blocksArray);
         }
 
-        //used to apply uniform offset to 'anchor' Block and 'blocks' Block array
+        //used to apply uniform offset to 'anchor' Block and 'blocks' Block array (anchor is includes in blocks list)
         protected void ApplyMovementCoordinateOffset(Vector2 offset)
         {
-            anchor.ApplyOffset(offset);
-
             foreach (Block b in blocks)
             {
                 b.ApplyOffset(offset);
@@ -89,7 +99,7 @@ namespace Tetris.domain
                     ori = ShapeRenderer.Orientation.ORIENT_0;
                     break;
                 default:
-                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation");
+                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation: " + orientation);
             }
 
             return ori;
