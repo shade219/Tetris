@@ -12,7 +12,7 @@ namespace Tetris.domain
     public class Block
     {
         Azul.Color color;
-        Vector2 coordinates;
+        public Vector2 coordinates;
 
         // Author: Your Name Here
         public Block(Azul.Color color, Vector2 coordinates)

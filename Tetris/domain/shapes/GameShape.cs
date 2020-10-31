@@ -14,8 +14,8 @@ namespace Tetris.domain
         List<Block> blocks;
         ShapeRenderer.Orientation orientation;
         DrawColor.Shade color;
-        bool isAboutToPlace;
-        bool isPlaced;
+        public bool isAboutToPlace;
+        public bool isPlaced;
 
         public GameShape(Block anchor)
         {
