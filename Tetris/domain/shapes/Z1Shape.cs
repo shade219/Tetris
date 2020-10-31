@@ -12,7 +12,7 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Your Name Here
-        public Z1Shape(Block anchor): base (anchor)
+        public Z1Shape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
         {
 
         }

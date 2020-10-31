@@ -6,10 +6,10 @@ namespace Tetris
     {
         public enum Orientation
         {
-            ORIENT_0,
-            ORIENT_1,
-            ORIENT_2,
-            ORIENT_3
+            ORIENT_0, // 0
+            ORIENT_1, // 90
+            ORIENT_2, // 180
+            ORIENT_3  // 270
         };
 
 

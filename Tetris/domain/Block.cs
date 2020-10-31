@@ -11,7 +11,7 @@ namespace Tetris.domain
     // Description:
     public class Block
     {
-        readonly DrawColor.Shade color;
+        public readonly DrawColor.Shade color;
 
         //private Vector<int> coordinates;
         private int x;
@@ -37,6 +37,13 @@ namespace Tetris.domain
         public Block Copy()
         {
             return new Block(this);
+        }
+
+        public Block Copy(Vector2 offset)
+        {
+            Block b = new Block(this);
+            b.ApplyOffset(offset);
+            return b;
         }
 
         public void Draw()

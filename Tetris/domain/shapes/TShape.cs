@@ -12,7 +12,7 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Your Name Here
-        public TShape(Block anchor): base (anchor)
+        public TShape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
         {
 
         }
