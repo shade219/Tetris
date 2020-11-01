@@ -63,57 +63,8 @@ namespace Tetris.domain.shapes
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, -1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0) }.ToList());
             // 180 -> 270
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1) }.ToList());
-           
         }
 
-        // Author: Greg Kulasik
-        public override List<Block> CalcBlocksPostAction(InputAction action)
-        {
-            List<Block> newBlocks = CopyBlocks();
-            ApplyActionToBlocks(action, newBlocks);
-            return newBlocks;
-        }
-
-        // Author: Greg Kulasik
-        // Detects the type of action and calls Rotate or Move as appropriate
-        protected override void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
-        {
-            switch (action)
-            {
-                case InputAction.Rotate:
-                    Rotate(blocksToApply);
-                    break;
-                case InputAction.MoveDown:
-                case InputAction.MoveLeft:
-                case InputAction.MoveRight:
-                    Move(action, blocksToApply);
-                    break;
-                default:
-                    throw new ArgumentException("Unexpected InputAction applied: " + action);
-            }
-        }
-
-
-
-        // Author: Greg Kulasik
-        // Rotates the shape in place (Square is special since rotate does not change the shape but we need to show it rotating - so the anchor will rotate around)
-        // New offsets are calculated for each 90 degree rotation
-        // For each block apply the roation for that block (both lists are ordered - blocks move clockwise)
-        protected void Rotate(List<Block> blocksToRotate)
-        {
-            ShapeRenderer.Orientation nextOri = GetNextOrientation();
-
-            List<Vector2> rotationOffsets;
-            if(nextOriToOffsets.TryGetValue(nextOri, out rotationOffsets))
-            {
-                for(int i = 0; i < blocksToRotate.Count(); i++)
-                {
-                    blocksToRotate.ElementAt(i).ApplyOffset(rotationOffsets.ElementAt(i));
-                }
-            }
-            //set new orientation
-            this.orientation = nextOri;
-        }
 
         // Author: Greg Kulasik
         public override void Draw()

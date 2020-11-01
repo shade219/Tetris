@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain
 {
-    // Authors: DeAngelo, Name2
-    // Description:
+    // Authors: DeAngelo, Greg Kulasik
+    // Description: A class which implements all shared functionality of derived shapes
+                        //Used for active GameShapes prior to being store onto the BlockGrid
     public abstract class GameShape
     {
         //used for drawing GameShape
@@ -20,12 +21,15 @@ namespace Tetris.domain
             get;
         }
 
-        //rotation offset dictionary -- initialized by derived shape
+        //NOTE:: rotation offset dictionary -- initialized by derived shape
         protected Dictionary<ShapeRenderer.Orientation, List<Vector2>> nextOriToOffsets;
 
         protected ShapeRenderer.Orientation orientation;
         protected DrawColor.Shade color;
+
+        //NOTE:: Set by MovementManager???
         protected bool isAboutToPlace;
+        //NOTE:: set by BlockGrid
         protected bool isPlaced;
 
 
@@ -38,32 +42,12 @@ namespace Tetris.domain
             this.isPlaced = false;
         }
 
-
-        public IReadOnlyCollection<Block> GetBlocks()
-        {
-            return blocks.AsReadOnly();
-        }
-        public IReadOnlyCollection<Vector2> GetOrientationOffsets(ShapeRenderer.Orientation ori)
-        {
-            List<Vector2> offsets;
-            nextOriToOffsets.TryGetValue(ori, out offsets);
-
-            return offsets;
-        }
-
-        public ShapeRenderer.Orientation GetOrientation()
-        {
-            return orientation;
-        }
-
         //************************************************************************
         // Abstract Functions (MUST be implemented)
         //************************************************************************
 
         //Draw GameShape at 'anchor' in 'orientation'
         public abstract void Draw();
-        protected abstract void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply);
-        public abstract List<Block> CalcBlocksPostAction(InputAction action);
 
         //************************************************************************
         //
@@ -76,6 +60,35 @@ namespace Tetris.domain
         {
             ApplyActionToBlocks(action, blocks);
         }
+
+        // Author: Greg Kulasik
+        // Detects the type of action and calls Rotate or Move as appropriate
+        protected void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
+        {
+            switch (action)
+            {
+                case InputAction.Rotate:
+                    Rotate(blocksToApply);
+                    break;
+                case InputAction.MoveDown:
+                case InputAction.MoveLeft:
+                case InputAction.MoveRight:
+                    Move(action, blocksToApply);
+                    break;
+                default:
+                    throw new ArgumentException("Unexpected InputAction applied: " + action);
+            }
+        }
+
+
+        // Author: Greg Kulasik
+        public List<Block> CalcBlocksPostAction(InputAction action)
+        {
+            List<Block> newBlocks = CopyBlocks();
+            ApplyActionToBlocks(action, newBlocks);
+            return newBlocks;
+        }
+
 
         //Author: DeAngelo Wilson
         protected List<Block> CopyBlocks()
@@ -129,6 +142,25 @@ namespace Tetris.domain
         }
 
 
+        // Author: Greg Kulasik
+        // Rotates the shape in place (Square is special since rotate does not change the shape but we need to show it rotating - so the anchor will rotate around)
+        // New offsets are calculated for each 90 degree rotation
+        // For each block apply the roation for that block (both lists are ordered - blocks move clockwise)
+        protected void Rotate(List<Block> blocksToRotate)
+        {
+            ShapeRenderer.Orientation nextOri = GetNextOrientation();
+
+            List<Vector2> rotationOffsets;
+            if (nextOriToOffsets.TryGetValue(nextOri, out rotationOffsets))
+            {
+                for (int i = 0; i < blocksToRotate.Count(); i++)
+                {
+                    blocksToRotate.ElementAt(i).ApplyOffset(rotationOffsets.ElementAt(i));
+                }
+            }
+            //set new orientation
+            this.orientation = nextOri;
+        }
         public ShapeRenderer.Orientation GetNextOrientation()
         {
             ShapeRenderer.Orientation ori;
@@ -154,6 +186,23 @@ namespace Tetris.domain
             return ori;
         }
 
+        public IReadOnlyCollection<Block> GetBlocks()
+        {
+            return blocks.AsReadOnly();
+        }
+        public IReadOnlyCollection<Vector2> GetOrientationOffsets(ShapeRenderer.Orientation ori)
+        {
+            List<Vector2> offsets;
+            nextOriToOffsets.TryGetValue(ori, out offsets);
+
+            return offsets;
+        }
+
+        public ShapeRenderer.Orientation GetOrientation()
+        {
+            return orientation;
+        }
+
         public void GameShapePlaced()
         {
             this.isPlaced = true;
@@ -165,5 +214,6 @@ namespace Tetris.domain
         {
             this.isAboutToPlace = true;
         }
+
     }
 }

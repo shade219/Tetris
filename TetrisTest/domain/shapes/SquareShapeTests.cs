@@ -105,7 +105,7 @@ namespace Tetris.domain.shapes.Tests
             //Rotate GameShape
             square.ApplyAction(InputAction.Rotate);
 
-            //Automated way of checking if properly rotated --- ASSUMES rotationOffset Lists are accurate
+            //Automated way of checking if properly rotated --- NOTE:: ASSUMES rotationOffset Lists are accurate
             //IReadOnlyCollection<Vector2> rotationOffsets = square.GetOrientationOffsets(square.GetOrientation());
 
             //for (int i = 0; i < coordinates.Count; i++)
@@ -202,14 +202,19 @@ namespace Tetris.domain.shapes.Tests
         [TestMethod()]
         public void CalcBlocksPostActionTest()
         {
-
+            //5 cases
+                //rotation
+                //move down
+                //move left
+                //move right
+                //invalid action
         }
 
-        // Author: Your Name Here
-        [TestMethod()]
-        public void DrawTest()
-        {
+        //// Author: Your Name Here
+        //[TestMethod()]
+        //public void DrawTest()
+        //{
 
-        }
+        //}
     }
 }

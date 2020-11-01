@@ -18,18 +18,6 @@ namespace Tetris.domain.shapes
         }
 
         // Author: Your Name Here
-        protected override void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
-        {
-            throw new NotImplementedException();
-        }
-
-        // Author: Your Name Here
-        public override List<Block> CalcBlocksPostAction(InputAction action)
-        {
-            throw new NotImplementedException();
-        }
-
-        // Author: Your Name Here
         public override void Draw()
         {
             throw new NotImplementedException();
