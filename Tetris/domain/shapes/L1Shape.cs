@@ -17,7 +17,7 @@ namespace Tetris.domain.shapes
         }
 
         // Author: Your Name Here
-        public override void ApplyAction(InputAction action)
+        protected override void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
         {
             throw new NotImplementedException();
         }

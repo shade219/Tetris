@@ -15,10 +15,10 @@ namespace Tetris.domain.shapes
         // Author: Greg Kulasik
         public SquareShape(Block anchor, ShapeRenderer.Orientation orientation) : base (anchor, orientation)
         {
-            this.anchor = anchor;
+            //this.anchor = anchor;
 
             // Check ShapeRenderer.draw___ which will tell you the color of the shape
-            this.color = DrawColor.Shade.COLOR_RED;
+            this.color = ShapeRenderer.GetSquareColor();
 
             // Draw a grid and determine what the shape looks like when it is at 0, 90, 180, and 270 degrees.
             // Then determine the other block offsets. The anchor is (x, y), the block immediately on the right is (x+1, y), the block immediately below is (x, y-1), etc.
@@ -53,12 +53,6 @@ namespace Tetris.domain.shapes
         }
 
         // Author: Greg Kulasik
-        public override void ApplyAction(InputAction action)
-        {
-            ApplyActionToBlocks(action, blocks);
-        }
-
-        // Author: Greg Kulasik
         public override List<Block> CalcBlocksPostAction(InputAction action)
         {
             List<Block> newBlocks = CopyBlocks();
@@ -68,7 +62,7 @@ namespace Tetris.domain.shapes
 
         // Author: Greg Kulasik
         // Detects the type of action and calls Rotate or Move as appropriate
-        protected void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
+        protected override void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
         {
             switch (action)
             {
@@ -85,30 +79,7 @@ namespace Tetris.domain.shapes
             }
         }
 
-        // Author: Greg Kulasik
-        // Moves blocks in a certain direction by applying a vector offset.
-        protected void Move(InputAction action, List<Block> blocksToMove)
-        {
-            Vector2 offset = new Vector2(0, 0);
 
-            switch (action)
-            {
-                case InputAction.MoveDown:
-                    offset = new Vector2(0, -1);
-                    break;
-                case InputAction.MoveLeft:
-                    offset = new Vector2(-1, 0);
-                    break;
-                case InputAction.MoveRight:
-                    offset = new Vector2(1, 0);
-                    break;
-                default:
-                    throw new ArgumentException("Unexpected InputAction applied: " + action);
-            }
-
-            foreach (Block b in blocksToMove)
-                b.ApplyOffset(offset);
-        }
 
         // Author: Greg Kulasik
         // Rotates the shape in place (Square is special since rotate does not change the shape but we need to show it rotating - so the anchor will rotate around)

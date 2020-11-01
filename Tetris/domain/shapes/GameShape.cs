@@ -20,36 +20,50 @@ namespace Tetris.domain
             get;
         }
 
-        protected ShapeRenderer.Orientation orientation;
+    protected ShapeRenderer.Orientation orientation;
         protected DrawColor.Shade color;
         protected bool isAboutToPlace;
         protected bool isPlaced;
-
-        //MOVED TO Tetris.Constants
-        //public Vector2 downOffset;
-        //public Vector2 upOffset;
-        //public Vector2 leftOffset;
-        //public Vector2 rightOffset;
 
 
         protected GameShape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0)
         {
             this.anchor = anchor;
-            blocks = new List<Block>();
-            isAboutToPlace = false;
-            isPlaced = false;
+            this.blocks = new List<Block>();
             this.orientation = orientation;
+            this.isAboutToPlace = false;
+            this.isPlaced = false;
         }
+
+
+        public IReadOnlyCollection<Block> GetBlocks()
+        {
+            return blocks.AsReadOnly();
+        }
+
+
+        //************************************************************************
+        // Abstract Functions (MUST be implemented)
+        //************************************************************************
 
         //Draw GameShape at 'anchor' in 'orientation'
         public abstract void Draw();
-
-        //apply rotation or movement offset to GameShape ('anchor' + 'blocks')
-        public abstract void ApplyAction(InputAction action);
-
+        protected abstract void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply);
         public abstract List<Block> CalcBlocksPostAction(InputAction action);
 
+        //************************************************************************
+        //
+        //************************************************************************
 
+
+        // Author: Greg Kulasik
+        //apply rotation or movement offset to GameShape ('anchor' + 'blocks')
+        public void ApplyAction(InputAction action)
+        {
+            ApplyActionToBlocks(action, blocks);
+        }
+
+        //Author: DeAngelo Wilson
         protected List<Block> CopyBlocks()
         {
             List<Block> newBlocks = new List<Block>();
@@ -60,7 +74,7 @@ namespace Tetris.domain
             return newBlocks;
         }
 
-        //DeAngelo Wilson
+        //Author: DeAngelo Wilson
         private List<Block> CreateCopyOfBlocksArray()
         {
             Block[] blocksArray = new Block[blocks.Count];
@@ -69,16 +83,37 @@ namespace Tetris.domain
             return new List<Block>(blocksArray);
         }
 
+        //Author: DeAngelo Wilson
         //used to apply uniform offset to 'anchor' Block and 'blocks' Block array (anchor is includes in blocks list)
-        protected void ApplyMovementCoordinateOffset(Vector2 offset)
+        private void ApplyMoveOffset(Vector2 offset, List<Block> blocksToMove)
         {
-            foreach (Block b in blocks)
+            foreach (Block b in blocksToMove)
             {
                 b.ApplyOffset(offset);
             }
         }
 
-        //public abstract void RotateGameShape();
+        // Author: Greg Kulasik
+        // Moves blocks in a certain direction by applying a vector offset.
+            //Uniform for all derived GameShape's
+        protected void Move(InputAction action, List<Block> blocksToMove)
+        {
+            switch (action)
+            {
+                case InputAction.MoveDown:
+                    ApplyMoveOffset(Constants.DOWN_OFFSET, blocksToMove);
+                    break;
+                case InputAction.MoveLeft:
+                    ApplyMoveOffset(Constants.LEFT_OFFSET, blocksToMove);
+                    break;
+                case InputAction.MoveRight:
+                    ApplyMoveOffset(Constants.RIGHT_OFFSET, blocksToMove);
+                    break;
+                default:
+                    throw new ArgumentException("Unexpected InputAction applied: " + action);
+            }
+        }
+
 
         public ShapeRenderer.Orientation GetNextOrientation()
         {
@@ -103,6 +138,18 @@ namespace Tetris.domain
             }
 
             return ori;
+        }
+
+        public void GameShapePlaced()
+        {
+            this.isPlaced = true;
+        }
+
+
+        //called by MovementManager -- TODO:: must reset/set flag (false) if moving left/right
+        public void AboutToPlaceGameShape()
+        {
+            this.isAboutToPlace = true;
         }
     }
 }

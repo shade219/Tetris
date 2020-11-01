@@ -36,13 +36,39 @@ namespace Tetris.domain.Tests
             grid.PlaceShape(shape1);
 
             GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 3), defaultOri);
-            grid.PlaceShape(shape1);
+            grid.PlaceShape(shape2);
 
             GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
-            grid.PlaceShape(shape1);
+            grid.PlaceShape(shape3);
 
             return grid;
         }
+
+        public BlockGrid VacantCoordsBlockGridInitialize(out List<Vector2> expectedPoints)
+        {
+            //points: (0,3) (0,4) (1,3) (1,4) -- (0,1) (0,2) (1,1) (1,2) -- (2,3) (2,4) (3,3) (3,4)
+            expectedPoints = new List<Vector2>()
+            {
+               new Vector2(0,0), new Vector2(1, 0), new Vector2(2, 0), new Vector2(3, 0), new Vector2(4, 0),
+               new Vector2(2,1), new Vector2(3, 1), new Vector2(4, 1),
+               new Vector2(2, 2), new Vector2(3, 2), new Vector2(4, 2),
+               new Vector2(4, 3), new Vector2(4, 4)
+            };
+
+            BlockGrid grid = new BlockGrid(5, 5);
+
+            GameShape shape1 = new SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 0, 3), defaultOri);
+            grid.PlaceShape(shape1);
+
+            GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 3), defaultOri);
+            grid.PlaceShape(shape2);
+
+            GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
+            grid.PlaceShape(shape3);
+
+            return grid;
+        }
+
 
         public BlockGrid CompleteLinesInitialize()
         {
@@ -52,14 +78,14 @@ namespace Tetris.domain.Tests
             grid.PlaceShape(shape1);
 
             GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 3), defaultOri);
-            grid.PlaceShape(shape1);
+            grid.PlaceShape(shape2);
 
             GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
-            grid.PlaceShape(shape1);
+            grid.PlaceShape(shape3);
 
             //complete line init
-            GameShape shape4 = new LineShape(new Block(DrawColor.Shade.COLOR_YELLOW, 0, 3), defaultOri);
-            grid.PlaceShape(shape1);
+            GameShape shape4 = new LineShape(new Block(DrawColor.Shade.COLOR_YELLOW, 0, 3), ShapeRenderer.Orientation.ORIENT_1);
+            grid.PlaceShape(shape4);
 
             return grid;
         }
@@ -68,7 +94,16 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void BlockGridTest()
         {
+            BlockGrid grid = new BlockGrid(5, 6);
 
+            Assert.AreEqual(5, grid.GetGridColumnCount());
+            Assert.AreEqual(6, grid.GetGridRowCount());
+
+            Assert.AreEqual(grid.GetGridColumnCount(), grid.grid.Length);
+            for (int i = 0; i < grid.GetGridColumnCount(); i++)
+            {
+                Assert.AreEqual(grid.GetGridRowCount(), grid.grid[i].Length);
+            }
         }
 
         // Author: Your Name Here
@@ -80,10 +115,10 @@ namespace Tetris.domain.Tests
 
             //test that the all points from shapes exist on grid 
             List<Vector2> points = grid.GetOccupiedCoordinates();
-            foreach (Vector2 p in points)
+            foreach (Vector2 p in expectedPoints)
             {
                 //check if p in expected points
-                if (!expectedPoints.Contains(p))
+                if (!points.Contains(p))
                 {
                     Assert.Fail("Block at point: {0}, {1} not found on grid", p.X, p.Y);
                 }
@@ -101,6 +136,10 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void GetCompletedLinesTest()
         {
+            BlockGrid grid = CompleteLinesInitialize();
+
+            grid.GetCompletedLines();
+
 
         }
 
@@ -108,7 +147,20 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void GetVacantCoordinatesTest()
         {
+            List<Vector2> expectedPoints;
+            BlockGrid grid = VacantCoordsBlockGridInitialize(out expectedPoints);
 
+            //test that the 3 shapes exist on grid 
+
+            List<Vector2> points = grid.GetVacantCoordinates();
+            foreach (Vector2 p in expectedPoints)
+            {
+                //check if p in expected points
+                if (!points.Contains(p))
+                {
+                    Assert.Fail("Block at point: {0}, {1} not found on grid", p.X, p.Y);
+                }
+            }
         }
 
         // Author: Your Name Here
@@ -121,10 +173,10 @@ namespace Tetris.domain.Tests
             //test that the 3 shapes exist on grid 
 
             List<Vector2> points = grid.GetOccupiedCoordinates();
-            foreach (Vector2 p in points)
+            foreach (Vector2 p in expectedPoints)
             {
                 //check if p in expected points
-                if (!expectedPoints.Contains(p))
+                if (!points.Contains(p))
                 {
                     Assert.Fail("Block at point: {0}, {1} not found on grid", p.X, p.Y);
                 }
