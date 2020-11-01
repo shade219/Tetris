@@ -40,7 +40,7 @@ namespace Tetris.domain
 
 
         static ShapeRenderer.Orientation defaultOri = ShapeRenderer.Orientation.ORIENT_2;
-
+        //Static method for initializing and testing BlockGrid in OldGameLoop.cs
         public static BlockGrid BasicBlockGridInitialize()
         {
             BlockGrid grid = new BlockGrid(Constants.GAME_MAX_X, Constants.GAME_MAX_Y);
@@ -113,7 +113,7 @@ namespace Tetris.domain
             ShiftGridBlocksDown(maxIndex + 1, toRemove.Count);
         }
 
-        public void ShiftGridBlocksDown(int lowestRow, int shift)
+        private void ShiftGridBlocksDown(int lowestRow, int shift)
         {
             //for all blocks above or equal (higher index) to lowestRow -- shift down by shift amount (total lines cleared)
             for (int col = 0; col < col_count; col++)
@@ -234,17 +234,6 @@ namespace Tetris.domain
                 coords.Add(new Vector2(block.GetX(), block.GetY()));
             }
 
-
-            //for (int col = 0; col < col_count; col++)
-            //{
-            //    for (int row = 0; row < row_count; row++)
-            //    {
-            //        if (grid[col][row] != null)
-            //        {
-            //            coords.Add(new Vector2( col, row));
-            //        }
-            //    }
-            //}
             return coords;
         }
 
