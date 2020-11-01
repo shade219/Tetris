@@ -6,25 +6,36 @@ using System.Threading.Tasks;
 
 namespace Tetris.services
 {
-    // Authors: Name1, Name2
-    // Description:
+    // Authors: Jessica Wilson
+    // Description: Determine the current level based off the total number of lines cleared
     public class LevelManager
     {
 
-        int maxLevel;
-        int startLevel;
-        int currentLevel;
+        public int maxLevel = 10;
+        public int startLevel;
+        public int currentLevel;
 
-        // Author: Your Name Here
+        // Author: Jessica Wilson
         public LevelManager(int overrideStartLevel)
         {
-
+            this.startLevel = overrideStartLevel;
+            this.currentLevel = overrideStartLevel;
+            
         }
 
-        // Author: Your Name Here
+        // Author: Jessica Wilson
         public int UpdateLevel(int totalLinesCleared)
         {
-            return 0;
+            //Each new level increases every 10 lines
+            currentLevel = totalLinesCleared / 10;
+
+            //can only get up to level ten (or whatever the max level is defaulted to)
+            if (currentLevel >= maxLevel)
+            {
+                return maxLevel;
+            }
+            return currentLevel;
+
         }
 
     }
