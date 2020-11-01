@@ -12,13 +12,13 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Your Name Here
-        public LineShape(Block anchor): base (anchor)
+        public LineShape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
         {
 
         }
 
         // Author: Your Name Here
-        public override void ApplyAction(InputAction action)
+        protected override void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
         {
             throw new NotImplementedException();
         }

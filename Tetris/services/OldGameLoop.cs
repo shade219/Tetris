@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Tetris.domain;
 using Tetris.services;
 
 namespace Tetris
@@ -27,6 +28,14 @@ namespace Tetris
             int statsCount = 0;
             int count = 0;
             Azul.AZUL_KEY prevEnterKey = 0;
+
+
+        //*************************************************
+        //  test code of block grid
+        //*************************************************
+        private BlockGrid grid;
+            //
+
 
 
         //-----------------------------------------------------------------------------
@@ -96,6 +105,11 @@ namespace Tetris
             //---------------------------------------------------------------------------------------------------------
 
             stats = new GameStats();
+
+            //*************************************************
+            //  test code of block grid
+            //*************************************************
+            grid = BlockGrid.BasicBlockGridInitialize();
 
         }
 
@@ -199,60 +213,67 @@ namespace Tetris
             SOM.drawBox(Constants.GAME_MIN_X, Constants.GAME_MAX_Y, DrawColor.Shade.COLOR_RED);
             SOM.drawBox(Constants.GAME_MAX_X, Constants.GAME_MAX_Y, DrawColor.Shade.COLOR_BLUE);
 
-            // Cycle all the tetris pieces
-            if (count < 2 * 10)
-            {
-                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_0);
+            //// Cycle all the tetris pieces
+            //if (count < 2 * 10)
+            //{
+            //    ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_0);
 
-                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_0);
-                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_0);
-                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_0);
-                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_0);
-                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_0);
-                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_0);
-                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_0);
-            }
-            else if (count < 2 * 20)
-            {
-                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_0);
+            //    ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_0);
+            //    ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_0);
+            //    ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_0);
+            //    ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_0);
+            //    ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_0);
+            //    ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_0);
+            //}
+            //else if (count < 2 * 20)
+            //{
+            //    ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_1);
 
-                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_1);
-                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_1);
-                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_1);
-                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_1);
-                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_1);
-                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_1);
-                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_1);
-            }
-            else if (count < 2 * 30)
-            {
-                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_1);
+            //    ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_1);
+            //}
+            //else if (count < 2 * 30)
+            //{
+            //    ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_2);
 
-                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_2);
-                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_2);
-                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_2);
-                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_2);
-                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_2);
-                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_2);
-                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_2);
-            }
-            else
-            {
-                ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_2);
+            //    ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_2);
+            //}
+            //else
+            //{
+            //    ShapeRenderer.drawLine(Constants.PREVIEW_WINDOW_X, Constants.PREVIEW_WINDOW_Y, ShapeRenderer.Orientation.ORIENT_3);
 
-                ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_3);
-                ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_3);
-                ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_3);
-                ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_3);
-                ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_3);
-                ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_3);
-                ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_3);
-            }
+            //    ShapeRenderer.drawLine(3, 3, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawL1(5, 8, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawL2(5, 14, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawT(5, 19, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawZ1(5, 23, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawZ2(5, 28, ShapeRenderer.Orientation.ORIENT_3);
+            //    ShapeRenderer.drawSquare(8, 4, ShapeRenderer.Orientation.ORIENT_3);
+            //}
 
             if (count > 2 * 40)
                 count = 0;
             else
                 count++;
+
+
+
+            //*************************************************
+            //  test code of block grid
+            //*************************************************
+            grid.Draw();
         }
 
         //-----------------------------------------------------------------------------

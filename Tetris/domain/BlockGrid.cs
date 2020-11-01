@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,11 +17,11 @@ namespace Tetris.domain
     {
         //2D dimensional array of different width/height
             // - Vacant coordinates MUST be null
-        Block[][] grid;
+        public readonly Block[][] grid;
         //NOTE: Grid access --> grid[x][y] || grid[col][row]
 
-        private int row_count;
-        private int col_count;
+        private readonly int row_count;
+        private readonly int col_count;
 
         private List<Block> blocks;
 
@@ -30,8 +32,32 @@ namespace Tetris.domain
             col_count = maxX;
 
             blocks = new List<Block>(row_count * col_count);
+
+            //Must initialize directly in constructor -- bc readonly
+            grid = new Block[maxX][];
             InitializeBlockGrid(maxX, maxY);
         }
+
+
+        static ShapeRenderer.Orientation defaultOri = ShapeRenderer.Orientation.ORIENT_2;
+
+        public static BlockGrid BasicBlockGridInitialize()
+        {
+            BlockGrid grid = new BlockGrid(Constants.GAME_MAX_X, Constants.GAME_MAX_Y);
+
+            GameShape shape1 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 1, 2), defaultOri);
+            grid.PlaceShape(shape1);
+
+            GameShape shape2 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 3, 2), defaultOri);
+            grid.PlaceShape(shape2);
+
+            GameShape shape3 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_RED, 1, 0), defaultOri);
+            grid.PlaceShape(shape3);
+
+            return grid;
+        }
+
+
 
         public void Draw()
         {
@@ -45,13 +71,20 @@ namespace Tetris.domain
         // Author: DeAngelo
         public void PlaceShape(GameShape toPlace)
         {
+            //TODO:: prevent duplicate placing
+
             //for each block of the GameShape-- place onto grid + add to list
-            foreach (Block block in toPlace.blocks)
+            foreach (Block block in toPlace.GetBlocks())
             {
+                if (grid[block.GetX()][block.GetY()] != null)
+                {
+                    throw new DuplicateNameException("PlaceShape:: block cannot be placed, position (" + block.GetX() + ", " + block.GetY() + ") already occupied");
+                }
                 Block blockCopy = block.Copy();
                 grid[block.GetX()][block.GetY()] = blockCopy;
                 blocks.Add(blockCopy);
             }
+            toPlace.GameShapePlaced();
         }
 
         // Author: DeAngelo Wilson
@@ -71,30 +104,40 @@ namespace Tetris.domain
                     grid[col][row] = null;
                 }
                 //
-                if (maxIndex < row)
+                if (maxIndex > row)
                 {
                     maxIndex = row;
                 }
             }
-            ShiftGridBlocksDown(maxIndex, toRemove.Count);
+            //shift every row above (+ 1) the highest line index removed
+            ShiftGridBlocksDown(maxIndex + 1, toRemove.Count);
         }
 
         public void ShiftGridBlocksDown(int lowestRow, int shift)
         {
-            //for all blocks above or equal (lowerIndex) to lowestRow -- shift down by shift amount (total lines cleared)
+            //for all blocks above or equal (higher index) to lowestRow -- shift down by shift amount (total lines cleared)
             for (int col = 0; col < col_count; col++)
             {            
-                for (int row = 0; row < lowestRow; row++)
+                for (int row = lowestRow; row < row_count; row++)
                 {
                     //shift block down
                     if (grid[col][row] != null)
                     {
-                        grid[col][row].ApplyOffset(Constants.DOWN_OFFSET * shift);
+                        ShiftBlockDown(col, row, shift);
                     }
                 }
             }
         }
 
+        private void ShiftBlockDown(int col, int row, int shift)
+        {
+            //move coords of block down
+            grid[col][row].ApplyOffset(Constants.DOWN_OFFSET * shift);
+
+            //move block down in grid
+            grid[col][row - 1] = grid[col][row];
+            grid[col][row] = null;
+        }
 
         // Author: DeAngelo Wilson
         public List<int> GetCompletedLines()
@@ -120,9 +163,10 @@ namespace Tetris.domain
             return completedLineIndex;
         }
 
-        public List<int> GetCompletedLines(List<int> rowIndexes)//TODO:: CHANGE TO GAMESHAPE
+        public List<int> GetCompletedLines(GameShape placedShape)
         {
             List<int> completedLineIndex = new List<int>();
+            List<int> rowIndexes = GetGameShapeRowIndexes(placedShape);
 
             foreach (int row in rowIndexes)
             {
@@ -145,8 +189,23 @@ namespace Tetris.domain
             return completedLineIndex;
         }
 
+        private List<int> GetGameShapeRowIndexes(GameShape gameShape)
+        {
+            List<int> rowIndexes = new List<int>();
 
-        //TODO:: could maintain a list of Vacant/Occupied Coordinates...
+            //for each block of the GameShape-- store row index
+            foreach (Block block in gameShape.GetBlocks())
+            {
+                if (!rowIndexes.Contains(block.GetY()))
+                {
+                    rowIndexes.Add(block.GetY());
+                }
+            }
+
+            return rowIndexes;
+        }
+
+
         // Author: DeAngelo Wilson
         public List<Vector2> GetVacantCoordinates()
         {
@@ -168,16 +227,24 @@ namespace Tetris.domain
         public List<Vector2> GetOccupiedCoordinates()
         {
             List<Vector2> coords = new List<Vector2>();
-            for (int col = 0; col < col_count; col++)
+
+            //return cords of every block in stored 'blocks' List
+            foreach (Block block in blocks)
             {
-                for (int row = 0; row < row_count; row++)
-                {
-                    if (grid[col][row] != null)
-                    {
-                        coords.Add(new Vector2( col, row));
-                    }
-                }
+                coords.Add(new Vector2(block.GetX(), block.GetY()));
             }
+
+
+            //for (int col = 0; col < col_count; col++)
+            //{
+            //    for (int row = 0; row < row_count; row++)
+            //    {
+            //        if (grid[col][row] != null)
+            //        {
+            //            coords.Add(new Vector2( col, row));
+            //        }
+            //    }
+            //}
             return coords;
         }
 
@@ -186,8 +253,7 @@ namespace Tetris.domain
         private void InitializeBlockGrid(int cols, int rows)
         {
             //Initialize Block grid
-            grid = new Block[cols][];
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < cols; i++)
             {
                 grid[i] = new Block[rows];
             }
@@ -199,6 +265,16 @@ namespace Tetris.domain
                     grid[col][row] = null;
                 }
             }
+        }
+
+        public int GetGridRowCount()
+        {
+            return row_count;
+        }
+
+        public int GetGridColumnCount()
+        {
+            return col_count;
         }
     }
 }

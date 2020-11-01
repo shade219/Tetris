@@ -11,13 +11,13 @@ namespace Tetris.domain.shapes
     public class L1Shape : GameShape
     {
         // Author: Your Name Here
-        public L1Shape(Block anchor): base (anchor)
+        public L1Shape(Block anchor, ShapeRenderer.Orientation orientation) : base (anchor, orientation)
         {
 
         }
 
         // Author: Your Name Here
-        public override void ApplyAction(InputAction action)
+        protected override void ApplyActionToBlocks(InputAction action, List<Block> blocksToApply)
         {
             throw new NotImplementedException();
         }
