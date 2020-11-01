@@ -26,14 +26,24 @@ namespace Tetris.services
         // Author: Jessica Wilson
         public int UpdateLevel(int totalLinesCleared)
         {
-            //Each new level increases every 10 lines
-            currentLevel = totalLinesCleared / 10;
-
-            //can only get up to level ten (or whatever the max level is defaulted to)
-            if (currentLevel >= maxLevel)
+            //defend against a negative input
+            if(totalLinesCleared < 10)
             {
-                return maxLevel;
+                return currentLevel;
             }
+            else
+            {
+                //Each new level increases every 10 lines
+                int level = totalLinesCleared / 10;
+                  currentLevel = startLevel + level;
+
+                //can only get up to level ten (or whatever the max level is defaulted to)
+                if (currentLevel >= maxLevel)
+                {
+                    currentLevel = maxLevel;
+                }
+            }
+            
             return currentLevel;
 
         }

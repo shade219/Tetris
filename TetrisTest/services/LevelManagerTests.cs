@@ -27,30 +27,70 @@ namespace Tetris.services.Tests
 
         // Author: Jessica Wilson
         [TestMethod()]
-        public void UpdateLevelTest()
+        public void UpdateLevelTestStartingAtLevelOne()
         {
-            int expectedLevel = 2;
-
+            //starting at level one, first ten lines take you to level 2, next ten are level 3.
             LevelManager manager = new LevelManager(1);
             int levelReturned = manager.UpdateLevel(24);
-            Assert.AreEqual(expectedLevel, manager.currentLevel);
+            Assert.AreEqual(3, manager.currentLevel);
             Assert.AreEqual(1, manager.startLevel);
             Assert.AreEqual(10, manager.maxLevel);
-            Assert.AreEqual(expectedLevel, levelReturned);
-
-            //make sure the current level is updated again at an even 10 number
-            levelReturned = manager.UpdateLevel(30);
-            Assert.AreEqual(levelReturned, manager.currentLevel);
+            Assert.AreEqual(3, levelReturned);
 
         }
 
         // Author: Jessica Wilson
         [TestMethod()]
+        public void UpdateLevelStillAtLevelOneTest()
+        {
+            //only cleared 7 lines have not moved on to the next level, still at level one.
+            LevelManager manager = new LevelManager(1);
+            int levelReturned = manager.UpdateLevel(7);
+            Assert.AreEqual(1, manager.currentLevel);
+            Assert.AreEqual(1, manager.startLevel);
+            Assert.AreEqual(10, manager.maxLevel);
+            Assert.AreEqual(1, levelReturned);
+
+        }
+
+        // Author: Jessica Wilson
+        [TestMethod()]
+        public void UpdateLevelNegativeInputTest()
+        {
+            //bad input from user 
+            LevelManager manager = new LevelManager(1);
+            int levelReturned = manager.UpdateLevel(-27);
+            Assert.AreEqual(1, manager.currentLevel);
+            Assert.AreEqual(1, manager.startLevel);
+            Assert.AreEqual(10, manager.maxLevel);
+            Assert.AreEqual(1, levelReturned);
+
+        }
+
+        // Author: Jessica Wilson
+        [TestMethod()]
+        public void UpdateLevelTestStartingAtLevelFive()
+        {
+            //User started at level 5, only 1 additional level is added
+            LevelManager manager = new LevelManager(5);
+            int levelReturned = manager.UpdateLevel(11);
+            Assert.AreEqual(6, manager.currentLevel);
+            Assert.AreEqual(5, manager.startLevel);
+            Assert.AreEqual(10, manager.maxLevel);
+            Assert.AreEqual(6, levelReturned);
+
+        }
+
+
+
+        // Author: Jessica Wilson
+        [TestMethod()]
         public void UpdateToMaxLevelLevelTest()
         {
+            //can only go up to level ten, will not go above
             LevelManager manager = new LevelManager(1);
             int levelReturned = manager.UpdateLevel(110);
-            Assert.AreEqual(11, manager.currentLevel);
+            Assert.AreEqual(10, manager.currentLevel);
             Assert.AreEqual(10, manager.maxLevel);
             Assert.AreEqual(10, levelReturned);
         }
