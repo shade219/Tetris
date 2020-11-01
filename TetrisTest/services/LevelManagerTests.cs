@@ -34,7 +34,6 @@ namespace Tetris.services.Tests
             int levelReturned = manager.UpdateLevel(24);
             Assert.AreEqual(3, manager.currentLevel);
             Assert.AreEqual(1, manager.startLevel);
-            Assert.AreEqual(10, manager.maxLevel);
             Assert.AreEqual(3, levelReturned);
 
         }
@@ -48,7 +47,6 @@ namespace Tetris.services.Tests
             int levelReturned = manager.UpdateLevel(7);
             Assert.AreEqual(1, manager.currentLevel);
             Assert.AreEqual(1, manager.startLevel);
-            Assert.AreEqual(10, manager.maxLevel);
             Assert.AreEqual(1, levelReturned);
 
         }
@@ -62,7 +60,6 @@ namespace Tetris.services.Tests
             int levelReturned = manager.UpdateLevel(-27);
             Assert.AreEqual(1, manager.currentLevel);
             Assert.AreEqual(1, manager.startLevel);
-            Assert.AreEqual(10, manager.maxLevel);
             Assert.AreEqual(1, levelReturned);
 
         }
@@ -76,7 +73,6 @@ namespace Tetris.services.Tests
             int levelReturned = manager.UpdateLevel(11);
             Assert.AreEqual(6, manager.currentLevel);
             Assert.AreEqual(5, manager.startLevel);
-            Assert.AreEqual(10, manager.maxLevel);
             Assert.AreEqual(6, levelReturned);
 
         }
@@ -91,7 +87,6 @@ namespace Tetris.services.Tests
             LevelManager manager = new LevelManager(1);
             int levelReturned = manager.UpdateLevel(110);
             Assert.AreEqual(10, manager.currentLevel);
-            Assert.AreEqual(10, manager.maxLevel);
             Assert.AreEqual(10, levelReturned);
         }
     }
