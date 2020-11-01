@@ -45,13 +45,13 @@ namespace Tetris.domain
         {
             BlockGrid grid = new BlockGrid(Constants.GAME_MAX_X, Constants.GAME_MAX_Y);
 
-            GameShape shape1 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 0, 3), defaultOri);
+            GameShape shape1 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 1, 2), defaultOri);
             grid.PlaceShape(shape1);
 
-            GameShape shape2 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 3), defaultOri);
+            GameShape shape2 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 3, 2), defaultOri);
             grid.PlaceShape(shape2);
 
-            GameShape shape3 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
+            GameShape shape3 = new shapes.SquareShape(new Block(DrawColor.Shade.COLOR_RED, 1, 0), defaultOri);
             grid.PlaceShape(shape3);
 
             return grid;

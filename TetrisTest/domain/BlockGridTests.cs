@@ -18,7 +18,7 @@ namespace Tetris.domain.Tests
     {
 
         // 180 degrees default here
-        ShapeRenderer.Orientation defaultOri = ShapeRenderer.Orientation.ORIENT_2;
+        ShapeRenderer.Orientation defaultOri = ShapeRenderer.Orientation.ORIENT_3;
 
         public BlockGrid BasicBlockGridInitialize(out List<Vector2> expectedPoints)
         {

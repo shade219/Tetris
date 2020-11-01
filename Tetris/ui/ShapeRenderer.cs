@@ -244,28 +244,28 @@ namespace Tetris
         {
             switch (orient)
             {
-                case ShapeRenderer.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0:// Anchor -- Top-left
                     SOM.drawBox(coor_x + 0, coor_y, GetSquareAnchorColor());
                     SOM.drawBox(coor_x + 1, coor_y, GetSquareColor());
                     SOM.drawBox(coor_x + 1, coor_y - 1, GetSquareColor());
                     SOM.drawBox(coor_x + 0, coor_y - 1, GetSquareColor());
                     break;
 
-                case ShapeRenderer.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1:// Anchor -- Top-right
                     SOM.drawBox(coor_x + 0, coor_y, GetSquareAnchorColor());
                     SOM.drawBox(coor_x - 1, coor_y, GetSquareColor());
                     SOM.drawBox(coor_x - 1, coor_y - 1, GetSquareColor());
                     SOM.drawBox(coor_x + 0, coor_y - 1, GetSquareColor());
                     break;
 
-                case ShapeRenderer.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2:// Anchor -- Bottom-right
                     SOM.drawBox(coor_x + 0, coor_y, GetSquareAnchorColor());
                     SOM.drawBox(coor_x - 1, coor_y, GetSquareColor());
                     SOM.drawBox(coor_x - 1, coor_y + 1, GetSquareColor());
                     SOM.drawBox(coor_x + 0, coor_y + 1, GetSquareColor());
                     break;
 
-                case ShapeRenderer.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3:// Anchor -- Bottom-left
                     SOM.drawBox(coor_x + 0, coor_y, GetSquareAnchorColor());
                     SOM.drawBox(coor_x + 1, coor_y, GetSquareColor());
                     SOM.drawBox(coor_x + 1, coor_y + 1, GetSquareColor());

@@ -24,27 +24,28 @@ namespace Tetris.domain.shapes
             // Then determine the other block offsets. The anchor is (x, y), the block immediately on the right is (x+1, y), the block immediately below is (x, y-1), etc.
             // Handle adding/creating the other blocks for each potential orientation
             this.blocks.Add(anchor);
+            //NOTE:: Swapped ordering of anchors <==> Orientations ---> matching ShapeRenderer*
             switch (orientation)
             {
-                case ShapeRenderer.Orientation.ORIENT_0: // 0 - anchor is on the top right
+                case ShapeRenderer.Orientation.ORIENT_0: // 270 - Anchor is on the top left
+                    this.blocks.Add(anchor.Copy(new Vector2(1, 0))); // Block to the right
+                    this.blocks.Add(anchor.Copy(new Vector2(1, -1))); // Block below and to the right
+                    this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block below 
+                    break;
+                case ShapeRenderer.Orientation.ORIENT_1: // 0 - anchor is on the top right
                     this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block down
                     this.blocks.Add(anchor.Copy(new Vector2(-1, -1))); // Block down and left
-                    this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block to the left
+                    this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block to the left 
                     break;
-                case ShapeRenderer.Orientation.ORIENT_1: // 90 - anchor is on the bottom right
+                case ShapeRenderer.Orientation.ORIENT_2: // 90 - anchor is on the bottom right
                     this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block to the left
                     this.blocks.Add(anchor.Copy(new Vector2(-1, 1))); // Block up and to the left
                     this.blocks.Add(anchor.Copy(new Vector2(0, 1))); // Block above
                     break;
-                case ShapeRenderer.Orientation.ORIENT_2: // 180 - anchor is on the bottom left
+                case ShapeRenderer.Orientation.ORIENT_3: // 180 - anchor is on the bottom left
                     this.blocks.Add(anchor.Copy(new Vector2(0, 1))); // Block above
                     this.blocks.Add(anchor.Copy(new Vector2(1, 1))); // Block above and to the right 
                     this.blocks.Add(anchor.Copy(new Vector2(1, 0))); // Block to the right
-                    break;
-                case ShapeRenderer.Orientation.ORIENT_3: // 270 - Anchor is on the top left
-                    this.blocks.Add(anchor.Copy(new Vector2(1, 0))); // Block to the right
-                    this.blocks.Add(anchor.Copy(new Vector2(1, -1))); // Block below and to the right
-                    this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block below
                     break;
                 default:
                     throw new ArgumentException("Unexpected ShapeRenderer::Orientation in SquareShape constructor: " + orientation);
