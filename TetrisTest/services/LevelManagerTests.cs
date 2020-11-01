@@ -27,7 +27,7 @@ namespace Tetris.services.Tests
 
         // Author: Jessica Wilson
         [TestMethod()]
-        public void UpdateLevelTestStartingAtLevelOne()
+        public void UpdateLevelStartingAtLevelOneTest()
         {
             //starting at level one, first ten lines take you to level 2, next ten are level 3.
             LevelManager manager = new LevelManager(1);
@@ -69,7 +69,7 @@ namespace Tetris.services.Tests
 
         // Author: Jessica Wilson
         [TestMethod()]
-        public void UpdateLevelTestStartingAtLevelFive()
+        public void UpdateLevelStartingAtLevelFiveTest()
         {
             //User started at level 5, only 1 additional level is added
             LevelManager manager = new LevelManager(5);
