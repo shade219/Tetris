@@ -20,7 +20,10 @@ namespace Tetris.domain
             get;
         }
 
-    protected ShapeRenderer.Orientation orientation;
+        //rotation offset dictionary -- initialized by derived shape
+        protected Dictionary<ShapeRenderer.Orientation, List<Vector2>> nextOriToOffsets;
+
+        protected ShapeRenderer.Orientation orientation;
         protected DrawColor.Shade color;
         protected bool isAboutToPlace;
         protected bool isPlaced;
@@ -40,7 +43,18 @@ namespace Tetris.domain
         {
             return blocks.AsReadOnly();
         }
+        public IReadOnlyCollection<Vector2> GetOrientationOffsets(ShapeRenderer.Orientation ori)
+        {
+            List<Vector2> offsets;
+            nextOriToOffsets.TryGetValue(ori, out offsets);
 
+            return offsets;
+        }
+
+        public ShapeRenderer.Orientation GetOrientation()
+        {
+            return orientation;
+        }
 
         //************************************************************************
         // Abstract Functions (MUST be implemented)

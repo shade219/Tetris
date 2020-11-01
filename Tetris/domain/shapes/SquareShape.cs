@@ -27,22 +27,22 @@ namespace Tetris.domain.shapes
             //NOTE:: Swapped ordering of anchors <==> Orientations ---> matching ShapeRenderer*
             switch (orientation)
             {
-                case ShapeRenderer.Orientation.ORIENT_0: // 270 - Anchor is on the top left
+                case ShapeRenderer.Orientation.ORIENT_0: // 0 - Anchor is on the top left
                     this.blocks.Add(anchor.Copy(new Vector2(1, 0))); // Block to the right
                     this.blocks.Add(anchor.Copy(new Vector2(1, -1))); // Block below and to the right
                     this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block below 
                     break;
-                case ShapeRenderer.Orientation.ORIENT_1: // 0 - anchor is on the top right
+                case ShapeRenderer.Orientation.ORIENT_1: // 90 - anchor is on the top right
                     this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block down
                     this.blocks.Add(anchor.Copy(new Vector2(-1, -1))); // Block down and left
                     this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block to the left 
                     break;
-                case ShapeRenderer.Orientation.ORIENT_2: // 90 - anchor is on the bottom right
+                case ShapeRenderer.Orientation.ORIENT_2: // 180 - anchor is on the bottom right
                     this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block to the left
                     this.blocks.Add(anchor.Copy(new Vector2(-1, 1))); // Block up and to the left
                     this.blocks.Add(anchor.Copy(new Vector2(0, 1))); // Block above
                     break;
-                case ShapeRenderer.Orientation.ORIENT_3: // 180 - anchor is on the bottom left
+                case ShapeRenderer.Orientation.ORIENT_3: // 270 - anchor is on the bottom left
                     this.blocks.Add(anchor.Copy(new Vector2(0, 1))); // Block above
                     this.blocks.Add(anchor.Copy(new Vector2(1, 1))); // Block above and to the right 
                     this.blocks.Add(anchor.Copy(new Vector2(1, 0))); // Block to the right
@@ -51,6 +51,19 @@ namespace Tetris.domain.shapes
                     throw new ArgumentException("Unexpected ShapeRenderer::Orientation in SquareShape constructor: " + orientation);
             }
 
+            //rotation offset dictionary
+            this.nextOriToOffsets = new Dictionary<ShapeRenderer.Orientation, List<Vector2>>();
+
+            // Note: Set the first Vector2 to (0, 0) to not move the anchor
+            // 270 -> 0
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_0, new[] { new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(-1, 0) }.ToList());
+            // 0 -> 90
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_1, new[] { new Vector2(1, 0), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(0, 1) }.ToList());
+            // 90 -> 180
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, -1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0) }.ToList());
+            // 180 -> 270
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1) }.ToList());
+           
         }
 
         // Author: Greg Kulasik
@@ -89,17 +102,6 @@ namespace Tetris.domain.shapes
         protected void Rotate(List<Block> blocksToRotate)
         {
             ShapeRenderer.Orientation nextOri = GetNextOrientation();
-            Dictionary<ShapeRenderer.Orientation, List<Vector2>> nextOriToOffsets = new Dictionary<ShapeRenderer.Orientation, List<Vector2>>();
-
-            // Note: Set the first Vector2 to (0, 0) to not move the anchor
-            // 270 -> 0
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_0,  new[] { new Vector2(1, 0), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(0, 1) }.ToList());
-            // 0 -> 90
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_1, new[] { new Vector2(0, -1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0) }.ToList());
-            // 90 -> 180
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1) }.ToList());
-            // 180 -> 270
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 1), new Vector2(1, 0), new Vector2(0, -1), new Vector2(-1, 0) }.ToList());
 
             List<Vector2> rotationOffsets;
             if(nextOriToOffsets.TryGetValue(nextOri, out rotationOffsets))
@@ -109,6 +111,8 @@ namespace Tetris.domain.shapes
                     blocksToRotate.ElementAt(i).ApplyOffset(rotationOffsets.ElementAt(i));
                 }
             }
+            //set new orientation
+            this.orientation = nextOri;
         }
 
         // Author: Greg Kulasik
