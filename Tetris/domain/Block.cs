@@ -17,7 +17,8 @@ namespace Tetris.domain
         private int x;
         private int y;
 
-        // Author: Your Name Here
+
+        // Author: DeAngelo Wilson
         public Block(DrawColor.Shade color, int x, int y)
         {
             this.color = color;
@@ -66,6 +67,11 @@ namespace Tetris.domain
         public int GetY()
         {
             return y;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return new Vector2(x, y);
         }
     }
 }

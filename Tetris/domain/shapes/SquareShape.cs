@@ -15,8 +15,11 @@ namespace Tetris.domain.shapes
         // Author: Greg Kulasik
         public SquareShape(Block anchor, ShapeRenderer.Orientation orientation) : base (anchor, orientation)
         {
-            //this.anchor = anchor;
-
+            //NOTE:: 'anchor' Block given color on construction... who should be responsible for knowing shapes color
+                //TODO::
+                    //Set Anchors color here???
+                    //OR set shapes color with anchor.color???
+            
             // Check ShapeRenderer.draw___ which will tell you the color of the shape
             this.color = ShapeRenderer.GetSquareColor();
 
