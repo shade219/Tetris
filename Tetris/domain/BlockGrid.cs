@@ -104,30 +104,40 @@ namespace Tetris.domain
                     grid[col][row] = null;
                 }
                 //
-                if (maxIndex < row)
+                if (maxIndex > row)
                 {
                     maxIndex = row;
                 }
             }
-            ShiftGridBlocksDown(maxIndex, toRemove.Count);
+            //shift every row above (+ 1) the highest line index removed
+            ShiftGridBlocksDown(maxIndex + 1, toRemove.Count);
         }
 
         public void ShiftGridBlocksDown(int lowestRow, int shift)
         {
-            //for all blocks above or equal (lowerIndex) to lowestRow -- shift down by shift amount (total lines cleared)
+            //for all blocks above or equal (higher index) to lowestRow -- shift down by shift amount (total lines cleared)
             for (int col = 0; col < col_count; col++)
             {            
-                for (int row = 0; row < lowestRow; row++)
+                for (int row = lowestRow; row < row_count; row++)
                 {
                     //shift block down
                     if (grid[col][row] != null)
                     {
-                        grid[col][row].ApplyOffset(Constants.DOWN_OFFSET * shift);
+                        ShiftBlockDown(col, row, shift);
                     }
                 }
             }
         }
 
+        private void ShiftBlockDown(int col, int row, int shift)
+        {
+            //move coords of block down
+            grid[col][row].ApplyOffset(Constants.DOWN_OFFSET * shift);
+
+            //move block down in grid
+            grid[col][row - 1] = grid[col][row];
+            grid[col][row] = null;
+        }
 
         // Author: DeAngelo Wilson
         public List<int> GetCompletedLines()
@@ -186,7 +196,10 @@ namespace Tetris.domain
             //for each block of the GameShape-- store row index
             foreach (Block block in gameShape.GetBlocks())
             {
-                rowIndexes.Add(block.GetY());
+                if (!rowIndexes.Contains(block.GetY()))
+                {
+                    rowIndexes.Add(block.GetY());
+                }
             }
 
             return rowIndexes;

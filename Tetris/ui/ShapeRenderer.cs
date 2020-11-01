@@ -18,28 +18,28 @@ namespace Tetris
 
             switch (orient)
             {
-                case ShapeRenderer.Orientation.ORIENT_0:
+                case ShapeRenderer.Orientation.ORIENT_0: // Horizontal
                     SOM.drawBox(coor_x - 1, coor_y, GetLineColor());
                     SOM.drawBox(coor_x + 0, coor_y, GetLineAnchorColor());
                     SOM.drawBox(coor_x + 1, coor_y, GetLineColor());
                     SOM.drawBox(coor_x + 2, coor_y, GetLineColor());
                     break;
 
-                case ShapeRenderer.Orientation.ORIENT_1:
+                case ShapeRenderer.Orientation.ORIENT_1: // Vertical
                     SOM.drawBox(coor_x, coor_y + 1, GetLineColor());
                     SOM.drawBox(coor_x, coor_y + 0, GetLineAnchorColor());
                     SOM.drawBox(coor_x, coor_y - 1, GetLineColor());
                     SOM.drawBox(coor_x, coor_y - 2, GetLineColor());
                     break;
 
-                case ShapeRenderer.Orientation.ORIENT_2:
+                case ShapeRenderer.Orientation.ORIENT_2: // Horizontal
                     SOM.drawBox(coor_x - 2, coor_y, GetLineColor());
                     SOM.drawBox(coor_x - 1, coor_y, GetLineColor());
                     SOM.drawBox(coor_x + 0, coor_y, GetLineAnchorColor());
                     SOM.drawBox(coor_x + 1, coor_y, GetLineColor());
                     break;
 
-                case ShapeRenderer.Orientation.ORIENT_3:
+                case ShapeRenderer.Orientation.ORIENT_3: // Vertical
                     SOM.drawBox(coor_x, coor_y + 2, GetLineColor());
                     SOM.drawBox(coor_x, coor_y + 1, GetLineColor());
                     SOM.drawBox(coor_x, coor_y + 0, GetLineAnchorColor());
