@@ -7,24 +7,38 @@ using System.Threading.Tasks;
 
 namespace Tetris.domain
 {
-    // Authors: DeAngelo, Name2
-    // Description:
+    // Authors: DeAngelo
+    // Description: a basic class representing 1 element in block grid -- GameShapes converted to 'Block'
     public class Block
     {
-        public readonly DrawColor.Shade color;
+        public DrawColor.Shade color
+        {
+            get;
+            private set;
+        }
 
-        //private Vector<int> coordinates;
         private int x;
         private int y;
 
 
         // Author: DeAngelo Wilson
+        public Block(int x, int y)
+        {
+            //default color of blocks -- set when attached to a GameShape
+            this.color = DrawColor.Shade.COLOR_GREY;
+            this.x = x;
+            this.y = y;
+        }
+        // Author: DeAngelo Wilson
         public Block(DrawColor.Shade color, int x, int y)
         {
+            //default color of blocks -- set when attached to a GameShape
             this.color = color;
             this.x = x;
             this.y = y;
         }
+
+
 
         public Block(Block block)
         {
@@ -73,5 +87,17 @@ namespace Tetris.domain
         {
             return new Vector2(x, y);
         }
+
+        public DrawColor.Shade GetColor()
+        {
+            return color;
+        }
+
+        public void SetColor(DrawColor.Shade c)
+        {
+            this.color = c;
+        }
+
+
     }
 }

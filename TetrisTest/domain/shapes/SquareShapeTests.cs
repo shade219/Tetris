@@ -19,13 +19,30 @@ namespace Tetris.domain.shapes.Tests
 
         private SquareShape BasicShapeInitialize(out List<Vector2> coordinates, ShapeRenderer.Orientation ori)
         {
-            Block anchor = new Block(DrawColor.Shade.COLOR_DK_RED, 100, 100);
+            Block anchor = new Block(100, 100);
             SquareShape square = new SquareShape(anchor, ori);
             coordinates = new List<Vector2>();
             foreach (Block b in square.blocks)
                 coordinates.Add(new Vector2(b.GetX(), b.GetY()));
 
             return square;
+        }
+
+
+        // Author: DeAngelo Wilson
+        [TestMethod()]
+        public void SquareShapeConstructionTest()
+        {
+            //ensure all blocks of square at correct positions
+            List<Vector2> coordinates;
+            GameShape square = BasicShapeInitialize(out coordinates, defaultOri);
+
+            List<Vector2> expectedCoordinates = new List<Vector2>(){new Vector2(100, 100), new Vector2(101, 100), new Vector2(101, 99), new Vector2(100, 99) };
+
+            foreach (Vector2 coord in expectedCoordinates)
+            {
+                Assert.IsTrue(coordinates.Contains(coord));
+            }
         }
 
         // Author: Greg Kulasik

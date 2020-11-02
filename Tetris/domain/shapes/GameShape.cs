@@ -222,12 +222,11 @@ namespace Tetris.domain
             this.isPlaced = true;
         }
 
-        //called by MovementManager -- TODO:: must reset/set flag (false) if moving left/right
         public void AboutToPlaceGameShape()
         {
             this.isAboutToPlace = true;
         }
-        //called by MovementManager -- TODO:: must reset/set flag (false) if moving left/right
+        //called by MovementManager -- must reset/set flag (false) if moving left/right
         public void ResetAboutToPlaceFlag()
         {
             this.isAboutToPlace = false;

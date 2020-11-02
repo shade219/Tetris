@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetris.domain;
-using Tetris.domain.shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using TetrisTest.domain.shapes;
 
 namespace Tetris.domain.Tests
 {
@@ -23,7 +23,7 @@ namespace Tetris.domain.Tests
         public void GameShapeTest()
         {
             Vector2 expectedCoordinate = new Vector2(100,100);
-            Block anchor = new Block(DrawColor.Shade.COLOR_DK_RED, (int)expectedCoordinate.X, (int)expectedCoordinate.Y);
+            Block anchor = new Block((int)expectedCoordinate.X, (int)expectedCoordinate.Y);
             DummyShape shape = new DummyShape(anchor, defaultOri);
             List<Vector2> coordinates = new List<Vector2>();
             foreach (Block b in shape.blocks)
@@ -88,7 +88,7 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void SetIsPlacedFlagTest()
         {
-            Block anchor = new Block(DrawColor.Shade.COLOR_DK_RED, 100, 100);
+            Block anchor = new Block(100, 100);
             DummyShape shape = new DummyShape(anchor, defaultOri);
 
             shape.GameShapePlaced();
@@ -100,7 +100,7 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void SetIsAboutToPlaceFlagTest()
         {
-            Block anchor = new Block(DrawColor.Shade.COLOR_DK_RED, 100, 100);
+            Block anchor = new Block(100, 100);
             DummyShape shape = new DummyShape(anchor, defaultOri);
 
             shape.AboutToPlaceGameShape();
@@ -116,7 +116,7 @@ namespace Tetris.domain.Tests
         [TestMethod()]
         public void GetNextOrientationTest()
         {
-            Block anchor = new Block(DrawColor.Shade.COLOR_DK_RED, 100, 100);
+            Block anchor = new Block(100, 100);
             DummyShape shape1 = new DummyShape(anchor, ShapeRenderer.Orientation.ORIENT_0);
 
             DummyShape shape2 = new DummyShape(anchor, ShapeRenderer.Orientation.ORIENT_1);
@@ -133,7 +133,7 @@ namespace Tetris.domain.Tests
 
         private DummyShape BasicShapeInitialize(out List<Vector2> coordinates, ShapeRenderer.Orientation ori)
         {
-            Block anchor = new Block(DrawColor.Shade.COLOR_DK_RED, 100, 100);
+            Block anchor = new Block(100, 100);
             DummyShape shape = new DummyShape(anchor, ori);
             coordinates = new List<Vector2>();
             foreach (Block b in shape.blocks)

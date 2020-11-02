@@ -4,10 +4,12 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris;
+using Tetris.domain;
 
-namespace Tetris.domain.shapes
+namespace TetrisTest.domain.shapes
 {
-    public class DummyShape: GameShape
+public class DummyShape : GameShape
     {
         // Author: Greg Kulasik
         public DummyShape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
@@ -38,3 +40,4 @@ namespace Tetris.domain.shapes
 
     }
 }
+

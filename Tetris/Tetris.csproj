@@ -93,7 +93,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="domain\shapes\DummyShape.cs" />
     <Compile Include="services\GameManager.cs" />
     <Compile Include="services\GameObject.cs" />
     <Compile Include="services\InputReader.cs" />
