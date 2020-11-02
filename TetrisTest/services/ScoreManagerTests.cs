@@ -23,36 +23,78 @@ namespace Tetris.services.Tests
             ScoreManager tester = new ScoreManager();
             Assert.AreEqual(tester.score, 0);
             tester.UpdateScore(2, 2);
-
-            ScoreManager tester2 = new ScoreManager();
-            Assert.AreEqual(tester2.score, 0);
         }
 
         // Author: Eoin Stanley
         [TestMethod()]
-        public void UpdateScoreTest()
+        public void UpdateScore1LineTest()
+        {
+            ScoreManager tester = new ScoreManager();
+
+            Assert.AreEqual(tester.UpdateScore(1, 2), 80);
+            Assert.AreEqual(tester.score, 80);
+
+            Assert.AreEqual(tester.UpdateScore(1, 5), 200);
+            Assert.AreEqual(tester.score, 280);
+        }
+
+        [TestMethod()]
+        public void UpdateScore2LineTest()
+        {
+            ScoreManager tester = new ScoreManager();
+
+            Assert.AreEqual(tester.UpdateScore(2, 2), 200);
+            Assert.AreEqual(tester.score, 200);
+
+            Assert.AreEqual(tester.UpdateScore(2, 5), 700);
+            Assert.AreEqual(tester.score, 700);
+        }
+
+        [TestMethod()]
+        public void UpdateScore3LineTest()
         {
             ScoreManager tester = new ScoreManager();
 
             Assert.AreEqual(tester.UpdateScore(3, 2), 600);
             Assert.AreEqual(tester.score, 600);
 
-            Assert.AreEqual(tester.UpdateScore(1, 1), 640);
-            Assert.AreEqual(tester.score, 640);
+            Assert.AreEqual(tester.UpdateScore(3, 5), 2100);
+            Assert.AreEqual(tester.score, 2100);
+        }
 
-            Assert.AreEqual(tester.UpdateScore(8, 4), -1); //expect print statement
-            Assert.AreEqual(tester.UpdateScore(3, -1), -1); //expect print statement
+        [TestMethod()]
+        public void UpdateScore4LineTest()
+        {
+            ScoreManager tester = new ScoreManager();
+
+            Assert.AreEqual(tester.UpdateScore(4, 2), 2400);
+            Assert.AreEqual(tester.score, 2400);
+
+            Assert.AreEqual(tester.UpdateScore(4, 5), 8400);
+            Assert.AreEqual(tester.score, 8400);
+        }
+
+        //Expect print statements for bad inputs
+        [TestMethod()]
+        public void UpdateScoreBadInputTest()
+        {
+            ScoreManager tester = new ScoreManager();
+
+            AssertEqual(tester.UpdateScore(-1, 1), 0); //lines cleared > 0
+            AssertEqual(tester.UpdateScore(5, 1), 0); // lines cleared < 4
+            AssertEqual(tester.UpdateScore(3, -1), 0); // level is negative
+
+            AssertEqual(tester.UpdateScore(-1), 0); // lines dropped is negative
         }
 
         // Author: Eoin Stanley
         [TestMethod()]
-        public void UpdateScoreTest1()
+        public void UpdateScoreDroppedLinesTest()
         {
             ScoreManager tester = new ScoreManager();
 
             Assert.AreEqual(tester.UpdateScore(8),8);
             Assert.AreEqual(tester.score, 8);
-            Assert.AreEqual(tester.UpdateScore(-5), -1); //expect print statement
         }
     }
 }
