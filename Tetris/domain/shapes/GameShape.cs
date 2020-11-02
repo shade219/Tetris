@@ -27,7 +27,7 @@ namespace Tetris.domain
         protected ShapeRenderer.Orientation orientation;
         protected DrawColor.Shade color;
 
-        //NOTE:: Maintained by MovementManager???
+        //NOTE:: Maintained by MovementManager
         public bool isAboutToPlace
         {
             get;
@@ -226,7 +226,6 @@ namespace Tetris.domain
         {
             this.isAboutToPlace = true;
         }
-        //called by MovementManager -- must reset/set flag (false) if moving left/right
         public void ResetAboutToPlaceFlag()
         {
             this.isAboutToPlace = false;
