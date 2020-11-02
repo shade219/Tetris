@@ -8,30 +8,51 @@ using System.Threading.Tasks;
 
 namespace Tetris.services.Tests
 {
-    // Authors: Name1, Name2
-    // Description:
+    // Authors: Eoin Stanley
+    // Description: Tests for Score Manager
     [TestClass()]
     public class ScoreManagerTests
     {
-        // Author: Your Name Here
+        // Author: Eoin Stanley
+
+        
+
         [TestMethod()]
         public void ScoreManagerTest()
         {
+            ScoreManager tester = new ScoreManager();
+            Assert.AreEqual(tester.score, 0);
+            tester.UpdateScore(2, 2);
 
+            ScoreManager tester2 = new ScoreManager();
+            Assert.AreEqual(tester2.score, 0);
         }
 
-        // Author: Your Name Here
+        // Author: Eoin Stanley
         [TestMethod()]
         public void UpdateScoreTest()
         {
+            ScoreManager tester = new ScoreManager();
 
+            Assert.AreEqual(tester.UpdateScore(3, 2), 600);
+            Assert.AreEqual(tester.score, 600);
+
+            Assert.AreEqual(tester.UpdateScore(1, 1), 640);
+            Assert.AreEqual(tester.score, 640);
+
+            Assert.AreEqual(tester.UpdateScore(8, 4), -1); //expect print statement
+            Assert.AreEqual(tester.UpdateScore(3, -1), -1); //expect print statement
         }
 
-        // Author: Your Name Here
+        // Author: Eoin Stanley
         [TestMethod()]
         public void UpdateScoreTest1()
         {
+            ScoreManager tester = new ScoreManager();
 
+            Assert.AreEqual(tester.UpdateScore(8),8);
+            Assert.AreEqual(tester.score, 8);
+            Assert.AreEqual(tester.UpdateScore(-5), -1); //expect print statement
         }
     }
 }
