@@ -7,30 +7,35 @@ using System.Threading.Tasks;
 
 namespace Tetris.services
 {
-    // Authors: Name1, Name2
-    // Description:
+    // Authors: Ana Maria Anghel
+    // Description: Timer keeps track of time on a single "cycle" and report if a piece should fall one more row.
     public class Timer
     {
-        long start;
-        long end;
-        int duration;
+        public long start;
+        public long end;
+        public int duration;
+        public TimeSpan time = new TimeSpan();
 
-        // Author: Your Name Here
+        // Author: Ana Maria Anghel
         public Timer(int duration)
         {
-
+            this.duration = duration;
         }
 
-        // Author: Your Name Here
+        // Author: Ana Maria Anghel
         public void ResetTimer()
         {
-
+            this.start =(long) time.TotalMilliseconds;
+            this.end = (long) time.TotalMilliseconds + this.duration;
         }
 
-        // Author: Your Name Here
+        // Author: Ana Maria Anghel
         public bool IsExpired()
         {
-            return false;
+            if (time.TotalMilliseconds < this.end)
+                return false;
+            else
+                return true;
         }
 
     }
