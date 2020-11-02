@@ -29,39 +29,39 @@ namespace Tetris.services
 
         private static GameShape PrivateGenerateShape(int currentLevel, int result)
         {
+        // The variable RESULT will be a randomly generated integer between 1-1000.
+        // Using Level 1 as example, the method will determine which shape to generate
+        // based on the following prbability:
+        // -------------------------------------------------------------------------------------------------------------------
+        // | SHAPE | Square  |       L1       |       L2       |      Line      |        T       |       Z1       |    Z2    | 
+        // -------------------------------------------------------------------------------------------------------------------
+        // | PROBA |   182   |       182      |       182      |      142       |       102      |       102      |    102   |
+        // -------------------------------------------------------------------------------------------------------------------
+        // | RANGE | n < 182 | 182 <= n < 364 | 364 <= n < 546 | 546 <= n < 688 | 688 <= n < 790 | 790 <= n < 892 | 892 <= n |
+        // -------------------------------------------------------------------------------------------------------------------
+
             int SquareAndL12Bound = SquareAndL12ShapeProbability(currentLevel);
             int LineShapeBound = LineShapeProbability();
             int TAndZ12Bound = TAndZ12ShapeProbability(currentLevel);
 
             Vector2 pos = new Vector2(ANCHOR_X, ANCHOR_Y);
 
-            if (result < SquareAndL12Bound)
+            switch (result)
             {
-                return new SquareShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_RED), pos));
-            }
-            else if (result < SquareAndL12Bound * 2)
-            {
-                return new L1Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_BLUE), pos));
-            }
-            else if (result < SquareAndL12Bound * 3)
-            {
-                return new L2Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_PURPLE), pos));
-            }
-            else if (result < SquareAndL12Bound * 3 + LineShapeBound)
-            {
-                return new LineShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_ORANGE), pos));
-            }
-            else if (result < SquareAndL12Bound * 3 + LineShapeBound + TAndZ12Bound)
-            {
-                return new TShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_YELLOW), pos));
-            }
-            else if (result < SquareAndL12Bound * 3 + LineShapeBound + TAndZ12Bound * 2)
-            {
-                return new Z1Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_GREEN), pos));
-            }
-            else
-            {
-                return new Z2Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_CYAN), pos));
+                case int n when (n < SquareAndL12Bound):
+                    return new SquareShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_RED), pos));
+                case int n when (n < SquareAndL12Bound * 2):
+                    return new L1Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_BLUE), pos));
+                case int n when (n < SquareAndL12Bound * 3):
+                    return new L2Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_PURPLE), pos));
+                case int n when (n < SquareAndL12Bound * 3 + LineShapeBound):
+                    return new LineShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_ORANGE), pos));
+                case int n when (n < SquareAndL12Bound * 3 + LineShapeBound + TAndZ12Bound):
+                    return new TShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_YELLOW), pos));
+                case int n when (n < SquareAndL12Bound * 3 + LineShapeBound + TAndZ12Bound * 2):
+                    return new Z1Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_GREEN), pos));
+                default:
+                    return new Z2Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_CYAN), pos));
             }
         }
 
