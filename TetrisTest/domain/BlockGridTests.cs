@@ -129,7 +129,7 @@ namespace Tetris.domain.Tests
         public void GetCompletedLinesTestWithGameShape()
         {
             BlockGrid grid = CompleteLinesInitialize();
-            GameShape gs = new SquareShape(new Block(DrawColor.Shade.COLOR_LT_GREEN, 4, 3), defaultOri);
+            GameShape gs = new SquareShape(new Block(4, 3), defaultOri);
             grid.PlaceShape(gs);
 
             List<int> lineIndexes = grid.GetCompletedLines(gs);
@@ -193,13 +193,13 @@ namespace Tetris.domain.Tests
 
             BlockGrid grid = new BlockGrid(5, 5);
 
-            GameShape shape1 = new SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 0, 3), defaultOri);
+            GameShape shape1 = new SquareShape(new Block(0, 3), defaultOri);
             grid.PlaceShape(shape1);
 
-            GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 3), defaultOri);
+            GameShape shape2 = new SquareShape(new Block( 2, 3), defaultOri);
             grid.PlaceShape(shape2);
 
-            GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
+            GameShape shape3 = new SquareShape(new Block(0, 1), defaultOri);
             grid.PlaceShape(shape3);
 
             return grid;
@@ -219,13 +219,13 @@ namespace Tetris.domain.Tests
 
             BlockGrid grid = new BlockGrid(5, 5);
 
-            GameShape shape1 = new SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 0, 3), defaultOri);
+            GameShape shape1 = new SquareShape(new Block(0, 3), defaultOri);
             grid.PlaceShape(shape1);
 
-            GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 3), defaultOri);
+            GameShape shape2 = new SquareShape(new Block(2, 3), defaultOri);
             grid.PlaceShape(shape2);
 
-            GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
+            GameShape shape3 = new SquareShape(new Block(0, 1), defaultOri);
             grid.PlaceShape(shape3);
 
             return grid;
@@ -237,21 +237,21 @@ namespace Tetris.domain.Tests
         {
             BlockGrid grid = new BlockGrid(6, 6);
 
-            GameShape shape1 = new SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 0, 3), defaultOri);
+            GameShape shape1 = new SquareShape(new Block(0, 3), defaultOri);
             grid.PlaceShape(shape1);
 
-            GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 1), defaultOri);
+            GameShape shape2 = new SquareShape(new Block(2, 1), defaultOri);
             grid.PlaceShape(shape2);
 
-            GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
+            GameShape shape3 = new SquareShape(new Block(0, 1), defaultOri);
             grid.PlaceShape(shape3);
 
             //complete line init
-            GameShape shape4 = new SquareShape(new Block(DrawColor.Shade.COLOR_YELLOW, 4, 1), defaultOri);
+            GameShape shape4 = new SquareShape(new Block(4, 1), defaultOri);
             grid.PlaceShape(shape4);
 
             //2nd line needs 1 more square
-            GameShape shape5 = new SquareShape(new Block(DrawColor.Shade.COLOR_ORANGE, 2, 3), defaultOri);
+            GameShape shape5 = new SquareShape(new Block(2, 3), defaultOri);
             grid.PlaceShape(shape5);
 
             return grid;
@@ -272,21 +272,21 @@ namespace Tetris.domain.Tests
 
             BlockGrid grid = new BlockGrid(6, 6);
 
-            GameShape shape1 = new SquareShape(new Block(DrawColor.Shade.COLOR_BLUE, 0, 3), defaultOri);
+            GameShape shape1 = new SquareShape(new Block(0, 3), defaultOri);
             grid.PlaceShape(shape1);
 
-            GameShape shape2 = new SquareShape(new Block(DrawColor.Shade.COLOR_CYAN, 2, 1), defaultOri);
+            GameShape shape2 = new SquareShape(new Block(2, 1), defaultOri);
             grid.PlaceShape(shape2);
 
-            GameShape shape3 = new SquareShape(new Block(DrawColor.Shade.COLOR_RED, 0, 1), defaultOri);
+            GameShape shape3 = new SquareShape(new Block(0, 1), defaultOri);
             grid.PlaceShape(shape3);
 
             //complete line init
-            GameShape shape4 = new SquareShape(new Block(DrawColor.Shade.COLOR_YELLOW, 4, 1), defaultOri);
+            GameShape shape4 = new SquareShape(new Block(4, 1), defaultOri);
             grid.PlaceShape(shape4);
 
             //2nd line needs 1 more square
-            GameShape shape5 = new SquareShape(new Block(DrawColor.Shade.COLOR_ORANGE, 2, 3), defaultOri);
+            GameShape shape5 = new SquareShape(new Block(2, 3), defaultOri);
             grid.PlaceShape(shape5);
 
             return grid;

@@ -53,6 +53,7 @@
     <Compile Include="domain\BlockGridTests.cs" />
     <Compile Include="domain\BlockTests.cs" />
     <Compile Include="domain\GameStateTests.cs" />
+    <Compile Include="domain\shapes\DummyShape.cs" />
     <Compile Include="domain\shapes\GameShapeTests.cs" />
     <Compile Include="domain\shapes\L1ShapeTests.cs" />
     <Compile Include="domain\shapes\L2ShapeTests.cs" />
