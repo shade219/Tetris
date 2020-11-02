@@ -10,7 +10,7 @@ namespace Tetris.services
     // Description: A class for keeping track of the score and updating it.
     public class ScoreManager
     {
-        int score;
+        public int score;
 
         // Author: Eoin Stanley
         public ScoreManager()
