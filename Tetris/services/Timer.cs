@@ -20,6 +20,8 @@ namespace Tetris.services
         public Timer(int duration)
         {
             this.duration = duration;
+            this.start = -1;
+            this.end = -1;
         }
 
         // Author: Ana Maria Anghel
