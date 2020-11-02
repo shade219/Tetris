@@ -13,7 +13,7 @@ namespace Tetris.services
     {
         public long start;
         public long end;
-        public int duration;
+        public int duration; //duration is calculated in miliseconds
         public TimeSpan time = new TimeSpan();
 
         // Author: Ana Maria Anghel
