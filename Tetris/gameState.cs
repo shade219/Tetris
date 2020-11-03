@@ -18,12 +18,12 @@ namespace Tetris
 
         public gameState()
         {
-            activeShape = ShapeGenerator::GenerateShape(this.currentLevel);
-            this.grid = new BlockGrid(maxX, maxY);
-            nextShape = ShapeGenerator::GenerateShape(this.currentLevel);
-            totalLinesCleared = 0;
-            currentLevel = 0;
-            currentScore = 0;
+            this.currentLevel = 0;
+            this.currentScore = 0;
+            this.totalLinesCleared = 0;
+            this.activeShape = ShapeGenerator.GenerateShape(this.currentLevel);
+            this.nextShape = ShapeGenerator.GenerateShape(this.currentLevel);
+            this.grid = new BlockGrid(Constants.GAME_MAX_X, Constants.GAME_MAX_Y);
         }
     }
 
