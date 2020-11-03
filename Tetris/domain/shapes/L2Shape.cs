@@ -18,12 +18,13 @@ namespace Tetris.domain.shapes
         {
 
             this.color = ShapeRenderer.GetL2Color();
+            anchor.SetColor(this.color);
 
             // Draw a grid and determine what the shape looks like when it is at 0, 90, 180, and 270 degrees.
             // Then determine the other block offsets. The anchor is (x, y), the block immediately on the right is (x+1, y), the block immediately below is (x, y-1), etc.
             // Handle adding/creating the other blocks for each potential orientation
             this.blocks.Add(anchor);
-            //NOTE:: Swapped ordering of anchors <==> Orientations ---> matching ShapeRenderer*
+            
             switch (orientation)
             {
                 case ShapeRenderer.Orientation.ORIENT_0: // 0 - Anchor is on the top left

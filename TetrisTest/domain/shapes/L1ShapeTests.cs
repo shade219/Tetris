@@ -10,7 +10,7 @@ using System.Numerics;
 namespace Tetris.domain.shapes.Tests
 {
     // Authors: Dillon Gould
-    // Description:
+    // Description: Will test the rotation of L1 Shape and run a simple construction test. 
     [TestClass()]
     public class L1ShapeTests
     {

@@ -10,7 +10,7 @@ using System.Numerics;
 namespace Tetris.domain.shapes.Tests
 {
     // Authors: Name1, Name2
-    // Description:
+    // Description: Will test the rotation of L2 Shape and run a simple construction test. 
     [TestClass()]
     public class L2ShapeTests
     {
@@ -103,14 +103,14 @@ namespace Tetris.domain.shapes.Tests
             Assert.AreEqual(coordinates.ElementAt(0).X, L2.blocks.ElementAt(0).GetX());
             Assert.AreEqual(coordinates.ElementAt(0).Y, L2.blocks.ElementAt(0).GetY());
 
-            Assert.AreEqual(coordinates.ElementAt(1).X + 1, L2.blocks.ElementAt(1).GetX());
+            Assert.AreEqual(coordinates.ElementAt(1).X - 1, L2.blocks.ElementAt(1).GetX());
             Assert.AreEqual(coordinates.ElementAt(1).Y - 1, L2.blocks.ElementAt(1).GetY());
 
             Assert.AreEqual(coordinates.ElementAt(2).X - 1, L2.blocks.ElementAt(2).GetX());
-            Assert.AreEqual(coordinates.ElementAt(2).Y - 1, L2.blocks.ElementAt(2).GetY());
+            Assert.AreEqual(coordinates.ElementAt(2).Y + 1, L2.blocks.ElementAt(2).GetY());
 
             Assert.AreEqual(coordinates.ElementAt(3).X - 2, L2.blocks.ElementAt(3).GetX());
-            Assert.AreEqual(coordinates.ElementAt(3).Y - 2, L2.blocks.ElementAt(3).GetY());
+            Assert.AreEqual(coordinates.ElementAt(3).Y + 2, L2.blocks.ElementAt(3).GetY());
         }
 
         // Author: Dillon Gould

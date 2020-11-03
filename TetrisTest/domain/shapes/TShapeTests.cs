@@ -10,7 +10,7 @@ using System.Numerics;
 namespace Tetris.domain.shapes.Tests
 {
     // Authors: Name1, Name2
-    // Description:
+    // Description: Will test the rotation of T Shape and run a simple construction test. 
     [TestClass()]
     public class TShapeTests
     {
