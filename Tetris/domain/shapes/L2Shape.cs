@@ -13,12 +13,10 @@ namespace Tetris.domain.shapes
     public class L2Shape : GameShape
     {
 
-        // Author: Your Name Here
+        // Author: Dillon Gould
         public L2Shape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
         {
-            //this.anchor = anchor;
 
-            // Check ShapeRenderer.draw___ which will tell you the color of the shape
             this.color = ShapeRenderer.GetL2Color();
 
             // Draw a grid and determine what the shape looks like when it is at 0, 90, 180, and 270 degrees.
@@ -49,7 +47,7 @@ namespace Tetris.domain.shapes
                     this.blocks.Add(anchor.Copy(new Vector2(0, -2))); // Block to the right 4
                     break;
                 default:
-                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation in SquareShape constructor: " + orientation);
+                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation in L2Shape constructor: " + orientation);
             }
 
             //rotation offset dictionary
@@ -63,7 +61,7 @@ namespace Tetris.domain.shapes
             // 90 -> 180
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, 0), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-2, -2) }.ToList());
             // 180 -> 270
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-2, -2) }.ToList());
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0), new Vector2(-1, -1), new Vector2(-1, 1), new Vector2(-2, 2) }.ToList());
         }
 
         // Authors: Dillon Gould

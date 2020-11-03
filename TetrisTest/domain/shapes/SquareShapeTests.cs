@@ -47,57 +47,6 @@ namespace Tetris.domain.shapes.Tests
 
         // Author: Greg Kulasik
         [TestMethod()]
-        public void MoveDownTest()
-        {
-            List<Vector2> coordinates;
-            GameShape square = BasicShapeInitialize(out coordinates, defaultOri);
-
-            square.ApplyAction(InputAction.MoveDown);
-
-            for (int i = 0; i < coordinates.Count(); i++)
-            {
-                // Check that X did not change, and Y was reduced by 1
-                Assert.AreEqual(coordinates.ElementAt(i).X, square.blocks.ElementAt(i).GetX());
-                Assert.AreEqual(coordinates.ElementAt(i).Y - 1, square.blocks.ElementAt(i).GetY());
-            }
-        }
-
-        // Author: Greg Kulasik
-        [TestMethod()]
-        public void MoveLeftTest()
-        {
-            List<Vector2> coordinates;
-            GameShape square = BasicShapeInitialize(out coordinates, defaultOri);
-
-            square.ApplyAction(InputAction.MoveLeft);
-
-            for (int i = 0; i < coordinates.Count(); i++)
-            {
-                // Check that X reduced by 1, Y did not change
-                Assert.AreEqual(coordinates.ElementAt(i).Y, square.blocks.ElementAt(i).GetY());
-                Assert.AreEqual(coordinates.ElementAt(i).X - 1, square.blocks.ElementAt(i).GetX());
-            }
-        }
-
-        // Author: Greg Kulasik
-        [TestMethod()]
-        public void MoveRightTest()
-        {
-            List<Vector2> coordinates;
-            GameShape square = BasicShapeInitialize(out coordinates, defaultOri);
-
-            square.ApplyAction(InputAction.MoveRight);
-
-            for (int i = 0; i < coordinates.Count(); i++)
-            {
-                // Check that X increased by 1, Y did not change
-                Assert.AreEqual(coordinates.ElementAt(i).Y, square.blocks.ElementAt(i).GetY());
-                Assert.AreEqual(coordinates.ElementAt(i).X + 1, square.blocks.ElementAt(i).GetX());
-            }
-        }
-
-        // Author: Greg Kulasik
-        [TestMethod()]
         public void Rotate0To90Test()
         {
             List<Vector2> coordinates;
@@ -105,6 +54,17 @@ namespace Tetris.domain.shapes.Tests
 
             //Rotate GameShape
             square.ApplyAction(InputAction.Rotate);
+
+            //Automated way of checking if properly rotated --- NOTE:: ASSUMES rotationOffset Lists are accurate
+            //IReadOnlyCollection<Vector2> rotationOffsets = square.GetOrientationOffsets(square.GetOrientation());
+
+            //for (int i = 0; i < coordinates.Count; i++)
+            //{
+            //    //Get position of 
+            //    Vector2 pos = new Vector2(square.blocks.ElementAt(i).GetX(), square.blocks.ElementAt(i).GetY());
+            //    pos -= rotationOffsets.ElementAt(i);
+            //    Assert.AreEqual(coordinates.ElementAt(i), pos);
+            //}
 
             Assert.AreEqual(coordinates.ElementAt(0).X + 1, square.blocks.ElementAt(0).GetX());
             Assert.AreEqual(coordinates.ElementAt(0).Y, square.blocks.ElementAt(0).GetY());
@@ -189,4 +149,3 @@ namespace Tetris.domain.shapes.Tests
         }
     }
 }
-    

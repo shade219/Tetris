@@ -34,7 +34,7 @@ namespace Tetris.domain.shapes.Tests
         {
             //ensure all blocks of square at correct positions
             List<Vector2> coordinates;
-            GameShape T = BasicShapeInitialize(out coordinates, defaultOri);
+            GameShape T = BasicShapeInitialize(out coordinates, ShapeRenderer.Orientation.ORIENT_0);
 
             List<Vector2> expectedCoordinates = new List<Vector2>() { new Vector2(100, 100), new Vector2(99, 100), new Vector2(101, 100), new Vector2(100, 99) };
 

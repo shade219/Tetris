@@ -11,10 +11,9 @@ namespace Tetris.domain.shapes
     // Description: Implementation of the T shape, drawing the shape and setting the orientation of the shape. 
     public class L1Shape : GameShape
     {
-        // Author: Your Name Here
+        // Dillon Gould
         public L1Shape(Block anchor, ShapeRenderer.Orientation orientation) : base (anchor, orientation)
         {
-            //this.anchor = anchor;
 
             // Check ShapeRenderer.draw___ which will tell you the color of the shape
             this.color = ShapeRenderer.GetL1Color();
@@ -47,7 +46,7 @@ namespace Tetris.domain.shapes
                     this.blocks.Add(anchor.Copy(new Vector2(0, -2))); // Block to the right 4
                     break;
                 default:
-                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation in SquareShape constructor: " + orientation);
+                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation in L1Shape constructor: " + orientation);
             }
 
             //rotation offset dictionary

@@ -12,10 +12,9 @@ namespace Tetris.domain.shapes
     public class TShape : GameShape
     {
 
-        // Author: Your Name Here
+        // Author: Dillon Gould
         public TShape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
         {
-            //this.anchor = anchor;
 
             // Check ShapeRenderer.draw___ which will tell you the color of the shape
             this.color = ShapeRenderer.GetTColor();
@@ -48,7 +47,7 @@ namespace Tetris.domain.shapes
                     this.blocks.Add(anchor.Copy(new Vector2(1, 0))); // Block to the right 4
                     break;
                 default:
-                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation in SquareShape constructor: " + orientation);
+                    throw new ArgumentException("Unexpected ShapeRenderer::Orientation in TShape constructor: " + orientation);
             }
 
             //rotation offset dictionary
