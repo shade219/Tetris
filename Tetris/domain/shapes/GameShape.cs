@@ -27,10 +27,18 @@ namespace Tetris.domain
         protected ShapeRenderer.Orientation orientation;
         protected DrawColor.Shade color;
 
-        //NOTE:: Set by MovementManager???
-        protected bool isAboutToPlace;
+        //NOTE:: Maintained by MovementManager
+        public bool isAboutToPlace
+        {
+            get;
+            private set;
+        }
         //NOTE:: set by BlockGrid
-        protected bool isPlaced;
+        public bool isPlaced
+        {
+            get;
+            private set;
+        }
 
 
         protected GameShape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0)
@@ -157,9 +165,10 @@ namespace Tetris.domain
                 {
                     blocksToRotate.ElementAt(i).ApplyOffset(rotationOffsets.ElementAt(i));
                 }
+                //set new orientation
+                this.orientation = nextOri;
             }
-            //set new orientation
-            this.orientation = nextOri;
+
         }
         public ShapeRenderer.Orientation GetNextOrientation()
         {
@@ -203,16 +212,23 @@ namespace Tetris.domain
             return orientation;
         }
 
+        public DrawColor.Shade GetColor()
+        {
+            return color;
+        }
+
         public void GameShapePlaced()
         {
             this.isPlaced = true;
         }
 
-
-        //called by MovementManager -- TODO:: must reset/set flag (false) if moving left/right
         public void AboutToPlaceGameShape()
         {
             this.isAboutToPlace = true;
+        }
+        public void ResetAboutToPlaceFlag()
+        {
+            this.isAboutToPlace = false;
         }
 
     }
