@@ -48,16 +48,16 @@ namespace Tetris.services.Tests
         }
 
         [TestMethod()]
-        [DataRow(1, 182)]
-        [DataRow(2, 169)]
+        [DataRow(1, 183)]
+        [DataRow(2, 170)]
         [DataRow(3, 156)]
-        [DataRow(4, 142)]
-        [DataRow(5, 129)]
+        [DataRow(4, 143)]
+        [DataRow(5, 130)]
         [DataRow(6, 116)]
-        [DataRow(7, 102)]
-        [DataRow(8, 89)]
+        [DataRow(7, 103)]
+        [DataRow(8, 90)]
         [DataRow(9, 76)]
-        [DataRow(10, 62)]
+        [DataRow(10, 63)]
         public void SquareAndL12ShapeProbabilityTest(int inLevel, float expectedProbability)
         {
             PrivateType wrapper = new PrivateType(typeof(ShapeGenerator));
@@ -74,16 +74,16 @@ namespace Tetris.services.Tests
         }
 
         [TestMethod()]
-        [DataRow(1, 102)]
+        [DataRow(1, 103)]
         [DataRow(2, 116)]
-        [DataRow(3, 129)]
-        [DataRow(4, 142)]
+        [DataRow(3, 130)]
+        [DataRow(4, 143)]
         [DataRow(5, 156)]
-        [DataRow(6, 169)]
-        [DataRow(7, 182)]
+        [DataRow(6, 170)]
+        [DataRow(7, 183)]
         [DataRow(8, 196)]
-        [DataRow(9, 209)]
-        [DataRow(10, 222)]
+        [DataRow(9, 210)]
+        [DataRow(10, 223)]
         public void TAndZ12ShapeProbabilityTest(int inLevel, float expectedProbability)
         {
             PrivateType wrapper = new PrivateType(typeof(ShapeGenerator));
