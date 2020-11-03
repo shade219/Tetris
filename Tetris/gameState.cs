@@ -18,8 +18,8 @@ namespace Tetris
 
         public gameState()
         {
-            activeShape = new activeShape();
-            this.grid = new BlockGrid();
+            activeShape = ShapeGenerator::GenerateShape(this.currentLevel);
+            this.grid = new BlockGrid(maxX, maxY);
             nextShape = new nextShape();
             totalLinesCleared = 0;
             currentLevel = 0;
