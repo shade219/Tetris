@@ -2,7 +2,9 @@ name: Build and run Unit Tests
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - team-*
 
 jobs:
   build_and_test_automation:
