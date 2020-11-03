@@ -40,7 +40,7 @@ namespace Tetris.services.Tests
         [TestMethod()]
         public void IsExpiredTest()
         {
-            int duration = 1;
+            int duration = 1000;
             Timer timer = new Timer(duration);
             timer.ResetTimer();
             Assert.IsFalse(timer.IsExpired());
