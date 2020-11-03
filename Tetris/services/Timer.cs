@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Tetris.services
         public long start;
         public long end;
         public int duration; //duration is calculated in miliseconds
-        public TimeSpan time = new TimeSpan();
+        public Stopwatch stopwatch = new Stopwatch();
 
         // Author: Ana Maria Anghel
         public Timer(int duration)
@@ -27,14 +28,17 @@ namespace Tetris.services
         // Author: Ana Maria Anghel
         public void ResetTimer()
         {
-            this.start =(long) time.TotalMilliseconds;
-            this.end = (long) time.TotalMilliseconds + this.duration;
+            stopwatch.Reset();
+            stopwatch.Restart();
+            stopwatch.Start();
+            this.start = stopwatch.ElapsedMilliseconds;
+            this.end = stopwatch.ElapsedMilliseconds + this.duration;
         }
 
         // Author: Ana Maria Anghel
         public bool IsExpired()
         {
-            if (time.TotalMilliseconds < this.end)
+            if (stopwatch.ElapsedMilliseconds < this.end)
                 return false;
             else
                 return true;

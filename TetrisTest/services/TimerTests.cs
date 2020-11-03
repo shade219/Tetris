@@ -29,21 +29,27 @@ namespace Tetris.services.Tests
             Timer timer = new Timer(10);
             timer.start = 2;
             timer.end = 12;
-            Assert.AreNotEqual(timer.time.TotalMilliseconds, timer.start);
-            Assert.AreNotEqual(timer.time.TotalMilliseconds + 10, timer.end);
+            Assert.AreNotEqual(timer.stopwatch.ElapsedMilliseconds, timer.start);
+            Assert.AreNotEqual(timer.stopwatch.ElapsedMilliseconds + 10, timer.end);
             timer.ResetTimer();
-            Assert.AreEqual(timer.time.TotalMilliseconds, timer.start);
-            Assert.AreEqual(timer.time.TotalMilliseconds + 10, timer.end);
+            Assert.IsTrue(timer.stopwatch.ElapsedMilliseconds - timer.start < 3);
+            Assert.IsTrue(timer.stopwatch.ElapsedMilliseconds - timer.end < 3);
         }
 
         // Author: Ana Maria Anghel
         [TestMethod()]
         public void IsExpiredTest()
         {
-            Timer timer = new Timer(1);
+            int duration = 1;
+            Timer timer = new Timer(duration);
             timer.ResetTimer();
             Assert.IsFalse(timer.IsExpired());
-            timer.end = (long)timer.time.TotalMilliseconds - 1;
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            while(watch.ElapsedMilliseconds <= duration+1)
+            {
+                continue;
+            }
             Assert.IsTrue(timer.IsExpired());
         }
     }
