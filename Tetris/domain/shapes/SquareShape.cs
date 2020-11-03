@@ -13,7 +13,7 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Greg Kulasik
-        public SquareShape(Block anchor, ShapeRenderer.Orientation orientation) : base (anchor, orientation)
+        public SquareShape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0) : base (anchor, orientation)
         {
             this.color = ShapeRenderer.GetSquareColor();
             anchor.SetColor(this.color);
