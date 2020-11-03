@@ -20,7 +20,7 @@ namespace Tetris
         {
             activeShape = ShapeGenerator::GenerateShape(this.currentLevel);
             this.grid = new BlockGrid(maxX, maxY);
-            nextShape = new nextShape();
+            nextShape = ShapeGenerator::GenerateShape(this.currentLevel);
             totalLinesCleared = 0;
             currentLevel = 0;
             currentScore = 0;
