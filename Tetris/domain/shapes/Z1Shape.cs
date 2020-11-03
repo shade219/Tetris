@@ -12,21 +12,9 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Your Name Here
-        public Z1Shape(Block anchor): base (anchor)
+        public Z1Shape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
         {
 
-        }
-
-        // Author: Your Name Here
-        public override void ApplyAction(InputAction action)
-        {
-            throw new NotImplementedException();
-        }
-
-        // Author: Your Name Here
-        public override List<Block> CalcBlocksPostAction(InputAction action)
-        {
-            throw new NotImplementedException();
         }
 
         // Author: Your Name Here

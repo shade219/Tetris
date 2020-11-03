@@ -2,7 +2,8 @@
 
 namespace Tetris
 {
-    static class DrawColor
+    //NOTE:: changed accessibility of class to public --> allows use in constructor
+    public static class DrawColor
     {
         public enum Shade
         {
