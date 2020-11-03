@@ -18,12 +18,12 @@ namespace Tetris
 
         public gameState()
         {
-            activeShape = new activeShape(); 
-            this.grid = new BlockGrid(); 
+            activeShape = new activeShape();
+            this.grid = new BlockGrid();
             nextShape = new nextShape();
-            totalLinesCleared = new totalLinesCleared();
-            currentLevel = new currentLevel();
-            currentScore = new currentScore();
+            totalLinesCleared = 0;
+            currentLevel = 0;
+            currentScore = 0;
         }
     }
 
