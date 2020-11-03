@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="gameState.cs" />
     <Compile Include="services\GameManager.cs" />
     <Compile Include="services\GameObject.cs" />
     <Compile Include="services\InputReader.cs" />
