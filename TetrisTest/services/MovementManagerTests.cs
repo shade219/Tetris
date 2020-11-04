@@ -1,13 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetris.services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tetris.domain;
 using System.Numerics;
-using TetrisTest.domain.shapes;
 using Tetris.domain.shapes;
 
 namespace Tetris.services.Tests
