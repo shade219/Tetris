@@ -43,8 +43,8 @@ namespace Tetris.services.Tests
         {
             ScoreManager tester = new ScoreManager();
 
-            Assert.AreEqual(tester.UpdateScore(2, 2), 200);
-            Assert.AreEqual(tester.score, 200);
+            Assert.AreEqual(tester.UpdateScore(2, 2), 280);
+            Assert.AreEqual(tester.score, 280);
 
             Assert.AreEqual(tester.UpdateScore(2, 5), 700);
             Assert.AreEqual(tester.score, 700);
