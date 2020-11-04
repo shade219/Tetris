@@ -80,11 +80,11 @@ namespace Tetris.services.Tests
         {
             ScoreManager tester = new ScoreManager();
 
-            AssertEqual(tester.UpdateScore(-1, 1), 0); //lines cleared > 0
-            AssertEqual(tester.UpdateScore(5, 1), 0); // lines cleared < 4
-            AssertEqual(tester.UpdateScore(3, -1), 0); // level is negative
+            Assert.AreEqual(tester.UpdateScore(-1, 1), 0); //lines cleared > 0
+            Assert.AreEqual(tester.UpdateScore(5, 1), 0); // lines cleared < 4
+            Assert.AreEqual(tester.UpdateScore(3, -1), 0); // level is negative
 
-            AssertEqual(tester.UpdateScore(-1), 0); // lines dropped is negative
+            Assert.AreEqual(tester.UpdateScore(-1), 0); // lines dropped is negative
         }
 
         // Author: Eoin Stanley
