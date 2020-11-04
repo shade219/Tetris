@@ -23,34 +23,33 @@ namespace Tetris.domain.Tests
         [TestMethod]
         public void BaseInitializeTest()
         {
-            GameState GS = new GameState();
-            Assert.IsNotNull(GS);
+            GameState gameState = new GameState();
+            Assert.IsNotNull(gameState);
         }
         [TestMethod]
         public void FullInitializeTest()
         {
-            GameState Var = new GameState();
-            int a = Var.currentLevel;
-            int b = Var.currentScore;
-            int c = Var.totalLinesCleared;
-            Assert.IsNotNull(Var.getGrid());
+            GameState gameState = new GameState();
+            int currLevel = gameState.currentLevel;
+            int currScore = gameState.currentScore;
+            int totLinesCleared = gameState.totalLinesCleared;
+            Assert.IsNotNull(gameState.getGrid());
             //Assert.IsNotNull(Var.getNextShape()); won't work until full code works
             //Assert.IsNotNull(Var.getActiveShape()); won't work until full code works
 
-            Assert.AreEqual(a, 0);
-            Assert.AreEqual(b, 0);
-            Assert.AreEqual(c, 0);
+            Assert.AreEqual(currLevel, 0);
+            Assert.AreEqual(currScore, 0);
+            Assert.AreEqual(totLinesCleared, 0);
         }
         [TestMethod]
-        public void typeErr()
+        public void IncorrectTypeInitializeTest()
         {
-            GameState Var = new GameState();
-
-            int s = 0;
-            int a = Var.currentLevel;
+            // no logic in GameState has been implemented to support catching bad types being passed in
+            GameState gameState = new GameState();
+            int a = gameState.currentLevel;
             Assert.IsInstanceOfType(a, typeof(int));
-            Assert.IsInstanceOfType(Var.currentScore, typeof(int));
-            Assert.IsInstanceOfType(Var.totalLinesCleared, typeof(int));
+            Assert.IsInstanceOfType(gameState.currentScore, typeof(int));
+            Assert.IsInstanceOfType(gameState.totalLinesCleared, typeof(int));
 
         }
 
