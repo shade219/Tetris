@@ -7,17 +7,18 @@ using Tetris.services;
 using Tetris.domain;
 
 namespace Tetris
-{
-    class gameState
-    { 
-        GameShape activeShape;
+{ // Authors: <Brian and Morgan>
+    class GameState
+    {
         BlockGrid grid;
+        GameShape activeShape;
         GameShape nextShape;
         public int totalLinesCleared;
         public int currentLevel;
         public int currentScore;
 
-        public gameState()
+        //Authors: <Brian and Morgan>
+        public GameState()
         {
             this.currentLevel = 0;
             this.currentScore = 0;
