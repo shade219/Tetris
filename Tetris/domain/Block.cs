@@ -11,9 +11,14 @@ namespace Tetris.domain
     // Description:
     public class Block
     {
-        Azul.Color color;
+        public DrawColor.Shade color
+        {
+            get;
+            private set;
+        }
         Vector2 coordinates;
-
+        private int x;
+        private int y;
         // Author: Your Name Here
         public Block(Azul.Color color, Vector2 coordinates)
         {
