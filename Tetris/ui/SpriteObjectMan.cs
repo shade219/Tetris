@@ -1,19 +1,16 @@
 ﻿using System;
+using Tetris.domain;
 using Tetris.services;
 
 namespace Tetris
 {
     static class SOM  // SpriteObjecManager i.e. SOM
     {
-        static public void drawStrings(GameStats stats)
+        static public void drawStrings(GameState state)
         {
-            int levels = stats.getLevelNum();
-            int lines = stats.getLineCount();
-            int score = stats.getScore();
-
-            SpriteFont LevelLabel = new SpriteFont("Level " + levels, 280, 300);
-            SpriteFont LineslLabel = new SpriteFont("Lines " + lines, 280, 275);
-            SpriteFont ScoreLabel = new SpriteFont("Score " + score, 280, 250);
+            SpriteFont LevelLabel = new SpriteFont("Level " + state.currentLevel, 280, 300);
+            SpriteFont LineslLabel = new SpriteFont("Lines " + state.totalLinesCleared, 280, 275);
+            SpriteFont ScoreLabel = new SpriteFont("Score " + state.currentScore, 280, 250);
 
             LevelLabel.Draw();
             LineslLabel.Draw();

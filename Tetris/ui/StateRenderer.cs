@@ -27,25 +27,16 @@ namespace Tetris.ui
 
             // 2. add activeShape and nextShape via getter and setter from GameState
 
-            // GameShape activeShape;  = state.getActiveShape(); 
-            // GameShape nextShape; = state.getNextShape(); 
-
-            // activeShape.Draw(); // uncomment if getters in gamestate are there
-            // nextShape.Draw(); // uncomment if getters in gamestate are there
+            state.getActiveShape().Draw(); 
+            state.getNextShape().Draw(); 
 
             // 3. fill in grid for tetris board
 
-            // BlockGrid bg = state.getGrid(); // uncomment if getters in gamestate are there
-
-            // bg.Draw(); uncomment if getters in gamestate are there
+            state.getGrid().Draw(); 
 
             // 4. add strings to showcase the currentLevel, currentScore, and totalLinesCleared
 
-            
-
-            // state.currentLevel
-            // state.currentScore
-            // state.TotalLinesCleared
+            SOM.drawStrings(state);
 
 
         }
