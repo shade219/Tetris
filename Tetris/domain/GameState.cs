@@ -1,28 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Tetris.services;
 
-namespace Tetris.domain
-{
-    // Authors: Name1, Name2
-    // Description:
-    public class GameState
+    namespace Tetris.domain
     {
-
-        BlockGrid grid;
-        GameShape activeShape;
-        GameShape nextShape;
-        int totalLinesCleared;
-        int currentLevel;
-        int currentScore;
-
-        // Author: Your Name Here
-        public GameState()
+        // Authors: <Brian and Morgan>
+        public class GameState
         {
+            public BlockGrid grid;
+            public GameShape activeShape;
+            public GameShape nextShape;
+            public int totalLinesCleared;
+            public int currentLevel;
+            public int currentScore;
 
+            //Authors: <Brian and Morgan>
+            public GameState()
+            {
+                this.currentLevel = 0;
+                this.currentScore = 0;
+                this.totalLinesCleared = 0;
+                this.activeShape = ShapeGenerator.GenerateShape(this.currentLevel);
+                this.nextShape = ShapeGenerator.GenerateShape(this.currentLevel);
+                this.grid = new BlockGrid(Constants.GAME_MAX_X, Constants.GAME_MAX_Y);
+            }
         }
 
     }
-}
