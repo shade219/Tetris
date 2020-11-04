@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetris.domain.shapes;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace Tetris.domain.shapes.Tests
             List<Vector2> coordinates;
             GameShape square = BasicShapeInitialize(out coordinates, defaultOri);
 
-            List<Vector2> expectedCoordinates = new List<Vector2>(){new Vector2(100, 100), new Vector2(101, 100), new Vector2(101, 99), new Vector2(100, 99) };
+            List<Vector2> expectedCoordinates = new List<Vector2>() { new Vector2(100, 100), new Vector2(101, 100), new Vector2(101, 99), new Vector2(100, 99) };
 
             foreach (Vector2 coord in expectedCoordinates)
             {
