@@ -10,9 +10,9 @@
         // Authors: <Brian and Morgan>
         public class GameState
         {
-            BlockGrid grid;
-            GameShape activeShape;
-            GameShape nextShape;
+            public BlockGrid grid;
+            public GameShape activeShape;
+            public GameShape nextShape;
             public int totalLinesCleared;
             public int currentLevel;
             public int currentScore;
