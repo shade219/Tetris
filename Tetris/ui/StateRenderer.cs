@@ -7,7 +7,7 @@ using Tetris.domain;
 
 namespace Tetris.ui
 {
-    // Authors: Name1, Name2
+    // Authors: Nathan Hester, Tom Zdanowski
     // Description:
     public static class StateRenderer
     {
