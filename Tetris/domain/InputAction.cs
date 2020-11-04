@@ -16,6 +16,7 @@ namespace Tetris.domain
         MoveLeft,
         MoveRight,
         Rotate,
-        Pause
+        Pause,
+        Null
     }
 }

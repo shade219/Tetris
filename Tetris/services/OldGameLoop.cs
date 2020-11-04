@@ -192,7 +192,7 @@ namespace Tetris
 
             // Update background
             SOM.drawBackground();
-            SOM.drawStrings(stats);
+            //SOM.drawStrings(stats); broke due to rewriting of stats
            
             // Draw one box, demo at position 1,1
             SOM.drawBox(1, 1, DrawColor.Shade.COLOR_LT_GREEN);
@@ -258,7 +258,7 @@ namespace Tetris
             else
                 count++;
         }
-
+        
         //-----------------------------------------------------------------------------
         // Game::UnLoadContent()
         //       unload content (resources loaded above)
