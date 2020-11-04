@@ -50,6 +50,7 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.score, 700);
         }
 
+        // Author: Eoin Stanley
         [TestMethod()]
         public void UpdateScore3LineTest()
         {
@@ -62,6 +63,7 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.score, 2100);
         }
 
+        //Author: Eoin Stanley
         [TestMethod()]
         public void UpdateScore4LineTest()
         {
@@ -74,6 +76,8 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.score, 8400);
         }
 
+
+        //Author: Eoin Stanley
         //Expect print statements for bad inputs
         [TestMethod()]
         public void UpdateScoreBadInputTest()
