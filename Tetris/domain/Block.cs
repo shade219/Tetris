@@ -25,5 +25,10 @@ namespace Tetris.domain
         {
             return null;
         }
+
+        public void Draw()
+        {
+            SOM.drawBox(x, y, color);
+        }
     }
 }
