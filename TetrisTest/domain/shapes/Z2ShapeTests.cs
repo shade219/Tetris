@@ -52,17 +52,6 @@ namespace Tetris.domain.shapes.Tests
             //Rotate GameShape
             z2.ApplyAction(InputAction.Rotate);
 
-            //Automated way of checking if properly rotated --- NOTE:: ASSUMES rotationOffset Lists are accurate
-            //IReadOnlyCollection<Vector2> rotationOffsets = square.GetOrientationOffsets(square.GetOrientation());
-
-            //for (int i = 0; i < coordinates.Count; i++)
-            //{
-            //    //Get position of 
-            //    Vector2 pos = new Vector2(square.blocks.ElementAt(i).GetX(), square.blocks.ElementAt(i).GetY());
-            //    pos -= rotationOffsets.ElementAt(i);
-            //    Assert.AreEqual(coordinates.ElementAt(i), pos);
-            //}
-
             Assert.AreEqual(coordinates.ElementAt(0).X, z2.blocks.ElementAt(0).GetX());
             Assert.AreEqual(coordinates.ElementAt(0).Y, z2.blocks.ElementAt(0).GetY());
 
