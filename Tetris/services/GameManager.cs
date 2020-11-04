@@ -60,6 +60,7 @@ namespace Tetris.services
         // Author: Stahl Samuel, Yuetao Zhu
         public override void Update()
         { 
+            /*
             BlockGrid grid = state.getGrid();               // apis needed from team-7
             GameShape activeShape = state.getActiveShape(); // apis needed from team-7
 
@@ -87,6 +88,7 @@ namespace Tetris.services
 
             
             throw new NotImplementedException();
+            */
 
         }
 
