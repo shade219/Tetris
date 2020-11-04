@@ -12,12 +12,29 @@ namespace Tetris.domain
     public class BlockGrid
     {
 
-        Block[][] grid;
+        //2D dimensional array of different width/height
+        // - Vacant coordinates MUST be null
+        public readonly Block[][] grid;
+        //NOTE: Grid access --> grid[x][y] || grid[col][row]
+
+        private readonly int row_count;
+        private readonly int col_count;
+
+        private List<Block> blocks;
+
 
         // Author: Your Name Here
         public BlockGrid(int maxX, int maxY)
         {
 
+        }
+
+        public void Draw()
+        {
+            foreach (Block block in blocks)
+            {
+                block.Draw();
+            }
         }
 
         // Author: Your Name Here

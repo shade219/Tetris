@@ -2,7 +2,7 @@
 
 namespace Tetris
 {
-    static class DrawColor
+    public static class DrawColor
     {
         public enum Shade
         {
