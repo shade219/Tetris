@@ -13,7 +13,7 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Dillon Gould
-        public TShape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
+        public TShape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0) : base(anchor, orientation)
         {
 
             this.color = ShapeRenderer.GetTColor();

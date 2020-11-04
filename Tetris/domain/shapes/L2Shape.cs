@@ -14,7 +14,7 @@ namespace Tetris.domain.shapes
     {
 
         // Author: Dillon Gould
-        public L2Shape(Block anchor, ShapeRenderer.Orientation orientation) : base(anchor, orientation)
+        public L2Shape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0) : base(anchor, orientation)
         {
 
             this.color = ShapeRenderer.GetL2Color();

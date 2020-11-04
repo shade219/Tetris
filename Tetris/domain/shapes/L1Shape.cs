@@ -12,7 +12,7 @@ namespace Tetris.domain.shapes
     public class L1Shape : GameShape
     {
         // Dillon Gould
-        public L1Shape(Block anchor, ShapeRenderer.Orientation orientation) : base (anchor, orientation)
+        public L1Shape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0) : base(anchor, orientation)
         {
 
             this.color = ShapeRenderer.GetL1Color();
