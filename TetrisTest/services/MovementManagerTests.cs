@@ -8,7 +8,8 @@ using Tetris.domain.shapes;
 namespace Tetris.services.Tests
 {
     // Authors: Brandon Wegner, Raffay Hussain
-    // Description: 
+    // Description: Verifies any action (MoveDown in this case) occurred and the grid
+    // can verify that the occupied coordinates now exhibit the changed block positioning
     [TestClass()]
     public class MovementManagerTests
     {
