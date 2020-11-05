@@ -13,7 +13,7 @@ namespace Tetris.services
     public static class MovementManager
     {
 
-        // Author: Brandon Wegner
+        // Author: Brandon Wegner, Samuel Stahl
         //Checks for collision in two states:
 
         //State 1: about to place - If AboutToPlace flag is set and action is MoveDown call placeshape
@@ -31,22 +31,23 @@ namespace Tetris.services
                 }
                 else
                 {
-                    List<Block> shapeBlocks = shape.CalcBlocksPostAction(action);
-                    bool collision = CheckForCollisions(grid, shapeBlocks, shape, action);
-                    if (!collision)
-                    {
-                        shape.ApplyAction(action);
-                    }
+                    checkAndApply(action, grid, shape);
                 }
             }
             else
             {
-                List<Block> shapeBlocks = shape.CalcBlocksPostAction(action);
-                bool collision = CheckForCollisions(grid, shapeBlocks, shape, action);
-                if (!collision)
-                {
-                    shape.ApplyAction(action);
-                }
+                checkAndApply(action, grid, shape);
+            }
+        }
+
+        private static void checkAndApply(InputAction action, BlockGrid grid, GameShape shape)
+        {
+            shape.ResetAboutToPlaceFlag();
+            List<Block> shapeBlocks = shape.CalcBlocksPostAction(action);
+            bool collision = CheckForCollisions(grid, shapeBlocks, shape, action);
+            if (!collision)
+            {
+                shape.ApplyAction(action);
             }
         }
 
@@ -100,14 +101,11 @@ namespace Tetris.services
                 {
                     Vector2 temp;
                     temp.X = blockCoord.X;
-                    //ask how the coords are implemented (matrix or cartesian)
                     temp.Y = blockCoord.Y - 1;
                     if (occupiedCoordinates.Contains(temp))
                     {
                         shape.AboutToPlaceGameShape();
                     }
-                    // Should this return false?
-                    return false;
                 }
             }
             return false;
