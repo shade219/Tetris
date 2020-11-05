@@ -106,6 +106,7 @@ namespace Tetris.services
                     {
                         shape.AboutToPlaceGameShape();
                     }
+                    // Should this return false?
                     return false;
                 }
             }
