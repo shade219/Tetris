@@ -31,6 +31,7 @@ namespace Tetris.services
                 }
                 else
                 {
+                    shape.ResetAboutToPlaceFlag();
                     checkAndApply(action, grid, shape);
                 }
             }
@@ -42,7 +43,6 @@ namespace Tetris.services
 
         private static void checkAndApply(InputAction action, BlockGrid grid, GameShape shape)
         {
-            shape.ResetAboutToPlaceFlag();
             List<Block> shapeBlocks = shape.CalcBlocksPostAction(action);
             bool collision = CheckForCollisions(grid, shapeBlocks, shape, action);
             if (!collision)

@@ -100,18 +100,19 @@ namespace Tetris.services
             music.Volume += vol_delta;
 
             /*
-            BlockGrid grid = state.getGrid();               // apis needed from team-7
-            GameShape activeShape = state.getActiveShape(); // apis needed from team-7
+            BlockGrid grid = state.getGrid();
+            GameShape activeShape = state.getActiveShape();
 
             // Things we need to check on every update:
             // 1. activeShape is placed => set activeShape to nextShape and nextShape = ShapeGenerator.GenerateShape(currentLevel);;
             // 2. if timer is expired => reset timer and MovementManager.moveDown();
             // 3. if timer is not expired => MovementManager(InputAction.getInputs());
+
             if (activeShape.isPlaced)
             {
-                activeShape = state.getNextShape();
+                state.activateNext();
+                activeShape = state.getActiveShape();
                 state.nextShape = ShapeGenerator.GenerateShape(currentLevel);
-                MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
 
                 // Tell BlockGrid whether new lines cleared
                 List<int> cl = grid.GetCompletedLines();
@@ -119,24 +120,29 @@ namespace Tetris.services
                 state.totalLinesCleared += cl.Count;
                 state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
                 scoreManager.UpdateScore(cl.Count,state.currentLevel);
+                lineCycleTimer.ResetTimer();
             }
-            else
-            {
-                checkTimerAndMoveShape(grid, activeShape);
-            }
+            checkTimerAndMoveShape(grid, activeShape);
             */
         }
 
+        /*
         private void checkTimerAndMoveShape(BlockGrid grid, GameShape activeShape)
         {
             if (lineCycleTimer.IsExpired())
             {
                 MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
                 lineCycleTimer.ResetTimer();
-            } else
+            }
+            else
             {
+                InputAction curInput = InputReader.GetInputs();
+                if (curInput != InputAction.Null)
+                {
                 MovementManager.ApplyAction(InputReader.GetInputs(), grid, activeShape);
+                }   
             }
         }
+        */
     }
 }
