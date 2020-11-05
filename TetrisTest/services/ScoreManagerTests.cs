@@ -34,7 +34,7 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.UpdateScore(1, 2), 80);
             Assert.AreEqual(tester.score, 80);
 
-            Assert.AreEqual(tester.UpdateScore(1, 5), 200);
+            Assert.AreEqual(tester.UpdateScore(1, 5), 280);
             Assert.AreEqual(tester.score, 280);
         }
 
@@ -43,13 +43,14 @@ namespace Tetris.services.Tests
         {
             ScoreManager tester = new ScoreManager();
 
-            Assert.AreEqual(tester.UpdateScore(2, 2), 200);
-            Assert.AreEqual(tester.score, 200);
+            Assert.AreEqual(tester.UpdateScore(2, 2), 280);
+            Assert.AreEqual(tester.score, 280);
 
             Assert.AreEqual(tester.UpdateScore(2, 5), 700);
             Assert.AreEqual(tester.score, 700);
         }
 
+        // Author: Eoin Stanley
         [TestMethod()]
         public void UpdateScore3LineTest()
         {
@@ -62,6 +63,7 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.score, 2100);
         }
 
+        //Author: Eoin Stanley
         [TestMethod()]
         public void UpdateScore4LineTest()
         {
@@ -74,6 +76,8 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.score, 8400);
         }
 
+
+        //Author: Eoin Stanley
         //Expect print statements for bad inputs
         [TestMethod()]
         public void UpdateScoreBadInputTest()
