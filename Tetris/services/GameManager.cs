@@ -14,8 +14,18 @@ namespace Tetris.services
         LevelManager levelManager;
         ScoreManager scoreManager;
         Timer lineCycleTimer;
-        int totalLinesCleared;
-        int currentLevel;
+        float vol_delta = 0.005f;
+
+        private Azul.Texture pFont;
+        private Azul.Texture pText;
+        private Azul.Sprite pRedBird;
+        private IrrKlang.ISoundEngine AudioEngine = null;
+        private IrrKlang.ISound music = null;
+        private IrrKlang.ISoundSource srcShoot = null;
+        private IrrKlang.ISound sndShoot = null;
+        private int startLevel = 0;
+        private int duration = 1;
+        private BlockGrid grid;
 
 
         // Author: Your Name Here
@@ -31,24 +41,42 @@ namespace Tetris.services
             StateRenderer.Draw(state);
         }
 
-        // Author: Stahl Samuel, Yuetao Zhu
+        // Author: Stahl Samuel, Yuetao Zhu, Brandon Wegner
         // Create game classes instances and draw initial game window 
         public override void Initialize()
         {
-            int startLevel = 0;
-            int duration = 1;
+            this.SetWindowName("Tetris Framework");
+            this.SetWidthHeight(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+            this.SetClearColor(0.4f, 0.4f, 0.8f, 1.0f);
 
             state = new GameState();
             levelManager = new LevelManager(startLevel);
             scoreManager = new ScoreManager();
             lineCycleTimer = new Timer(duration);
-            StateRenderer.Draw(state);
         }
 
-        // Author: Your Name Here
+        // Author: Brandon Wegner
         public override void LoadContent()
         {
-            throw new NotImplementedException();
+            AudioEngine = new IrrKlang.ISoundEngine();
+
+            music = AudioEngine.Play2D("theme.wav", true);
+            music.Volume = 0.2f;
+
+            srcShoot = AudioEngine.AddSoundSourceFromFile("shoot.wav");
+            sndShoot = AudioEngine.Play2D(srcShoot, false, false, false);
+            sndShoot.Stop();
+
+            pFont = new Azul.Texture("consolas20pt.tga");
+
+            GlyphMan.AddXml("Consolas20pt.xml", pFont);
+
+            pText = new Azul.Texture("unsorted.tga");
+
+            pRedBird = new Azul.Sprite(pText, new Azul.Rect(903.0f, 797.0f, 46.0f, 46.0f),
+                new Azul.Rect(300.0f, 100.0f, 30.0f, 30.0f));
+
+            grid = BlockGrid.BasicBlockGridInitialize();
         }
 
         // Author: Your Name Here
@@ -59,12 +87,22 @@ namespace Tetris.services
 
         // Author: Stahl Samuel, Yuetao Zhu
         public override void Update()
-        { 
-            /*
+        {
+            AudioEngine.Update();
+            if (music.Volume > 0.30f)
+            {
+                vol_delta = -0.002f;
+            }
+            else if (music.Volume < 0.00f)
+            {
+                vol_delta = 0.002f;
+            }
+            music.Volume += vol_delta;
+
             BlockGrid grid = state.getGrid();               // apis needed from team-7
             GameShape activeShape = state.getActiveShape(); // apis needed from team-7
 
-            // Thins we need to check on every update:
+            // Things we need to check on every update:
             // 1. activeShape is placed => set activeShape to nextShape and nextShape = ShapeGenerator.GenerateShape(currentLevel);;
             // 2. if timer is expired => reset timer and MovementManager.moveDown();
             // 3. if timer is not expired => MovementManager(InputAction.getInputs());
@@ -85,11 +123,6 @@ namespace Tetris.services
             {
                 checkTimerAndMoveShape(grid, activeShape);
             }
-
-            
-            throw new NotImplementedException();
-            */
-
         }
 
         private void checkTimerAndMoveShape(BlockGrid grid, GameShape activeShape)
