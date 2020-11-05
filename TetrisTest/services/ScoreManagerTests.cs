@@ -34,8 +34,8 @@ namespace Tetris.services.Tests
             Assert.AreEqual(tester.UpdateScore(1, 2), 80);
             Assert.AreEqual(tester.score, 80);
 
-            Assert.AreEqual(tester.UpdateScore(1, 5), 200);
-            Assert.AreEqual(tester.score, 200);
+            Assert.AreEqual(tester.UpdateScore(1, 5), 280);
+            Assert.AreEqual(tester.score, 280);
         }
 
         [TestMethod()]
