@@ -99,6 +99,7 @@ namespace Tetris.services
             }
             music.Volume += vol_delta;
 
+            /*
             BlockGrid grid = state.getGrid();               // apis needed from team-7
             GameShape activeShape = state.getActiveShape(); // apis needed from team-7
 
@@ -123,6 +124,7 @@ namespace Tetris.services
             {
                 checkTimerAndMoveShape(grid, activeShape);
             }
+            */
         }
 
         private void checkTimerAndMoveShape(BlockGrid grid, GameShape activeShape)
