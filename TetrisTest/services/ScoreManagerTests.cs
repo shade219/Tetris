@@ -21,8 +21,8 @@ namespace Tetris.services.Tests
         public void ScoreManagerTest()
         {
             ScoreManager tester = new ScoreManager();
-            Assert.AreEqual(tester.score, 0);
-            tester.UpdateScore(2, 2);
+            Assert.AreEqual(0, tester.score);
+            
         }
 
         // Author: Eoin Stanley
@@ -30,24 +30,17 @@ namespace Tetris.services.Tests
         public void UpdateScore1LineTest()
         {
             ScoreManager tester = new ScoreManager();
-
-            Assert.AreEqual(tester.UpdateScore(1, 2), 80);
-            Assert.AreEqual(tester.score, 80);
-
-            Assert.AreEqual(tester.UpdateScore(1, 5), 280);
-            Assert.AreEqual(tester.score, 280);
+            Assert.AreEqual(80, tester.UpdateScore(1, 2));
+            Assert.AreEqual(280, tester.UpdateScore(1, 5));
         }
 
         [TestMethod()]
+        // Author: Eoin Stanley, Jessica Wilson
         public void UpdateScore2LineTest()
         {
             ScoreManager tester = new ScoreManager();
-
-            Assert.AreEqual(tester.UpdateScore(2, 2), 280);
-            Assert.AreEqual(tester.score, 280);
-
-            Assert.AreEqual(tester.UpdateScore(2, 5), 700);
-            Assert.AreEqual(tester.score, 700);
+            Assert.AreEqual(200, tester.UpdateScore(2, 2));
+            Assert.AreEqual(700, tester.UpdateScore(2, 5));
         }
 
         // Author: Eoin Stanley
@@ -55,12 +48,8 @@ namespace Tetris.services.Tests
         public void UpdateScore3LineTest()
         {
             ScoreManager tester = new ScoreManager();
-
-            Assert.AreEqual(tester.UpdateScore(3, 2), 600);
-            Assert.AreEqual(tester.score, 600);
-
-            Assert.AreEqual(tester.UpdateScore(3, 5), 2100);
-            Assert.AreEqual(tester.score, 2100);
+            Assert.AreEqual(600, tester.UpdateScore(3, 2));
+            Assert.AreEqual(2100, tester.UpdateScore(3, 5));
         }
 
         //Author: Eoin Stanley
@@ -68,12 +57,8 @@ namespace Tetris.services.Tests
         public void UpdateScore4LineTest()
         {
             ScoreManager tester = new ScoreManager();
-
-            Assert.AreEqual(tester.UpdateScore(4, 2), 2400);
-            Assert.AreEqual(tester.score, 2400);
-
-            Assert.AreEqual(tester.UpdateScore(4, 5), 8400);
-            Assert.AreEqual(tester.score, 8400);
+            Assert.AreEqual(2400, tester.UpdateScore(4, 2));
+            Assert.AreEqual(8400, tester.UpdateScore(4, 5));
         }
 
 
@@ -84,11 +69,11 @@ namespace Tetris.services.Tests
         {
             ScoreManager tester = new ScoreManager();
 
-            Assert.AreEqual(tester.UpdateScore(-1, 1), 0); //lines cleared > 0
-            Assert.AreEqual(tester.UpdateScore(5, 1), 0); // lines cleared < 4
-            Assert.AreEqual(tester.UpdateScore(3, -1), 0); // level is negative
+            Assert.AreEqual(0, tester.UpdateScore(-1, 1)); //lines cleared > 0
+            Assert.AreEqual(0, tester.UpdateScore(5, 1)); // lines cleared < 4
+            Assert.AreEqual(0, tester.UpdateScore(3, -1)); // level is negative
 
-            Assert.AreEqual(tester.UpdateScore(-1), 0); // lines dropped is negative
+            Assert.AreEqual(0, tester.UpdateScore(-1)); // lines dropped is negative
         }
 
         // Author: Eoin Stanley
@@ -96,9 +81,7 @@ namespace Tetris.services.Tests
         public void UpdateScoreDroppedLinesTest()
         {
             ScoreManager tester = new ScoreManager();
-
-            Assert.AreEqual(tester.UpdateScore(8),8);
-            Assert.AreEqual(tester.score, 8);
+            Assert.AreEqual(8, tester.UpdateScore(8));
         }
     }
 }
