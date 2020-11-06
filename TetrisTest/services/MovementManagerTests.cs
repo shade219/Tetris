@@ -4,6 +4,7 @@ using System.Linq;
 using Tetris.domain;
 using System.Numerics;
 using Tetris.domain.shapes;
+using System;
 
 namespace Tetris.services.Tests
 {
@@ -17,42 +18,65 @@ namespace Tetris.services.Tests
 
         // Author: Brandon Wegner
         [TestMethod()]
-        public void ApplyActionTest()
+        public void ApplyActionTestMoveDownNoCollision()
         {
-            // Create initial space block occupies
             Block anchor = new Block(4, 4);
-            // Make square with default orientation
             SquareShape shape = new SquareShape(anchor, defaultOri);
-            // Add block coords to coords before action applied
             List<Vector2> coordinates = new List<Vector2>();
+
             foreach (Block b in shape.blocks)
             { 
                 coordinates.Add(new Vector2(b.GetX(), b.GetY()));
             }
 
-            // Make a 10 X 10 grid
             BlockGrid grid = new BlockGrid(10, 10);
-
-            // Apply MoveDown action on shape in grid
             MovementManager.ApplyAction(InputAction.MoveDown, grid, shape);
-
             List<Vector2> expectedCoord = new List<Vector2>();
-            // Loop through and add the new coords of block in grid to expected position
+
             foreach (Block b in shape.blocks)
             {
                 expectedCoord.Add(new Vector2(b.GetX(), b.GetY()));
             }
 
             int i = 0;
-            /* Loops through size of coordinates and expectedCoord (should be same size)
-             * and check that the expected is Y - 1 for the shape positioning in org coordinates
-             */
             while (i < coordinates.Count() && i < expectedCoord.Count())
             {
                 Assert.AreEqual(expectedCoord.ElementAt(i).X, coordinates.ElementAt(i).X);
                 Assert.AreEqual(expectedCoord.ElementAt(i).Y, coordinates.ElementAt(i).Y - 1);
                 i++;
             }
+            Assert.IsFalse(shape.isPlaced);
+        }
+
+        [TestMethod()]
+        public void ApplyActionTestMoveDownCollision()
+        {
+            Block anchor = new Block(1, 2);
+            SquareShape shape = new SquareShape(anchor, defaultOri);
+            BlockGrid grid = new BlockGrid(10, 10);
+            shape.AboutToPlaceGameShape();
+            MovementManager.ApplyAction(InputAction.MoveDown, grid, shape);
+            Assert.IsTrue(shape.isPlaced);
+        }
+
+        [TestMethod()]
+        public void ApplyActionTestMoveRightNoCollision()
+        {
+            Block anchor1 = new Block(1, 1);
+            Block anchor2 = new Block(1, 3);
+            SquareShape shape1 = new SquareShape(anchor1, defaultOri);
+            SquareShape shape2 = new SquareShape(anchor2, defaultOri);
+
+            BlockGrid grid = new BlockGrid(10, 10);
+            grid.PlaceShape(shape1);
+            shape2.AboutToPlaceGameShape();
+
+            Assert.IsTrue(shape2.isAboutToPlace);
+
+            MovementManager.ApplyAction(InputAction.MoveRight, grid, shape2);
+            MovementManager.ApplyAction(InputAction.MoveRight, grid, shape2);
+
+            Assert.IsFalse(shape2.isAboutToPlace);
         }
 
         // Author: Raffay Hussain
