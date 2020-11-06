@@ -202,7 +202,7 @@ namespace Tetris
 
             // Update background
             SOM.drawBackground();
-            SOM.drawStrings(stats);
+            // SOM.drawStrings(stats);
 
             // Draw one box, demo at position 1,1
             SOM.drawBox(1, 1, DrawColor.Shade.COLOR_LT_GREEN);
