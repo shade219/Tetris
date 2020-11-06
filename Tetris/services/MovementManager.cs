@@ -44,7 +44,7 @@ namespace Tetris.services
         private static void checkAndApply(InputAction action, BlockGrid grid, GameShape shape)
         {
             List<Block> shapeBlocks = shape.CalcBlocksPostAction(action);
-            bool collision = CheckForCollisions(grid, shapeBlocks, shape, action);
+            bool collision = CheckForCollisions(grid, shapeBlocks, shape);
             if (!collision)
             {
                 shape.ApplyAction(action);
@@ -55,7 +55,7 @@ namespace Tetris.services
         //Checks first for illegal move and returns true if found
         // else returns false if move is legal
         //After illegal move check, checks for imenent collision with bottom or block in grid and sets AboutToPlace if true
-        public static bool CheckForCollisions(BlockGrid grid, List<Block> blocks, GameShape shape, InputAction action)
+        public static bool CheckForCollisions(BlockGrid grid, List<Block> blocks, GameShape shape)
         {
             List<Vector2> occupiedCoordinates = grid.GetOccupiedCoordinates();
 

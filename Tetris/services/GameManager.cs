@@ -102,17 +102,6 @@ namespace Tetris.services
             }
             music.Volume += vol_delta;
 
-            if (InputReader.GetInputs() == InputAction.Pause)
-            {
-                if (isPaused)
-                {
-                    isPaused = false;
-                }
-                else
-                {
-                    isPaused = true;
-                }
-            }
 
             if (!isPaused)
             {
@@ -121,9 +110,9 @@ namespace Tetris.services
                 GameShape activeShape = state.getActiveShape();
 
                 // Things we need to check on every update:
-                // 1. activeShape is placed => set activeShape to nextShape and nextShape = ShapeGenerator.GenerateShape(currentLevel);;
-                // 2. if timer is expired => reset timer and MovementManager.moveDown();
-                // 3. if timer is not expired => MovementManager(InputAction.getInputs());
+                // 1. activeShape is placed => trigger GameStaet.activateNext() and set active shape to new active shape
+                // 2. if timer is expired => reset timer and MovementManager.ApplyAction(InputAction.MoveDown,grid,shape);
+                // 3. if timer is not expired => processInput();
 
 
 
@@ -131,7 +120,6 @@ namespace Tetris.services
                 {
                     state.activateNext();
                     activeShape = state.getActiveShape();
-                    state.nextShape = ShapeGenerator.GenerateShape(currentLevel);
 
                     // Tell BlockGrid whether new lines cleared
                     List<int> cl = grid.GetCompletedLines();
@@ -141,28 +129,48 @@ namespace Tetris.services
                     scoreManager.UpdateScore(cl.Count,state.currentLevel);
                     lineCycleTimer.ResetTimer();
                 }
-                checkTimerAndMoveShape(grid, activeShape);
+                if(lineCycleTimer.IsExpired())
+                {
+                    MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
+                    lineCycleTimer.ResetTimer();
+                }
+                else
+                {
+                    processInput(grid, activeShape)
+                }
                 */
             }
         }
 
-        /*
-        private void checkTimerAndMoveShape(BlockGrid grid, GameShape activeShape)
+        private void togglePause()
         {
-            if (lineCycleTimer.IsExpired())
+            if (isPaused)
             {
-                MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
-                lineCycleTimer.ResetTimer();
+                isPaused = false;
             }
             else
             {
-                InputAction curInput = InputReader.GetInputs();
-                if (curInput != InputAction.Null)
-                {
-                MovementManager.ApplyAction(curInput, grid, activeShape);
-                }   
+                isPaused = true;
             }
         }
-        */
+        private void processInput(BlockGrid grid, GameShape activeShape)
+        {
+            InputAction curInput = InputReader.GetInputs();
+
+            switch (curInput)
+            {
+                case InputAction.Pause:
+                    togglePause();
+                    break;
+                /*
+                case InputAction.NULL:
+                    break;
+                */
+                default:
+                    MovementManager.ApplyAction(curInput, grid, activeShape);
+                    break;
+
+            }
+        }
     }
 }
