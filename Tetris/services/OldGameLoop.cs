@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Tetris.domain;
 using Tetris.services;
 
 namespace Tetris
@@ -27,6 +28,14 @@ namespace Tetris
             int statsCount = 0;
             int count = 0;
             Azul.AZUL_KEY prevEnterKey = 0;
+
+
+        //*************************************************
+        //  test code of block grid
+        //*************************************************
+        private BlockGrid grid;
+            //
+
 
 
         //-----------------------------------------------------------------------------
@@ -60,10 +69,6 @@ namespace Tetris
             // Play a sound file
             music = AudioEngine.Play2D("theme.wav",true);
             music.Volume = 0.2f;
-            
-            //Team5/deangelo
-            //Description: Test-edit
-            music.Volume = 0f;
 
             // Resident loads
             srcShoot = AudioEngine.AddSoundSourceFromFile("shoot.wav");
@@ -101,6 +106,11 @@ namespace Tetris
 
             stats = new GameStats();
 
+            //*************************************************
+            //  test code of block grid
+            //*************************************************
+            grid = BlockGrid.BasicBlockGridInitialize();
+
         }
 
         //-----------------------------------------------------------------------------
@@ -113,7 +123,7 @@ namespace Tetris
         {
             // Snd update - Need to be called once a frame
             AudioEngine.Update();
-
+            
             //-----------------------------------------------------------
             // Input Test
             //-----------------------------------------------------------
@@ -257,6 +267,13 @@ namespace Tetris
                 count = 0;
             else
                 count++;
+
+
+
+            //*************************************************
+            //  test code of block grid
+            //*************************************************
+            grid.Draw();
         }
 
         //-----------------------------------------------------------------------------

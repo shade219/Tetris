@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Tetris
 {
@@ -16,5 +17,13 @@ namespace Tetris
         public const int GAME_MAX_Y = 29;
         public const int GAME_MIN_X = 0;
         public const int GAME_MIN_Y = 0;
+
+        
+        
+        
+        public static readonly Vector2 DOWN_OFFSET = new Vector2(0, -1);
+        public static readonly Vector2 UP_OFFSET = new Vector2(0, 1);
+        public static readonly Vector2 LEFT_OFFSET = new Vector2( -1, 0 );
+        public static readonly Vector2 RIGHT_OFFSET = new Vector2(1, 0 );
     }
 }
