@@ -14,7 +14,7 @@ namespace Tetris.services
         LevelManager levelManager;
         ScoreManager scoreManager;
         Timer lineCycleTimer;
-        float vol_delta = 0.005f;
+        float vol_delta = 0.010f;
 
         private Azul.Texture pFont;
         private Azul.Texture pText;
@@ -24,7 +24,7 @@ namespace Tetris.services
         private IrrKlang.ISoundSource srcShoot = null;
         private IrrKlang.ISound sndShoot = null;
         private int startLevel = 0;
-        private int duration = 1;
+        private int duration = 500;
         private BlockGrid grid;
         private bool isPaused = false;
 
@@ -102,10 +102,12 @@ namespace Tetris.services
             }
             music.Volume += vol_delta;
 
+            // Intentionally disabling sounds for now
+            music.Volume = 0.010f;
 
             if (!isPaused)
             {
-                /*
+                
                 BlockGrid grid = state.getGrid();
                 GameShape activeShape = state.getActiveShape();
 
@@ -113,8 +115,6 @@ namespace Tetris.services
                 // 1. activeShape is placed => trigger GameStaet.activateNext() and set active shape to new active shape
                 // 2. if timer is expired => reset timer and MovementManager.ApplyAction(InputAction.MoveDown,grid,shape);
                 // 3. if timer is not expired => processInput();
-
-
 
                 if (activeShape.isPlaced)
                 {
@@ -136,9 +136,9 @@ namespace Tetris.services
                 }
                 else
                 {
-                    processInput(grid, activeShape)
+                    processInput(grid, activeShape);
                 }
-                */
+                
             }
         }
 
@@ -162,10 +162,8 @@ namespace Tetris.services
                 case InputAction.Pause:
                     togglePause();
                     break;
-                /*
-                case InputAction.NULL:
+                case InputAction.Null:
                     break;
-                */
                 default:
                     MovementManager.ApplyAction(curInput, grid, activeShape);
                     break;

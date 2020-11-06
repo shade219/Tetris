@@ -50,6 +50,11 @@ namespace Tetris.domain
             this.isPlaced = false;
         }
 
+        public void MoveShapeToSpawn()
+        {
+            this.ApplyMoveOffset(new Vector2(-12, 3), blocks);
+        }
+
         //************************************************************************
         // Abstract Functions (MUST be implemented)
         //************************************************************************

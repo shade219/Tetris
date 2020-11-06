@@ -90,6 +90,7 @@ namespace Tetris.domain
         // Author: DeAngelo Wilson
         public void RemoveLines(List<int> toRemove)
         {
+            
             //given a list of row indexes toRemove -- remove row + move all above blocks down 1
             int maxIndex = -1;
 
@@ -115,6 +116,8 @@ namespace Tetris.domain
 
         private void ShiftGridBlocksDown(int lowestRow, int shift)
         {
+            if (shift == 0) return;
+
             //for all blocks above or equal (higher index) to lowestRow -- shift down by shift amount (total lines cleared)
             for (int col = 0; col < col_count; col++)
             {

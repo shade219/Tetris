@@ -24,6 +24,7 @@ namespace Tetris.domain
             this.currentScore = 0;
             this.totalLinesCleared = 0;
             this.activeShape = ShapeGenerator.GenerateShape(this.currentLevel);
+            this.activeShape.MoveShapeToSpawn();
             this.nextShape = ShapeGenerator.GenerateShape(this.currentLevel);
             this.grid = new BlockGrid(Constants.GAME_MAX_X, Constants.GAME_MAX_Y);
         }
@@ -46,6 +47,7 @@ namespace Tetris.domain
         public void activateNext()
         {
             this.activeShape = this.nextShape;
+            activeShape.MoveShapeToSpawn();
             this.nextShape = ShapeGenerator.GenerateShape(this.currentLevel);
         }
 
