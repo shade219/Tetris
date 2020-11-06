@@ -82,7 +82,10 @@ namespace Tetris.services
         // Author: Your Name Here
         public override void UnLoadContent()
         {
-            throw new NotImplementedException();
+            //Please have game major review
+            //Unsure what to upload
+            //throw new NotImplementedException();
+
         }
 
         // Author: Stahl Samuel, Yuetao Zhu

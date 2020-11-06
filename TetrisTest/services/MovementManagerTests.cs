@@ -63,8 +63,9 @@ namespace Tetris.services.Tests
             // Piece is not touching anything
             Block anchor = new Block(4, 4);
             BlockGrid grid = new BlockGrid(5, 5);
-            List<Block> blocks = new List<Block> { anchor };
+            //List<Block> blocks = new List<Block> { anchor };
             SquareShape shape = new SquareShape(anchor, defaultOri);
+            List<Block> blocks = shape.blocks;
             InputAction action = InputAction.MoveDown;
             Assert.AreEqual(false, MovementManager.CheckForCollisions(grid, blocks, shape, action));
         }
@@ -75,8 +76,9 @@ namespace Tetris.services.Tests
             // block that we are about to add crosses the left bound
             Block anchor = new Block(-1, 4);
             BlockGrid grid = new BlockGrid(5, 5);
-            List<Block> blocks = new List<Block> { anchor };
+            //List<Block> blocks = new List<Block> { anchor };
             SquareShape shape = new SquareShape(anchor, defaultOri);
+            List<Block> blocks = shape.blocks;
             InputAction action = InputAction.MoveDown;
             Assert.AreEqual(true, MovementManager.CheckForCollisions(grid, blocks, shape, action));
         }
@@ -85,10 +87,11 @@ namespace Tetris.services.Tests
         public void CheckForCollisionsTest_Right_Bound()
         {
             // block that we are about to add exceeds max width
-            Block anchor = new Block(3, 6);
+            Block anchor = new Block(6, 3);
             BlockGrid grid = new BlockGrid(5, 5);
-            List<Block> blocks = new List<Block> { anchor };
+            //List<Block> blocks = new List<Block> { anchor };
             SquareShape shape = new SquareShape(anchor, defaultOri);
+            List<Block> blocks = shape.blocks;
             InputAction action = InputAction.MoveDown;
             Assert.AreEqual(true, MovementManager.CheckForCollisions(grid, blocks, shape, action));
         }
@@ -96,12 +99,13 @@ namespace Tetris.services.Tests
         [TestMethod()]
         public void CheckForCollisionsTest_Pieces_Touching()
         {
-            Block anchor = new Block(4, 4);
+            Block anchor = new Block(3, 3);
             BlockGrid grid = new BlockGrid(5, 5);
             GameShape existingShape = new SquareShape(anchor, defaultOri);
             // put an exisiting shape at the coordinate where we are placing a block
             grid.PlaceShape(existingShape);
-            List<Block> blocks = new List<Block> { anchor };
+            //List<Block> blocks = new List<Block> { anchor };
+            List<Block> blocks = existingShape.blocks;
             SquareShape shape = new SquareShape(anchor, defaultOri);
             InputAction action = InputAction.MoveDown;
             Assert.AreEqual(true, MovementManager.CheckForCollisions(grid, blocks, shape, action));
@@ -113,8 +117,9 @@ namespace Tetris.services.Tests
             // block has reached the bottom
             Block anchor = new Block(3, -1);
             BlockGrid grid = new BlockGrid(5, 5);
-            List<Block> blocks = new List<Block> { anchor };
+            //List<Block> blocks = new List<Block> { anchor };
             SquareShape shape = new SquareShape(anchor, defaultOri);
+            List<Block> blocks = shape.blocks;
             InputAction action = InputAction.MoveDown;
             Assert.AreEqual(true, MovementManager.CheckForCollisions(grid, blocks, shape, action));
         }
