@@ -26,6 +26,7 @@ namespace Tetris.services
         private int startLevel = 0;
         private int duration = 1;
         private BlockGrid grid;
+        private bool isPaused = false;
 
 
         // Author: Your Name Here
@@ -76,7 +77,6 @@ namespace Tetris.services
             pRedBird = new Azul.Sprite(pText, new Azul.Rect(903.0f, 797.0f, 46.0f, 46.0f),
                 new Azul.Rect(300.0f, 100.0f, 30.0f, 30.0f));
 
-            grid = BlockGrid.BasicBlockGridInitialize();
         }
 
         // Author: Your Name Here
@@ -102,31 +102,48 @@ namespace Tetris.services
             }
             music.Volume += vol_delta;
 
-            /*
-            BlockGrid grid = state.getGrid();
-            GameShape activeShape = state.getActiveShape();
-
-            // Things we need to check on every update:
-            // 1. activeShape is placed => set activeShape to nextShape and nextShape = ShapeGenerator.GenerateShape(currentLevel);;
-            // 2. if timer is expired => reset timer and MovementManager.moveDown();
-            // 3. if timer is not expired => MovementManager(InputAction.getInputs());
-
-            if (activeShape.isPlaced)
+            if (InputReader.GetInputs() == InputAction.Pause)
             {
-                state.activateNext();
-                activeShape = state.getActiveShape();
-                state.nextShape = ShapeGenerator.GenerateShape(currentLevel);
-
-                // Tell BlockGrid whether new lines cleared
-                List<int> cl = grid.GetCompletedLines();
-                grid.RemoveLines(cl);
-                state.totalLinesCleared += cl.Count;
-                state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
-                scoreManager.UpdateScore(cl.Count,state.currentLevel);
-                lineCycleTimer.ResetTimer();
+                if (isPaused)
+                {
+                    isPaused = false;
+                }
+                else
+                {
+                    isPaused = true;
+                }
             }
-            checkTimerAndMoveShape(grid, activeShape);
-            */
+
+            if (!isPaused)
+            {
+                /*
+                BlockGrid grid = state.getGrid();
+                GameShape activeShape = state.getActiveShape();
+
+                // Things we need to check on every update:
+                // 1. activeShape is placed => set activeShape to nextShape and nextShape = ShapeGenerator.GenerateShape(currentLevel);;
+                // 2. if timer is expired => reset timer and MovementManager.moveDown();
+                // 3. if timer is not expired => MovementManager(InputAction.getInputs());
+
+
+
+                if (activeShape.isPlaced)
+                {
+                    state.activateNext();
+                    activeShape = state.getActiveShape();
+                    state.nextShape = ShapeGenerator.GenerateShape(currentLevel);
+
+                    // Tell BlockGrid whether new lines cleared
+                    List<int> cl = grid.GetCompletedLines();
+                    grid.RemoveLines(cl);
+                    state.totalLinesCleared += cl.Count;
+                    state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
+                    scoreManager.UpdateScore(cl.Count,state.currentLevel);
+                    lineCycleTimer.ResetTimer();
+                }
+                checkTimerAndMoveShape(grid, activeShape);
+                */
+            }
         }
 
         /*
@@ -142,7 +159,7 @@ namespace Tetris.services
                 InputAction curInput = InputReader.GetInputs();
                 if (curInput != InputAction.Null)
                 {
-                MovementManager.ApplyAction(InputReader.GetInputs(), grid, activeShape);
+                MovementManager.ApplyAction(curInput, grid, activeShape);
                 }   
             }
         }
