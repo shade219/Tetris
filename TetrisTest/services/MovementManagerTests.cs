@@ -85,8 +85,8 @@ namespace Tetris.services.Tests
         public void CheckForCollisionsTest_Floating_Piece()
         {
             // Piece is not touching anything
-            Block anchor = new Block(4, 4);
-            BlockGrid grid = new BlockGrid(5, 5);
+            Block anchor = new Block(3, 3);
+            BlockGrid grid = new BlockGrid(6, 6);
             //List<Block> blocks = new List<Block> { anchor };
             SquareShape shape = new SquareShape(anchor, defaultOri);
             List<Block> blocks = shape.blocks;
