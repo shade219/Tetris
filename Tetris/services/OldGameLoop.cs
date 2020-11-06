@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Tetris.domain;
 using Tetris.services;
 
 namespace Tetris
@@ -29,11 +30,19 @@ namespace Tetris
             Azul.AZUL_KEY prevEnterKey = 0;
 
 
+        //*************************************************
+        //  test code of block grid
+        //*************************************************
+        private BlockGrid grid;
+            //
+
+
+
         //-----------------------------------------------------------------------------
         // Game::Initialize()
-        //		Allows the engine to perform any initialization it needs to before 
-        //      starting to run.  This is where it can query for any required services 
-        //      and load any non-graphic related content. 
+        //		Allows the engine to perform any initialization it needs to before
+        //      starting to run.  This is where it can query for any required services
+        //      and load any non-graphic related content.
         //-----------------------------------------------------------------------------
         public override void Initialize()
         {
@@ -60,10 +69,6 @@ namespace Tetris
             // Play a sound file
             music = AudioEngine.Play2D("theme.wav",true);
             music.Volume = 0.2f;
-            
-            //Team5/deangelo
-            //Description: Test-edit
-            music.Volume = 0f;
 
             // Resident loads
             srcShoot = AudioEngine.AddSoundSourceFromFile("shoot.wav");
@@ -100,6 +105,11 @@ namespace Tetris
             //---------------------------------------------------------------------------------------------------------
 
             stats = new GameStats();
+
+            //*************************************************
+            //  test code of block grid
+            //*************************************************
+            grid = BlockGrid.BasicBlockGridInitialize();
 
         }
 
@@ -148,7 +158,7 @@ namespace Tetris
             //--------------------------------------------------------
 
             // Quick hack to have a one off call.
-            // you need to release the keyboard between calls 
+            // you need to release the keyboard between calls
             if (Azul.Input.GetKeyState(Azul.AZUL_KEY.KEY_ENTER) && prevEnterKey == 0)
             {
                 prevEnterKey = Azul.AZUL_KEY.KEY_ENTER;
@@ -192,8 +202,8 @@ namespace Tetris
 
             // Update background
             SOM.drawBackground();
-            SOM.drawStrings(stats);
-           
+            // SOM.drawStrings(stats);
+
             // Draw one box, demo at position 1,1
             SOM.drawBox(1, 1, DrawColor.Shade.COLOR_LT_GREEN);
 
@@ -257,6 +267,13 @@ namespace Tetris
                 count = 0;
             else
                 count++;
+
+
+
+            //*************************************************
+            //  test code of block grid
+            //*************************************************
+            grid.Draw();
         }
 
         //-----------------------------------------------------------------------------
@@ -271,4 +288,3 @@ namespace Tetris
 
     }
 }
-

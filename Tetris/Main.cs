@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using Tetris.services;
+using Tetris.ui;
 
 namespace Tetris
 {    
@@ -11,7 +13,7 @@ namespace Tetris
         static void Main(string[] args)
         {
             // Create the instance
-            OldGameLoop game = new OldGameLoop();
+            GameManager game = new GameManager();
             Debug.Assert(game != null);
 
             // Start the game
