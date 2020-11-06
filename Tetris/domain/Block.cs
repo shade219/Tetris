@@ -9,8 +9,8 @@ namespace Tetris.domain
 {
     // Authors: DeAngelo
     // Description: a basic class representing 1 element in block grid -- GameShapes converted to 'Block'
-    public class Block
-    {
+    public class Block 
+    { 
         public DrawColor.Shade color
         {
             get;
@@ -19,7 +19,6 @@ namespace Tetris.domain
 
         private int x;
         private int y;
-
 
         // Author: DeAngelo Wilson
         public Block(int x, int y)
