@@ -32,7 +32,7 @@ namespace Tetris.services
     {
         // Author: Yao-Hua Liu
         private static readonly int ANCHOR_X = Constants.PREVIEW_WINDOW_X;
-        private static readonly int ANCHOR_Y = Constants.PREVIEW_WINDOW_X;
+        private static readonly int ANCHOR_Y = Constants.PREVIEW_WINDOW_Y;
 
         public static GameShape GenerateShape(int currentLevel)
         {
@@ -53,19 +53,19 @@ namespace Tetris.services
             switch (result)
             {
                 case int n when (n <= SquareAndL12Bound):
-                    return new SquareShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_RED), pos));
+                    return new SquareShape(new Block(pos));
                 case int n when (n <= SquareAndL12Bound * 2):
-                    return new L1Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_BLUE), pos));
+                    return new L1Shape(new Block( pos));
                 case int n when (n <= SquareAndL12Bound * 3):
-                    return new L2Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_PURPLE), pos));
+                    return new L2Shape(new Block(pos));
                 case int n when (n <= SquareAndL12Bound * 3 + LineShapeBound):
-                    return new LineShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_ORANGE), pos));
+                    return new LineShape(new Block(pos));
                 case int n when (n <= SquareAndL12Bound * 3 + LineShapeBound + TAndZ12Bound):
-                    return new TShape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_YELLOW), pos));
+                    return new TShape(new Block(pos));
                 case int n when (n <= SquareAndL12Bound * 3 + LineShapeBound + TAndZ12Bound * 2):
-                    return new Z1Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_GREEN), pos));
+                    return new Z1Shape(new Block(pos));
                 default:
-                    return new Z2Shape(new Block(DrawColor.getColor(DrawColor.Shade.COLOR_DK_CYAN), pos));
+                    return new Z2Shape(new Block(pos));
             }
         }
 

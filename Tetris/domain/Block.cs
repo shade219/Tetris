@@ -37,7 +37,7 @@ namespace Tetris.domain
             this.y = y;
         }
 
-
+        public Block(Vector2 coordinates) : this((int)coordinates.X, (int)coordinates.Y){ }
 
         public Block(Block block)
         {
