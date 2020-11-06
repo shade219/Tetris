@@ -40,9 +40,9 @@ namespace Tetris
 
         //-----------------------------------------------------------------------------
         // Game::Initialize()
-        //		Allows the engine to perform any initialization it needs to before 
-        //      starting to run.  This is where it can query for any required services 
-        //      and load any non-graphic related content. 
+        //		Allows the engine to perform any initialization it needs to before
+        //      starting to run.  This is where it can query for any required services
+        //      and load any non-graphic related content.
         //-----------------------------------------------------------------------------
         public override void Initialize()
         {
@@ -123,7 +123,7 @@ namespace Tetris
         {
             // Snd update - Need to be called once a frame
             AudioEngine.Update();
-            
+
             //-----------------------------------------------------------
             // Input Test
             //-----------------------------------------------------------
@@ -158,7 +158,7 @@ namespace Tetris
             //--------------------------------------------------------
 
             // Quick hack to have a one off call.
-            // you need to release the keyboard between calls 
+            // you need to release the keyboard between calls
             if (Azul.Input.GetKeyState(Azul.AZUL_KEY.KEY_ENTER) && prevEnterKey == 0)
             {
                 prevEnterKey = Azul.AZUL_KEY.KEY_ENTER;
@@ -203,7 +203,7 @@ namespace Tetris
             // Update background
             SOM.drawBackground();
             SOM.drawStrings(stats);
-           
+
             // Draw one box, demo at position 1,1
             SOM.drawBox(1, 1, DrawColor.Shade.COLOR_LT_GREEN);
 
@@ -288,4 +288,3 @@ namespace Tetris
 
     }
 }
-

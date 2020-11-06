@@ -117,7 +117,7 @@ namespace Tetris.domain
         {
             //for all blocks above or equal (higher index) to lowestRow -- shift down by shift amount (total lines cleared)
             for (int col = 0; col < col_count; col++)
-            {            
+            {
                 for (int row = lowestRow; row < row_count; row++)
                 {
                     //shift block down

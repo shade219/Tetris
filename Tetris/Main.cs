@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using Tetris.services;
+using Tetris.ui;
 
 namespace Tetris
 {    
