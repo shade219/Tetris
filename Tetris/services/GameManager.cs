@@ -65,7 +65,7 @@ namespace Tetris.services
 
             //INITIALIZE TEST STARTING GRID
             //Can be used for to speed up - and create testing scenarios
-            InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
+           // InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
         }
 
         public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
