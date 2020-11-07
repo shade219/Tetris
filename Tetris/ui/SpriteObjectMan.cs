@@ -49,8 +49,8 @@ namespace Tetris
             // This is draw in painted order
             // Draw the color big box first, then the inside.
                 //APPLY AN OFFSET OF 2 -- ignore bordering grey blocks
-            int x = (xPos + 2) * Constants.BOX_SIZE + Constants.BOX_SIZE_HALF;
-            int y = (yPos + 2) * Constants.BOX_SIZE + Constants.BOX_SIZE_HALF;
+            int x = (xPos + 1) * Constants.BOX_SIZE + Constants.BOX_SIZE_HALF;
+            int y = (yPos + 1) * Constants.BOX_SIZE + Constants.BOX_SIZE_HALF;
 
             drawInternal(x, y, inColor);
         }
