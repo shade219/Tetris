@@ -59,9 +59,6 @@ namespace Tetris.domain
         // Abstract Functions (MUST be implemented)
         //************************************************************************
 
-        //Draw GameShape at 'anchor' in 'orientation'
-        public abstract void Draw();
-
         //************************************************************************
         //
         //************************************************************************
@@ -234,6 +231,14 @@ namespace Tetris.domain
         public void ResetAboutToPlaceFlag()
         {
             this.isAboutToPlace = false;
+        }
+
+        public void Draw()
+        {
+            foreach(Block b in blocks)
+            {
+                SOM.drawBox(b.GetX(), b.GetY(), b.color);
+            }
         }
 
     }

@@ -26,7 +26,7 @@ namespace Tetris.services
         private IrrKlang.ISound sndShoot = null;
         private int startLevel = 1;
         private int duration = 500;
-        private int inputTimerDuration = 100;
+        private int inputTimerDuration = 200;
         private BlockGrid grid;
         private bool isPaused = false;
 

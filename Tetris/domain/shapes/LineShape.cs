@@ -41,6 +41,8 @@ namespace Tetris.domain.shapes
                     throw new ArgumentException("Unexpected ShapeRenderer::Orientation in LineShape constructor: " + orientation);
             }
 
+            anchor.SetColor(ShapeRenderer.GetLineAnchorColor());
+
             //rotation offset dictionary
             this.nextOriToOffsets = new Dictionary<ShapeRenderer.Orientation, List<Vector2>>();
 
@@ -57,10 +59,5 @@ namespace Tetris.domain.shapes
         }
 
 
-        // Author: Alex Schertler
-        public override void Draw()
-        {
-            ShapeRenderer.drawLine(anchor.GetX(), anchor.GetY(), orientation);
-        }
     }
 }

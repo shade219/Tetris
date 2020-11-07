@@ -41,6 +41,8 @@ namespace Tetris.domain.shapes
                     throw new ArgumentException("Unexpected ShapeRenderer::Orientation in Z1Shape constructor: " + orientation);
             }
 
+            anchor.SetColor(ShapeRenderer.GetZ1AnchorColor());
+
             //rotation offset dictionary
             this.nextOriToOffsets = new Dictionary<ShapeRenderer.Orientation, List<Vector2>>();
 
@@ -57,11 +59,6 @@ namespace Tetris.domain.shapes
         }
 
 
-        // Author: Alex Schertler
-        public override void Draw()
-        {
-            ShapeRenderer.drawZ1(anchor.GetX(), anchor.GetY(), orientation);
 
-        }
     }
 }
