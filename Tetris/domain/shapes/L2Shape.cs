@@ -51,6 +51,8 @@ namespace Tetris.domain.shapes
                     throw new ArgumentException("Unexpected ShapeRenderer::Orientation in L2Shape constructor: " + orientation);
             }
 
+            anchor.SetColor(ShapeRenderer.GetL2AnchorColor());
+
             //rotation offset dictionary
             this.nextOriToOffsets = new Dictionary<ShapeRenderer.Orientation, List<Vector2>>();
 
@@ -60,15 +62,11 @@ namespace Tetris.domain.shapes
             // 0 -> 90
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_1, new[] { new Vector2(0, 0), new Vector2(-1, 1), new Vector2(1, 1), new Vector2(2, 2) }.ToList());
             // 90 -> 180
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, 0), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-2, -2) }.ToList());
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, 0), new Vector2(1, 1), new Vector2(1, -1), new Vector2(2, -2) }.ToList());
             // 180 -> 270
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0), new Vector2(-1, -1), new Vector2(-1, 1), new Vector2(-2, 2) }.ToList());
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-2, -2) }.ToList());
         }
 
-        // Authors: Dillon Gould
-        public override void Draw()
-        {
-            ShapeRenderer.drawL2(anchor.GetX(), anchor.GetY(), orientation);
-        }
+       
     }
 }
