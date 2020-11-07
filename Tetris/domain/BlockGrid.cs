@@ -63,7 +63,7 @@ namespace Tetris.domain
         {
             foreach (Block block in blocks)
             {
-                block.Draw();
+                block.Draw(1, 1);
             }
         }
 

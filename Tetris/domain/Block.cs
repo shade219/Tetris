@@ -65,6 +65,12 @@ namespace Tetris.domain
             SOM.drawBox(x, y, color);
         }
 
+        public void Draw(int offsetX, int offsetY)
+        {
+            SOM.drawBlockGridBox(x, y, color);
+        }
+
+
         public void ApplyOffset(Vector2 offset)
         {
             x += (int) offset.X;

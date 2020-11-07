@@ -237,7 +237,7 @@ namespace Tetris.domain
         {
             foreach(Block b in blocks)
             {
-                SOM.drawBox(b.GetX(), b.GetY(), b.color);
+                SOM.drawBlockGridBox(b.GetX(), b.GetY(), b.color);
             }
         }
 

@@ -44,6 +44,17 @@ namespace Tetris
             drawInternal(x, y, inColor);
         }
 
+        public static void drawBlockGridBox(int xPos, int yPos, DrawColor.Shade inColor)
+        {
+            // This is draw in painted order
+            // Draw the color big box first, then the inside.
+                //APPLY AN OFFSET OF 2 -- ignore bordering grey blocks
+            int x = (xPos + 2) * Constants.BOX_SIZE + Constants.BOX_SIZE_HALF;
+            int y = (yPos + 2) * Constants.BOX_SIZE + Constants.BOX_SIZE_HALF;
+
+            drawInternal(x, y, inColor);
+        }
+
         static public void drawPreviewWindow(int xPos, int yPos, int sizeX, int sizeY, DrawColor.Shade inColor, DrawColor.Shade outColor)
         {
             // This is draw in painted order
