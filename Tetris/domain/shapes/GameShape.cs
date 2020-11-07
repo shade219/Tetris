@@ -14,6 +14,7 @@ namespace Tetris.domain
     {
         //used for drawing GameShape
         protected Block anchor;
+        private Boolean canMutateOrientation = false;
 
         //used for placing GameShape onto Game-BlockGrid
         public List<Block> blocks
@@ -68,7 +69,9 @@ namespace Tetris.domain
         //apply rotation or movement offset to GameShape ('anchor' + 'blocks')
         public void ApplyAction(InputAction action)
         {
+            canMutateOrientation = true;
             ApplyActionToBlocks(action, blocks);
+            canMutateOrientation = false;
         }
 
         // Author: Greg Kulasik
@@ -167,11 +170,13 @@ namespace Tetris.domain
                 {
                     blocksToRotate.ElementAt(i).ApplyOffset(rotationOffsets.ElementAt(i));
                 }
-                //set new orientation
-                this.orientation = nextOri;
+                if(canMutateOrientation)
+                    //set new orientation
+                    this.orientation = nextOri;
             }
 
         }
+
         public ShapeRenderer.Orientation GetNextOrientation()
         {
             ShapeRenderer.Orientation ori;

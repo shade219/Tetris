@@ -62,9 +62,9 @@ namespace Tetris.domain.shapes
             // 0 -> 90
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_1, new[] { new Vector2(0, 0), new Vector2(-1, 1), new Vector2(1, 1), new Vector2(2, 2) }.ToList());
             // 90 -> 180
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, 0), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-2, -2) }.ToList());
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_2, new[] { new Vector2(0, 0), new Vector2(1, 1), new Vector2(1, -1), new Vector2(2, -2) }.ToList());
             // 180 -> 270
-            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0), new Vector2(-1, -1), new Vector2(-1, 1), new Vector2(-2, 2) }.ToList());
+            nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0), new Vector2(1, -1), new Vector2(-1, -1), new Vector2(-2, -2) }.ToList());
         }
 
        

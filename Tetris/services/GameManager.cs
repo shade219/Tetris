@@ -15,6 +15,7 @@ namespace Tetris.services
         ScoreManager scoreManager;
         Timer lineCycleTimer;
         Timer inputTimer;
+        InputReader inputReader;
         float vol_delta = 0.010f;
 
         private Azul.Texture pFont;
@@ -25,8 +26,8 @@ namespace Tetris.services
         private IrrKlang.ISoundSource srcShoot = null;
         private IrrKlang.ISound sndShoot = null;
         private int startLevel = 1;
-        private int duration = 500;
-        private int inputTimerDuration = 200;
+        private int duration = 1000;
+        private int inputTimerDuration = 100;
         private BlockGrid grid;
         private bool isPaused = false;
 
@@ -59,6 +60,7 @@ namespace Tetris.services
             lineCycleTimer.ResetTimer();
             inputTimer = new Timer(inputTimerDuration);
             inputTimer.ResetTimer();
+            inputReader = new InputReader();
         }
 
         // Author: Brandon Wegner
@@ -120,6 +122,7 @@ namespace Tetris.services
                 // 1. activeShape is placed => trigger GameState.activateNext() and set active shape to new active shape
                 // 2. if timer is expired => reset timer and MovementManager.ApplyAction(InputAction.MoveDown,grid,shape);
                 // 3. if timer is not expired => processInput();
+                inputReader.GetInputs();
 
                 if (activeShape.isPlaced)
                 {
@@ -163,7 +166,7 @@ namespace Tetris.services
         }
         private void processInput(BlockGrid grid, GameShape activeShape)
         {
-            InputAction curInput = InputReader.GetInputs();
+            InputAction curInput = inputReader.GetLastAction();
 
             switch (curInput)
             {

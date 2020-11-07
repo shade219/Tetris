@@ -57,8 +57,5 @@ namespace Tetris.domain.shapes
             // 180 -> 270 (same as 0 -> 90)
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, vectorSetTwo.ToList());
         }
-
-
-
     }
 }

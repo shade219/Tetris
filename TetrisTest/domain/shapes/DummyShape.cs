@@ -31,13 +31,6 @@ public class DummyShape : GameShape
             nextOriToOffsets.Add(ShapeRenderer.Orientation.ORIENT_3, new[] { new Vector2(0, 0) }.ToList());
         }
 
-
-        // Author: Greg Kulasik
-        public override void Draw()
-        {
-            //ShapeRenderer.drawSquare(anchor.GetX(), anchor.GetY(), orientation);
-        }
-
     }
 }
 
