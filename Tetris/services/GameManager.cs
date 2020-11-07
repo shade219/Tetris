@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tetris.domain;
+using Tetris.domain.shapes;
 using Tetris.ui;
 
 namespace Tetris.services
@@ -26,9 +27,9 @@ namespace Tetris.services
         private IrrKlang.ISoundSource srcShoot = null;
         private IrrKlang.ISound sndShoot = null;
         private int startLevel = 1;
-        private int duration = 1000;
-        private int inputTimerDuration = 100;
-        private BlockGrid grid;
+        private int duration = 500;
+        private int instantDropDuration = 25;
+        private int inputTimerDuration = 200;
         private bool isPaused = false;
 
 
@@ -61,9 +62,37 @@ namespace Tetris.services
             inputTimer = new Timer(inputTimerDuration);
             inputTimer.ResetTimer();
             inputReader = new InputReader();
+
+            //INITIALIZE TEST STARTING GRID
+            //Can be used for to speed up - and create testing scenarios
+            InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
         }
 
-        // Author: Brandon Wegner
+        public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
+        {
+            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
+            {
+                GameShape shape1 = new SquareShape(new Block(0, 1));
+                grid.PlaceShape(shape1);
+
+                GameShape shape2 = new SquareShape(new Block(2, 1));
+                grid.PlaceShape(shape2);
+
+                GameShape shape3 = new SquareShape(new Block(4, 1));
+                grid.PlaceShape(shape3);
+
+                GameShape shape4 = new SquareShape(new Block(6, 1));
+                grid.PlaceShape(shape4);
+
+                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
+                //GameShape shape5 = new SquareShape(new Block(8, 1));
+                //grid.PlaceShape(shape5);
+            }
+
+
+        }
+
+    // Author: Brandon Wegner
         public override void LoadContent()
         {
             AudioEngine = new IrrKlang.ISoundEngine();
@@ -83,7 +112,6 @@ namespace Tetris.services
 
             pRedBird = new Azul.Sprite(pText, new Azul.Rect(903.0f, 797.0f, 46.0f, 46.0f),
                 new Azul.Rect(300.0f, 100.0f, 30.0f, 30.0f));
-
         }
 
         // Author: Your Name Here

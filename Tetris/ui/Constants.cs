@@ -13,9 +13,13 @@ namespace Tetris
         public const int PREVIEW_WINDOW_X = 17;
         public const int PREVIEW_WINDOW_Y = 26;
 
-        public const int GAME_MAX_X = 9;
+        //X-Spawn location of shapes.
         public const int GAME_CENTER_X = 5;
-        public const int GAME_MAX_Y = 29;
+
+        //Changed:: grid is 10x30 (NOT 9x29)
+        public const int GAME_MAX_X = 10;
+        public const int GAME_MAX_Y = 30;
+        //
         public const int GAME_MIN_X = 0;
         public const int GAME_MIN_Y = 0;
 
