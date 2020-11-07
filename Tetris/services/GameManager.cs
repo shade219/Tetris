@@ -169,7 +169,7 @@ namespace Tetris.services
                         grid.RemoveLines(cl);
                         state.totalLinesCleared += cl.Count;
                         state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
-                        scoreManager.UpdateScore(cl.Count, state.currentLevel);
+                        state.currentScore = scoreManager.UpdateScore(cl.Count, state.currentLevel);
                         lineCycleTimer.ResetTimer();
                     }
                     if (lineCycleTimer.IsExpired())
