@@ -14,6 +14,7 @@ namespace Tetris.services
         LevelManager levelManager;
         ScoreManager scoreManager;
         Timer lineCycleTimer;
+        Timer inputTimer;
         float vol_delta = 0.010f;
 
         private Azul.Texture pFont;
@@ -23,8 +24,9 @@ namespace Tetris.services
         private IrrKlang.ISound music = null;
         private IrrKlang.ISoundSource srcShoot = null;
         private IrrKlang.ISound sndShoot = null;
-        private int startLevel = 0;
+        private int startLevel = 1;
         private int duration = 500;
+        private int inputTimerDuration = 100;
         private BlockGrid grid;
         private bool isPaused = false;
 
@@ -54,6 +56,9 @@ namespace Tetris.services
             levelManager = new LevelManager(startLevel);
             scoreManager = new ScoreManager();
             lineCycleTimer = new Timer(duration);
+            lineCycleTimer.ResetTimer();
+            inputTimer = new Timer(inputTimerDuration);
+            inputTimer.ResetTimer();
         }
 
         // Author: Brandon Wegner
@@ -103,7 +108,7 @@ namespace Tetris.services
             music.Volume += vol_delta;
 
             // Intentionally disabling sounds for now
-            music.Volume = 0.010f;
+            music.Volume = 0.000f;
 
             if (!isPaused)
             {
@@ -112,7 +117,7 @@ namespace Tetris.services
                 GameShape activeShape = state.getActiveShape();
 
                 // Things we need to check on every update:
-                // 1. activeShape is placed => trigger GameStaet.activateNext() and set active shape to new active shape
+                // 1. activeShape is placed => trigger GameState.activateNext() and set active shape to new active shape
                 // 2. if timer is expired => reset timer and MovementManager.ApplyAction(InputAction.MoveDown,grid,shape);
                 // 3. if timer is not expired => processInput();
 
@@ -136,9 +141,12 @@ namespace Tetris.services
                 }
                 else
                 {
-                    processInput(grid, activeShape);
+                    if (inputTimer.IsExpired())
+                    {
+                        processInput(grid, activeShape);
+                        inputTimer.ResetTimer();
+                    }
                 }
-                
             }
         }
 
