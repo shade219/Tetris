@@ -42,7 +42,7 @@ namespace Tetris.domain
         {
             foreach (Block block in blocks)
             {
-                block.Draw(1, 1);
+                block.Draw();
             }
         }
 
