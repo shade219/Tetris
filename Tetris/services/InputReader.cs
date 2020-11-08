@@ -16,15 +16,24 @@ namespace Tetris.services
         // Store last action seen for retrieval later once the timer runs out
 
         InputAction lastAction;
+        InputAction avoidRepeatOfAction;
+        Timer inputRepeatProtector;
 
         public InputReader()
         {
             this.lastAction = InputAction.Null;
+            this.avoidRepeatOfAction = InputAction.Null;
+            this.inputRepeatProtector = new Timer(35);
+            this.inputRepeatProtector.ResetTimer();
         }
 
         public InputAction GetLastAction()
         {
             InputAction toReturn = lastAction;
+            // Store the last action we recorded/will process
+            // This way if the same input comes up immediately after (Null should show up)
+            // then we know we captured a double input
+            avoidRepeatOfAction = toReturn;
             lastAction = InputAction.Null;
 
             return toReturn;
@@ -33,6 +42,11 @@ namespace Tetris.services
         // Author: Brian Moore
         public void GetInputs()
         {
+            // Don't record input too often
+            if (!inputRepeatProtector.IsExpired()) return;
+            // Process lastAction recorded before getting new input
+            if (lastAction != InputAction.Null) return;
+
             //Returning value from within checks, so keeping all as If checks. 
 
             //First check for Pause
@@ -67,6 +81,19 @@ namespace Tetris.services
             {
                 lastAction = InputAction.MoveRight;
             }
+
+            // If we register the same key twice in a row then the key 
+            // is likely being held down so slow down the processing to accomodate 
+            // longer key press wihtout double input
+            // Set to Null so that we can accept the same input next time 
+            // (max delay of input inputRepeatProtector * 2)
+            if (lastAction == avoidRepeatOfAction)
+                lastAction = InputAction.Null;
+
+            inputRepeatProtector.ResetTimer();
+
+            if(lastAction != InputAction.Null)
+                Console.WriteLine($"Input recorded: {lastAction}");
         }
     }
 }

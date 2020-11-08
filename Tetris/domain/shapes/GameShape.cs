@@ -41,7 +41,7 @@ namespace Tetris.domain
             private set;
         }
 
-
+        // Author: DeAngelo Wilson
         protected GameShape(Block anchor, ShapeRenderer.Orientation orientation = ShapeRenderer.Orientation.ORIENT_0)
         {
             this.anchor = anchor;
@@ -51,6 +51,7 @@ namespace Tetris.domain
             this.isPlaced = false;
         }
 
+        // Author: Greg Kulasik
         public void MoveShapeToSpawn()
         {
             this.ApplyMoveOffset(new Vector2(-12, 3), blocks);
@@ -176,7 +177,7 @@ namespace Tetris.domain
             }
 
         }
-
+        // Author: DeAngelo Wilson
         public ShapeRenderer.Orientation GetNextOrientation()
         {
             ShapeRenderer.Orientation ori;
@@ -201,11 +202,13 @@ namespace Tetris.domain
 
             return ori;
         }
-
+        // Author: DeAngelo Wilson
         public IReadOnlyCollection<Block> GetBlocks()
         {
             return blocks.AsReadOnly();
         }
+
+        // Author: DeAngelo Wilson
         public IReadOnlyCollection<Vector2> GetOrientationOffsets(ShapeRenderer.Orientation ori)
         {
             List<Vector2> offsets;
@@ -213,37 +216,51 @@ namespace Tetris.domain
 
             return offsets;
         }
-
+        // Author: DeAngelo Wilson
         public ShapeRenderer.Orientation GetOrientation()
         {
             return orientation;
         }
-
+        // Author: DeAngelo Wilson
         public DrawColor.Shade GetColor()
         {
             return color;
         }
-
+        // Author: DeAngelo Wilson
         public void GameShapePlaced()
         {
             this.isPlaced = true;
         }
-
+        // Author: DeAngelo Wilson
         public void AboutToPlaceGameShape()
         {
             this.isAboutToPlace = true;
         }
+        // Author: DeAngelo Wilson
         public void ResetAboutToPlaceFlag()
         {
             this.isAboutToPlace = false;
         }
 
+        // Author: Greg Kulasik
         public void Draw()
         {
             foreach(Block b in blocks)
             {
                 SOM.drawBox(b.GetX(), b.GetY(), b.color);
             }
+        }
+
+        // Author: Greg Kulasik
+        // Print helper for debugging
+        override public String ToString()
+        {
+            String blockString = "";
+            foreach (Block b in blocks)
+            {
+                blockString += $"({b.GetX()}, {b.GetY()})";
+            }
+            return $"{this.GetType().Name}: {blockString}";
         }
 
     }
