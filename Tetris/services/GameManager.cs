@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Tetris.domain;
 using Tetris.domain.shapes;
 using Tetris.ui;
