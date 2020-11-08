@@ -55,7 +55,7 @@ namespace Tetris.services
             this.SetWidthHeight(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
             this.SetClearColor(0.4f, 0.4f, 0.8f, 1.0f);
             duration = 750;
-            inputTimerDuration = 200;
+            inputTimerDuration = 150;
             state = new GameState();
             levelManager = new LevelManager(startLevel);
             scoreManager = new ScoreManager();
