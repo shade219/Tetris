@@ -35,7 +35,7 @@ namespace Tetris.services
 
         // Author: Your Name Here
         // Not sure about creator
-        //public GameManager()    
+        //public GameManager()
         //{
 
         //}
@@ -48,7 +48,7 @@ namespace Tetris.services
         }
 
         // Author: Stahl Samuel, Yuetao Zhu, Brandon Wegner
-        // Create game classes instances and draw initial game window 
+        // Create game classes instances and draw initial game window
         public override void Initialize()
         {
             this.SetWindowName("Tetris Framework");
@@ -196,9 +196,10 @@ namespace Tetris.services
         private void GameOver()
         {
             Console.WriteLine("GAME OVER...");
+            state.gameIsOver();
             togglePause();
         }
-        
+
         //given the active GameShape on activation
         private GameShape TryActivateGameShape()
         {

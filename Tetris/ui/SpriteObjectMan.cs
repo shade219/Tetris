@@ -11,10 +11,12 @@ namespace Tetris
             SpriteFont LevelLabel = new SpriteFont("Level " + state.currentLevel, 280, 300);
             SpriteFont LineslLabel = new SpriteFont("Lines " + state.totalLinesCleared, 280, 275);
             SpriteFont ScoreLabel = new SpriteFont("Score " + state.currentScore, 280, 250);
-
+            SpriteFont GameOverLabel = new SpriteFont("GAME OVER", 280, 225);
             LevelLabel.Draw();
             LineslLabel.Draw();
             ScoreLabel.Draw();
+            if(state.gameOver)
+                GameOverLabel.Draw();
         }
 
         static public void drawInternal(int xPos, int yPos, DrawColor.Shade inColor)

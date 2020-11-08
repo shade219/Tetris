@@ -25,6 +25,7 @@ namespace Tetris.domain.Tests
             GameState gameState = new GameState();
             Assert.IsNotNull(gameState);
         }
+
         [TestMethod]
         public void FullInitializeTest()
         {
@@ -39,7 +40,9 @@ namespace Tetris.domain.Tests
             Assert.AreEqual(currLevel, 0);
             Assert.AreEqual(currScore, 0);
             Assert.AreEqual(totLinesCleared, 0);
+            Assert.IsFalse(gameState.gameOver);
         }
+
         [TestMethod]
         public void IncorrectTypeInitializeTest()
         {
@@ -53,27 +56,27 @@ namespace Tetris.domain.Tests
         }
 
         [TestMethod]
-        public void getGridTest()
-        {
-            // testing getGrid
-        }
-
-        [TestMethod]
-        public void getActiveShapeTest()
-        {
-            // testing getActiveShape
-        }
-
-        [TestMethod]
-        public void getNextShapeTest()
-        {
-            // testing getNextShape
-        }
-
-        [TestMethod]
         public void getActivateNextTest()
         {
-            // testing getActivateNext
+            GameState gameState = new GameState();
+            GameShape originalActive = gameState.getActiveShape();
+            GameShape originalNext = gameState.getNextShape();
+
+            gameState.activateNext();
+
+            Assert.AreEqual(originalNext, gameState.getActiveShape());
+            Assert.IsNotNull(gameState.getNextShape());
         }
+
+
+        [TestMethod]
+        public void GameIsOverMarksGameOver()
+        {
+            GameState gameState = new GameState();
+            Assert.IsFalse(gameState.gameOver);
+            gameState.gameIsOver();
+            Assert.IsTrue(gameState.gameOver);
+        }
+
     }
 }

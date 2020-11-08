@@ -16,10 +16,12 @@ namespace Tetris.domain
         public int totalLinesCleared;
         public int currentLevel;
         public int currentScore;
+        public bool gameOver;
 
         //Authors: <Brian and Morgan>
         public GameState()
         {
+            this.gameOver = false;
             this.currentLevel = 0;
             this.currentScore = 0;
             this.totalLinesCleared = 0;
@@ -51,6 +53,9 @@ namespace Tetris.domain
             this.nextShape = ShapeGenerator.GenerateShape(this.currentLevel);
         }
 
-
+        public void gameIsOver()
+        {
+            this.gameOver = true;
+        }
     }
 }
