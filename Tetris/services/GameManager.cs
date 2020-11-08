@@ -46,6 +46,7 @@ namespace Tetris.services
         public override void Draw()
         {
             StateRenderer.Draw(state);
+            pRedBird.Render();
         }
 
         // Author: Stahl Samuel, Yuetao Zhu, Brandon Wegner
@@ -69,35 +70,12 @@ namespace Tetris.services
             inputReader = new InputReader();
 
             //INITIALIZE TEST STARTING GRID
-            //Can be used for to speed up - and create testing scenarios
-           // InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
+            //Can be used for creating/speed-up testing scenarios
+            //InitTestingBlockGrid_NonConsecutiveLinesScenario(state.getGrid());
         }
 
-        public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
-        {
-            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
-            {
-                GameShape shape1 = new SquareShape(new Block(0, 1));
-                grid.PlaceShape(shape1);
 
-                GameShape shape2 = new SquareShape(new Block(2, 1));
-                grid.PlaceShape(shape2);
-
-                GameShape shape3 = new SquareShape(new Block(4, 1));
-                grid.PlaceShape(shape3);
-
-                GameShape shape4 = new SquareShape(new Block(6, 1));
-                grid.PlaceShape(shape4);
-
-                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
-                //GameShape shape5 = new SquareShape(new Block(8, 1));
-                //grid.PlaceShape(shape5);
-            }
-
-
-        }
-
-    // Author: Brandon Wegner
+        // Author: Brandon Wegner
         public override void LoadContent()
         {
             AudioEngine = new IrrKlang.ISoundEngine();
@@ -150,6 +128,12 @@ namespace Tetris.services
                 inputReader.GetInputs();
                 if (!isPaused)
                 {
+                    //--------------------------------------------------------
+                    // Rotate Sprite -- shows if game paused or not...
+                    //--------------------------------------------------------
+                    pRedBird.angle = pRedBird.angle + 0.01f;
+                    pRedBird.Update();
+
 
                     BlockGrid grid = state.getGrid();
                     GameShape activeShape = state.getActiveShape();
@@ -161,18 +145,11 @@ namespace Tetris.services
 
                     if (activeShape.isPlaced)
                     {
-                        state.activateNext();
-                        activeShape = state.getActiveShape();
-
-                        // Tell BlockGrid whether new lines cleared
-                        List<int> cl = grid.GetCompletedLines();
-                        grid.RemoveLines(cl);
-                        state.totalLinesCleared += cl.Count;
-                        state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
-                        state.currentScore = scoreManager.UpdateScore(cl.Count, state.currentLevel);
-                        lineCycleTimer.ResetTimer();
+                        //Update activeShape, lines, score, level, check game-over
+                        UpdateGameState(grid);
                     }
-                    if (lineCycleTimer.IsExpired())
+                    //if shape was placed, timer was just reset (mutually exclusive)
+                    else if(lineCycleTimer.IsExpired())
                     {
                         MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
                         lineCycleTimer.ResetTimer();
@@ -197,6 +174,51 @@ namespace Tetris.services
                 }
                 frameSleepTimer.ResetTimer();
             }
+        }
+
+        //Called after shape placed:
+            //===> Update GameState (Score, lines, level) + reset line
+        private void UpdateGameState(BlockGrid grid)
+        {
+            //CHECK FOR GAMEOVER
+            GameShape activeShape = TryActivateGameShape();
+            if (activeShape == null)
+            {
+                //GAME OVER -- Shutdown... (or start reset game?)
+                GameOver();
+            }
+            else
+            {
+                // Tell BlockGrid whether new lines cleared
+                List<int> cl = grid.GetCompletedLines();
+                grid.RemoveLines(cl);
+                state.totalLinesCleared += cl.Count;
+                state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
+                state.currentScore = scoreManager.UpdateScore(cl.Count, state.currentLevel);
+                lineCycleTimer.ResetTimer();
+            }
+        }
+
+        private void GameOver()
+        {
+            Console.WriteLine("GAME OVER...");
+            togglePause();
+        }
+        
+        //given the active GameShape on activation
+        private GameShape TryActivateGameShape()
+        {
+            state.activateNext();
+
+            //if active shape spawned into collision ==> GameOver
+            if (MovementManager.CheckForCollisions(state.getGrid(), state.getActiveShape().blocks,
+                state.getActiveShape()))
+            {
+                return null;
+            }
+
+
+            return state.getActiveShape();
         }
 
         private void togglePause()
@@ -228,5 +250,72 @@ namespace Tetris.services
 
             }
         }
+
+
+
+        //---------------------------------------------------------------------
+        // GamePlay testing Grid environment set-up methods
+        //---------------------------------------------------------------------
+
+        public void InitTestingBlockGrid_NonConsecutiveLinesScenario(BlockGrid grid)
+        {
+            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
+            {
+                GameShape shape1 = new SquareShape(new Block(0, 1));
+                grid.PlaceShape(shape1);
+
+                GameShape shape2 = new SquareShape(new Block(2, 1));
+                grid.PlaceShape(shape2);
+
+                GameShape shape3 = new SquareShape(new Block(4, 1));
+                grid.PlaceShape(shape3);
+
+                GameShape shape4 = new SquareShape(new Block(6, 1));
+                grid.PlaceShape(shape4);
+
+                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
+                GameShape shape5 = new LineShape(new Block(8, 2), ShapeRenderer.Orientation.ORIENT_1);
+                grid.PlaceShape(shape5);
+
+                // Non consecutive line
+
+                GameShape shape6 = new SquareShape(new Block(6, 3));
+                grid.PlaceShape(shape6);
+
+                GameShape shape7 = new L2Shape(new Block(2, 3));
+                grid.PlaceShape(shape7);
+
+                GameShape shape8 = new L2Shape(new Block(5, 3));
+                grid.PlaceShape(shape8);
+
+            }
+
+
+        }
+
+        public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
+        {
+            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
+            {
+                GameShape shape1 = new SquareShape(new Block(0, 1));
+                grid.PlaceShape(shape1);
+
+                GameShape shape2 = new SquareShape(new Block(2, 1));
+                grid.PlaceShape(shape2);
+
+                GameShape shape3 = new SquareShape(new Block(4, 1));
+                grid.PlaceShape(shape3);
+
+                GameShape shape4 = new SquareShape(new Block(6, 1));
+                grid.PlaceShape(shape4);
+
+                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
+                //GameShape shape5 = new SquareShape(new Block(8, 1));
+                //grid.PlaceShape(shape5);
+            }
+
+
+        }
+
     }
 }

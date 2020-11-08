@@ -9,7 +9,7 @@ namespace Tetris.domain.shapes
 
 {
     // Authors: Dillon Gould
-    // Description: Implementation of the T shape, drawing the shape and setting the orientation of the shape. 
+    // Description: Implementation of the L2 shape, drawing the shape and setting the orientation of the shape. 
     public class L2Shape : GameShape
     {
 
@@ -28,9 +28,9 @@ namespace Tetris.domain.shapes
             switch (orientation)
             {
                 case ShapeRenderer.Orientation.ORIENT_0: // 0 - Anchor is on the top left
-                    this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block the the left 2
-                    this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block to the right 3
-                    this.blocks.Add(anchor.Copy(new Vector2(-2, 0))); // Block below 4
+                    this.blocks.Add(anchor.Copy(new Vector2(0, -1))); // Block below
+                    this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block left
+                    this.blocks.Add(anchor.Copy(new Vector2(-2, 0))); // Block left (2x)
                     break;
                 case ShapeRenderer.Orientation.ORIENT_1: // 90 - anchor is on the top right
                     this.blocks.Add(anchor.Copy(new Vector2(-1, 0))); // Block above 2

@@ -66,32 +66,61 @@ namespace Tetris.domain
             toPlace.GameShapePlaced();
         }
 
+
+
         // Author: DeAngelo Wilson
         public void RemoveLines(List<int> toRemove)
         {
-            
             //given a list of row indexes toRemove -- remove row + move all above blocks down 1
-            int maxIndex = -1;
+            int count = 0;
+            toRemove.Sort();
 
             //Note:: there is an animation for this ==> pauses game time, all completed lines flash --> then destroyed
             //remove the completed line
             foreach (int row in toRemove)
             {
+                int newRow = row - count;
+
                 for (int col = 0; col < col_count; col++)
                 {
                     //remove + destroy all blocks in row
-                    blocks.Remove(grid[col][row]);
-                    grid[col][row] = null;
+                    blocks.Remove(grid[col][newRow]);
+                    grid[col][newRow] = null;
                 }
-                //
-                if (maxIndex < row)
-                {
-                    maxIndex = row;
-                }
+                //shift every row above, down by 1... (way less optimized than below RemoveLines, but clean & working)
+                ShiftGridBlocksDown(newRow + 1, 1);
+                count++;
             }
-            //shift every row above (+ 1) the highest line index removed
-            ShiftGridBlocksDown(maxIndex + 1, toRemove.Count);
+
         }
+
+
+        //// Author: DeAngelo Wilson
+        //public void RemoveLines(List<int> toRemove)
+        //{
+
+        //    //given a list of row indexes toRemove -- remove row + move all above blocks down 1
+        //    int maxIndex = -1;
+
+        //    //Note:: there is an animation for this ==> pauses game time, all completed lines flash --> then destroyed
+        //    //remove the completed line
+        //    foreach (int row in toRemove)
+        //    {
+        //        for (int col = 0; col < col_count; col++)
+        //        {
+        //            //remove + destroy all blocks in row
+        //            blocks.Remove(grid[col][row]);
+        //            grid[col][row] = null;
+        //        }
+        //        //
+        //        if (maxIndex < row)
+        //        {
+        //            maxIndex = row;
+        //        }
+        //    }
+        //    //shift every row above (+ 1) the highest line index removed
+        //    ShiftGridBlocksDown(maxIndex + 1, toRemove.Count);
+        //}
 
         private void ShiftGridBlocksDown(int lowestRow, int shift)
         {

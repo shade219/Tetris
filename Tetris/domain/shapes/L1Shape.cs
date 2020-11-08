@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Tetris.domain.shapes
 {
     // Authors: Dillon Gould
-    // Description: Implementation of the T shape, drawing the shape and setting the orientation of the shape. 
+    // Description: Implementation of the L1 shape, drawing the shape and setting the orientation of the shape. 
     public class L1Shape : GameShape
     {
         // Dillon Gould
