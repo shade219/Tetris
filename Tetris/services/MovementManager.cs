@@ -12,7 +12,6 @@ namespace Tetris.services
     // Description: processes result of InputAction on GameShape in relation to BlockGrid and performs collision checking
     public static class MovementManager
     {
-
         // Author: Brandon Wegner, Samuel Stahl
         //Checks for collision in two states:
 
@@ -25,7 +24,7 @@ namespace Tetris.services
         {
             if (shape.isAboutToPlace)
             {
-                if(action == InputAction.MoveDown)
+                if (action == InputAction.MoveDown)
                 {
                     grid.PlaceShape(shape);
                 }
@@ -44,11 +43,14 @@ namespace Tetris.services
         private static void checkAndApply(InputAction action, BlockGrid grid, GameShape shape)
         {
             List<Block> shapeBlocks = shape.CalcBlocksPostAction(action);
+            List<Vector2> occupiedCoordinates = grid.GetOccupiedCoordinates();
             bool collision = CheckForCollisions(grid, shapeBlocks, shape);
+            CheckForCollisions(grid, shape.blocks, shape);
             if (!collision)
             {
                 shape.ApplyAction(action);
             }
+            checkAboutToPlace(shape.blocks, shape, occupiedCoordinates);
         }
 
         // Author: Samuel Stahl
@@ -85,10 +87,14 @@ namespace Tetris.services
                 }
 
             }
+            return false;
+        }
 
-            //Checks for legal collisions that will cause block placement next timer tick
-            //If legal collision is imenent applies the action and sets about to place flag
-            foreach(Block b in blocks)
+        //Checks for legal collisions that will cause block placement next timer tick
+        //If legal collision is imenent applies the action and sets about to place flag
+        private static void checkAboutToPlace(List<Block> blocks, GameShape shape, List<Vector2> occupiedCoordinates)
+        {
+            foreach (Block b in blocks)
             {
                 Vector2 blockCoord = b.GetPosition();
                 //check for bottom row collision
@@ -108,7 +114,6 @@ namespace Tetris.services
                     }
                 }
             }
-            return false;
         }
 
     }
