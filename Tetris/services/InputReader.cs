@@ -14,17 +14,13 @@ namespace Tetris.services
 
         // Greg change
         // Store last action seen for retrieval later once the timer runs out
-
         InputAction lastAction;
         InputAction actionToAvoidRepeating;
-        //Timer inputRepeatProtector;
 
         public InputReader()
         {
             this.lastAction = InputAction.Null;
             this.actionToAvoidRepeating = InputAction.Null;
-            //this.inputRepeatProtector = new Timer(35);
-            //this.inputRepeatProtector.ResetTimer();
         }
 
         public InputAction GetLastAction()
@@ -43,8 +39,6 @@ namespace Tetris.services
         // Author: Brian Moore
         public void GetInputs()
         {
-            // Don't record input too often
-            //if (!inputRepeatProtector.IsExpired()) return;
             // Process lastAction recorded before getting new input
             if (lastAction != InputAction.Null) return;
 
@@ -84,13 +78,10 @@ namespace Tetris.services
 
             // If we register the same key twice in a row then the key 
             // is likely being held down so slow down the processing to accomodate 
-            // longer key press wihtout double input
+            // longer key press without double input
             // Set to Null so that we can accept the same input next time 
-            // (max delay of input inputRepeatProtector * 2)
             if (lastAction == actionToAvoidRepeating)
                 lastAction = InputAction.Null;
-
-            //inputRepeatProtector.ResetTimer();
 
             if(lastAction != InputAction.Null)
                 Console.WriteLine($"Input recorded: {lastAction}");

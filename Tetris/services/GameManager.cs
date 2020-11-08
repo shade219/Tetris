@@ -27,7 +27,6 @@ namespace Tetris.services
         private IrrKlang.ISoundSource srcShoot = null;
         private IrrKlang.ISound sndShoot = null;
         private int startLevel = 1;
-        //private int frameSleepTimerDuration = 16;
         private int duration = 0;
         private int instantDropDuration = 25;
         private int inputTimerDuration = 0;
