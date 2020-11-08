@@ -19,6 +19,7 @@ namespace Tetris.services
         ScoreManager scoreManager;
         Timer lineCycleTimer;
         Timer inputTimer;
+        Timer frameSleepTimer;
         InputReader inputReader;
         float vol_delta = 0.010f;
 
@@ -30,9 +31,10 @@ namespace Tetris.services
         private IrrKlang.ISoundSource srcShoot = null;
         private IrrKlang.ISound sndShoot = null;
         private int startLevel = 1;
-        private int duration = 500;
+        private int frameSleepTimerDuration = 16;
+        private int duration = 0;
         private int instantDropDuration = 25;
-        private int inputTimerDuration = 200;
+        private int inputTimerDuration = 0;
         private bool isPaused = false;
 
 
@@ -47,6 +49,7 @@ namespace Tetris.services
         public override void Draw()
         {
             StateRenderer.Draw(state);
+            pRedBird.Render();
         }
 
         // Author: Stahl Samuel, Yuetao Zhu, Brandon Wegner
@@ -56,7 +59,8 @@ namespace Tetris.services
             this.SetWindowName("Tetris Framework");
             this.SetWidthHeight(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
             this.SetClearColor(0.4f, 0.4f, 0.8f, 1.0f);
-
+            duration = frameSleepTimerDuration * 54;
+            inputTimerDuration = frameSleepTimerDuration * 18;
             state = new GameState();
             levelManager = new LevelManager(startLevel);
             scoreManager = new ScoreManager();
@@ -64,6 +68,8 @@ namespace Tetris.services
             lineCycleTimer.ResetTimer();
             inputTimer = new Timer(inputTimerDuration);
             inputTimer.ResetTimer();
+            frameSleepTimer = new Timer(frameSleepTimerDuration);
+            frameSleepTimer.ResetTimer();
             inputReader = new InputReader();
 
             //INITIALIZE TEST STARTING GRID
@@ -129,65 +135,93 @@ namespace Tetris.services
         // Author: Stahl Samuel, Yuetao Zhu
         public override void Update()
         {
-            AudioEngine.Update();
-            if (music.Volume > 0.30f)
+            if (frameSleepTimer.IsExpired())
             {
-                vol_delta = -0.002f;
-            }
-            else if (music.Volume < 0.00f)
-            {
-                vol_delta = 0.002f;
-            }
-            music.Volume += vol_delta;
-
-            // Intentionally disabling sounds for now
-            music.Volume = 0.000f;
-
-            if (!isPaused)
-            {
-                
-                BlockGrid grid = state.getGrid();
-                GameShape activeShape = state.getActiveShape();
-
-                // Things we need to check on every update:
-                // 1. activeShape is placed => trigger GameState.activateNext() and set active shape to new active shape
-                // 2. if timer is expired => reset timer and MovementManager.ApplyAction(InputAction.MoveDown,grid,shape);
-                // 3. if timer is not expired => processInput();
-                inputReader.GetInputs();
-
-                if (activeShape.isPlaced)
+                AudioEngine.Update();
+                if (music.Volume > 0.30f)
                 {
-                    //CHECK FOR GAMEOVER
-                    activeShape = TryActivateGameShape();
-                    if (activeShape == null)
+                    vol_delta = -0.002f;
+                }
+                else if (music.Volume < 0.00f)
+                {
+                    vol_delta = 0.002f;
+                }
+                music.Volume += vol_delta;
+
+                // Intentionally disabling sounds for now
+                music.Volume = 0.000f;
+
+                inputReader.GetInputs();
+                if (!isPaused)
+                {
+                    //--------------------------------------------------------
+                    // Rotate Sprite -- shows if game paused or not...
+                    //--------------------------------------------------------
+                    pRedBird.angle = pRedBird.angle + 0.01f;
+                    pRedBird.Update();
+
+
+                    BlockGrid grid = state.getGrid();
+                    GameShape activeShape = state.getActiveShape();
+
+                    // Things we need to check on every update:
+                    // 1. activeShape is placed => trigger GameState.activateNext() and set active shape to new active shape
+                    // 2. if timer is expired => reset timer and MovementManager.ApplyAction(InputAction.MoveDown,grid,shape);
+                    // 3. if timer is not expired => processInput();
+
+                    if (activeShape.isPlaced)
                     {
-                        //GAME OVER -- Shutdown... (or start reset game?)
-                        GameOver();
+                        //Update activeShape, lines, score, level, check game-over
+                        UpdateGameState(grid);
+                    }
+                    //if shape was placed, timer was just reset (mutually exclusive)
+                    else if(lineCycleTimer.IsExpired())
+                    {
+                        MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
+                        lineCycleTimer.ResetTimer();
                     }
                     else
                     {
-                        // Tell BlockGrid whether new lines cleared
-                        List<int> cl = grid.GetCompletedLines();
-                        grid.RemoveLines(cl);
-                        state.totalLinesCleared += cl.Count;
-                        state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
-                        scoreManager.UpdateScore(cl.Count,state.currentLevel);
-                        lineCycleTimer.ResetTimer();
+                        if (inputTimer.IsExpired())
+                        {
+                            processInput(grid, activeShape);
+                            inputTimer.ResetTimer();
+                        }
                     }
-                }
-                if(lineCycleTimer.IsExpired())
-                {
-                    MovementManager.ApplyAction(InputAction.MoveDown, grid, activeShape);
-                    lineCycleTimer.ResetTimer();
                 }
                 else
                 {
                     if (inputTimer.IsExpired())
                     {
-                        processInput(grid, activeShape);
+                        // Paused
+                        processInput(null, null);
                         inputTimer.ResetTimer();
                     }
                 }
+                frameSleepTimer.ResetTimer();
+            }
+        }
+
+        //Called after shape placed:
+            //===> Update GameState (Score, lines, level) + reset line
+        private void UpdateGameState(BlockGrid grid)
+        {
+            //CHECK FOR GAMEOVER
+            GameShape activeShape = TryActivateGameShape();
+            if (activeShape == null)
+            {
+                //GAME OVER -- Shutdown... (or start reset game?)
+                GameOver();
+            }
+            else
+            {
+                // Tell BlockGrid whether new lines cleared
+                List<int> cl = grid.GetCompletedLines();
+                grid.RemoveLines(cl);
+                state.totalLinesCleared += cl.Count;
+                state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
+                state.currentScore = scoreManager.UpdateScore(cl.Count, state.currentLevel);
+                lineCycleTimer.ResetTimer();
             }
         }
 
@@ -236,7 +270,8 @@ namespace Tetris.services
                 case InputAction.Null:
                     break;
                 default:
-                    MovementManager.ApplyAction(curInput, grid, activeShape);
+                    if(!isPaused)
+                        MovementManager.ApplyAction(curInput, grid, activeShape);
                     break;
 
             }

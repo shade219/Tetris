@@ -36,7 +36,7 @@ namespace Tetris.services
             //Returning value from within checks, so keeping all as If checks. 
 
             //First check for Pause
-            if (Azul.Input.GetKeyState(Azul.AZUL_KEY.KEY_ESCAPE))
+            if (Azul.Input.GetKeyState(Azul.AZUL_KEY.KEY_P))
             {
                 lastAction = InputAction.Pause;
             }
