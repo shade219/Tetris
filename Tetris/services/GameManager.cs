@@ -196,6 +196,7 @@ namespace Tetris.services
         private void GameOver()
         {
             Console.WriteLine("GAME OVER...");
+            state.gameIsOver();
             togglePause();
         }
 
