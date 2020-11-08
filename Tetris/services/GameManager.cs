@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
+using Azul;
 using Tetris.domain;
 using Tetris.domain.shapes;
 using Tetris.ui;
@@ -64,8 +67,8 @@ namespace Tetris.services
             inputReader = new InputReader();
 
             //INITIALIZE TEST STARTING GRID
-            //Can be used for to speed up - and create testing scenarios
-            InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
+            //Can be used for creating/speed-up testing scenarios
+            //InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
         }
 
         public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
@@ -154,16 +157,23 @@ namespace Tetris.services
 
                 if (activeShape.isPlaced)
                 {
-                    state.activateNext();
-                    activeShape = state.getActiveShape();
-
-                    // Tell BlockGrid whether new lines cleared
-                    List<int> cl = grid.GetCompletedLines();
-                    grid.RemoveLines(cl);
-                    state.totalLinesCleared += cl.Count;
-                    state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
-                    scoreManager.UpdateScore(cl.Count,state.currentLevel);
-                    lineCycleTimer.ResetTimer();
+                    //CHECK FOR GAMEOVER
+                    activeShape = TryActivateGameShape();
+                    if (activeShape == null)
+                    {
+                        //GAME OVER -- Shutdown... (or start reset game?)
+                        GameOver();
+                    }
+                    else
+                    {
+                        // Tell BlockGrid whether new lines cleared
+                        List<int> cl = grid.GetCompletedLines();
+                        grid.RemoveLines(cl);
+                        state.totalLinesCleared += cl.Count;
+                        state.currentLevel = levelManager.UpdateLevel(state.totalLinesCleared);
+                        scoreManager.UpdateScore(cl.Count,state.currentLevel);
+                        lineCycleTimer.ResetTimer();
+                    }
                 }
                 if(lineCycleTimer.IsExpired())
                 {
@@ -179,6 +189,28 @@ namespace Tetris.services
                     }
                 }
             }
+        }
+
+        private void GameOver()
+        {
+            Debug.Print("GAME OVER...");
+            togglePause();
+        }
+        
+        //given the active GameShape on activation
+        private GameShape TryActivateGameShape()
+        {
+            state.activateNext();
+
+            //if active shape spawned into collision ==> GameOver
+            if (MovementManager.CheckForCollisions(state.getGrid(), state.getActiveShape().blocks,
+                state.getActiveShape()))
+            {
+                return null;
+            }
+
+
+            return state.getActiveShape();
         }
 
         private void togglePause()
