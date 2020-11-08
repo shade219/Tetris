@@ -71,34 +71,11 @@ namespace Tetris.services
 
             //INITIALIZE TEST STARTING GRID
             //Can be used for creating/speed-up testing scenarios
-            //InitTestingBlockGrid_DoubleLineScenario(state.getGrid());
+            //InitTestingBlockGrid_NonConsecutiveLinesScenario(state.getGrid());
         }
 
-        public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
-        {
-            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
-            {
-                GameShape shape1 = new SquareShape(new Block(0, 1));
-                grid.PlaceShape(shape1);
 
-                GameShape shape2 = new SquareShape(new Block(2, 1));
-                grid.PlaceShape(shape2);
-
-                GameShape shape3 = new SquareShape(new Block(4, 1));
-                grid.PlaceShape(shape3);
-
-                GameShape shape4 = new SquareShape(new Block(6, 1));
-                grid.PlaceShape(shape4);
-
-                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
-                //GameShape shape5 = new SquareShape(new Block(8, 1));
-                //grid.PlaceShape(shape5);
-            }
-
-
-        }
-
-    // Author: Brandon Wegner
+        // Author: Brandon Wegner
         public override void LoadContent()
         {
             AudioEngine = new IrrKlang.ISoundEngine();
@@ -273,5 +250,72 @@ namespace Tetris.services
 
             }
         }
+
+
+
+        //---------------------------------------------------------------------
+        // GamePlay testing Grid environment set-up methods
+        //---------------------------------------------------------------------
+
+        public void InitTestingBlockGrid_NonConsecutiveLinesScenario(BlockGrid grid)
+        {
+            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
+            {
+                GameShape shape1 = new SquareShape(new Block(0, 1));
+                grid.PlaceShape(shape1);
+
+                GameShape shape2 = new SquareShape(new Block(2, 1));
+                grid.PlaceShape(shape2);
+
+                GameShape shape3 = new SquareShape(new Block(4, 1));
+                grid.PlaceShape(shape3);
+
+                GameShape shape4 = new SquareShape(new Block(6, 1));
+                grid.PlaceShape(shape4);
+
+                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
+                GameShape shape5 = new LineShape(new Block(8, 2), ShapeRenderer.Orientation.ORIENT_1);
+                grid.PlaceShape(shape5);
+
+                // Non consecutive line
+
+                GameShape shape6 = new SquareShape(new Block(6, 3));
+                grid.PlaceShape(shape6);
+
+                GameShape shape7 = new L2Shape(new Block(2, 3));
+                grid.PlaceShape(shape7);
+
+                GameShape shape8 = new L2Shape(new Block(5, 3));
+                grid.PlaceShape(shape8);
+
+            }
+
+
+        }
+
+        public void InitTestingBlockGrid_DoubleLineScenario(BlockGrid grid)
+        {
+            if (grid.GetGridRowCount() == 30 && grid.GetGridColumnCount() == 10)
+            {
+                GameShape shape1 = new SquareShape(new Block(0, 1));
+                grid.PlaceShape(shape1);
+
+                GameShape shape2 = new SquareShape(new Block(2, 1));
+                grid.PlaceShape(shape2);
+
+                GameShape shape3 = new SquareShape(new Block(4, 1));
+                grid.PlaceShape(shape3);
+
+                GameShape shape4 = new SquareShape(new Block(6, 1));
+                grid.PlaceShape(shape4);
+
+                //NOTE:: Line only removed on is.Placed update (when a block is placed -- checks if lines need to be removed)
+                //GameShape shape5 = new SquareShape(new Block(8, 1));
+                //grid.PlaceShape(shape5);
+            }
+
+
+        }
+
     }
 }
