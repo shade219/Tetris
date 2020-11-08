@@ -14,26 +14,34 @@ namespace Tetris.services
 
         // Greg change
         // Store last action seen for retrieval later once the timer runs out
-
         InputAction lastAction;
+        InputAction actionToAvoidRepeating;
 
         public InputReader()
         {
             this.lastAction = InputAction.Null;
+            this.actionToAvoidRepeating = InputAction.Null;
         }
 
         public InputAction GetLastAction()
         {
             InputAction toReturn = lastAction;
+            // Store the last action we recorded/will process
+            // This way if the same input comes up immediately after (Null should show up)
+            // then we know we captured a double input
+            actionToAvoidRepeating = toReturn;
             lastAction = InputAction.Null;
 
             return toReturn;
         }
 
+        //NOTE:: does not register multiple key presses (ignores the "2nd" keystroke)
         // Author: Brian Moore
         public void GetInputs()
         {
-            //Returning value from within checks, so keeping all as If checks. 
+            // Process lastAction recorded before getting new input
+            if (lastAction != InputAction.Null) return;
+
 
             //First check for Pause
             if (Azul.Input.GetKeyState(Azul.AZUL_KEY.KEY_P))
@@ -67,6 +75,16 @@ namespace Tetris.services
             {
                 lastAction = InputAction.MoveRight;
             }
+
+            // If we register the same key twice in a row then the key 
+            // is likely being held down so slow down the processing to accomodate 
+            // longer key press without double input
+            // Set to Null so that we can accept the same input next time 
+            if (lastAction == actionToAvoidRepeating)
+                lastAction = InputAction.Null;
+
+            if(lastAction != InputAction.Null)
+                Console.WriteLine($"Input recorded: {lastAction}");
         }
     }
 }
