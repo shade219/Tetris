@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using Azul;
+
 using Tetris.domain;
 using Tetris.domain.shapes;
 using Tetris.ui;
@@ -227,7 +225,7 @@ namespace Tetris.services
 
         private void GameOver()
         {
-            Debug.Print("GAME OVER...");
+            Console.WriteLine("GAME OVER...");
             togglePause();
         }
         
